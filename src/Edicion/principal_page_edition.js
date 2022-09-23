@@ -9,10 +9,10 @@ import EditionsThroughYears from './editions';
 
 function EditionPage(){ //agregar la imagen a los parámetros 
     const params = {
-        title:"Art City Tour Mayo 2022",
+        title:"ART CITY TOUR MAYO 2022",
         editionTitle:"Chepe de Moda",
-        body:"esto es el contenido de la edición gatos gatos gatos \n dfjkhsdjkfhdsjkfjsdhfjkdshj soy un gato misifus \n kdsbk klsdflkdf fkesopwoa"
-         + "para hacer lineas más largas de gatos miau miau \n dksdoiej fldisodjk ldiduifj palabras que son grandeeeees \n sdsfsdf",
+        body:"Segundo Art City Tour presencial del 2022\narticulados en tres rutas: Davivienda Costa Rica,\nNORTE y Bodega Navarro Correas.\n\n"
+        + "15 espacios culturales de la ciudad de San José\nnos esperan el próximo jueves 12 de mayo con la\nselección de actividades que han preparado para\n\"Chepe de moda\".",
          isPrincipal: true
     }
 

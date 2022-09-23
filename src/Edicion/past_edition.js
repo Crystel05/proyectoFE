@@ -2,13 +2,13 @@ import React from 'react';
 import styles from '../CSS/images.module.css';
 import ImageSlider from './image_slider';
 import TextPart from './textPartEdition';
-import placeHolder1 from  '../Images/carPh.jpeg'
+import placeHolder1 from  '../Images/carPh.png'
 
 function PastEdition(props){
     
     const slideImages = [
         {
-            url: '../Images/carPh.jpeg',
+            url: '../Images/carPh.png',
             title: 'Slide 1',
           },
           {

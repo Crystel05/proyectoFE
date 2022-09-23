@@ -2,9 +2,9 @@ import { Box } from '@mui/material';
 import React from 'react';
 import styles from '../CSS/text.module.css'
 import stylesButton from '../CSS/buttonp.module.css'
-import map from '../Images/mapa.jpg'
+import map from '../Images/mapaDavivienda.PNG'
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
-import lugar from '../Images/lugarRutas.jpeg'
+import lugar from '../Images/lugarRutas.png'
 function Route(props){
 
     const body = props.details;

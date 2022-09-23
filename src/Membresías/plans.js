@@ -6,10 +6,10 @@ import styles from '../CSS/buttonp.module.css'
 export default function Plans(){ //cambiar esto por una lista de base de datos después 
     
     const plans = [
-        'Básico ₡2000',
-        'Estándar ₡3000',
-        'Plus ₡5000',
-        'Premium ₡8000'
+        'Básico ₡2.000',
+        'Estándar ₡3.000',
+        'Plus ₡5.000',
+        'Premium ₡8.000'
     ]
     const [clicked, setClicked] = useState(false);
 

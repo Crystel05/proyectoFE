@@ -29,7 +29,7 @@ const Contacts = () =>{
             <div style={{display:'flex', flexDirection:'column', marginLeft:'auto', marginRight:'auto'}} >
                 <a className={styles.contactsTitle} >Contacto</a>
                 <a className={styles.contactsNames} ><CallIcon/> +506 8888 8888</a>
-                <a className={styles.contactsNames} ><EmailIcon/> mail@mail.com</a>
+                <a className={styles.contactsNames} ><EmailIcon/> artcitytour@act.com</a>
             </div>
         </Box>
     )

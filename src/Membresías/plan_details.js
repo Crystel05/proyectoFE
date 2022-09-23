@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import React from 'react'
 import styles from '../CSS/buttonp.module.css'
 import textStyles from '../CSS/text.module.css'
-import lugar from '../Images/lugarRutas.jpeg'
+import lugar from '../Images/membership.png'
 
 export default function PlanDetails(props){
 

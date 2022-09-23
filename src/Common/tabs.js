@@ -9,7 +9,7 @@ import MainRoutes from '../Rutas/main';
 import Memberships from '../Membresías/memberships';
 
 export default function LabTabs() {
-    const [value, setValue] = React.useState('membresias');
+    const [value, setValue] = React.useState('edicion');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
