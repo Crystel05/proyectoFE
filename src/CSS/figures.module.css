@@ -1,0 +1,11 @@
+.lines{
+    color: #009cc1;
+    background-color: #009cc1;
+    height: 10;
+    width: 10%;
+    border-color: #009cc1;
+    margin-left: 0px;
+    border-top-right-radius: 10%;
+    border-bottom-right-radius: 10%;
+    border: none;
+}

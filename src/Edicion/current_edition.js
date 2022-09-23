@@ -1,0 +1,18 @@
+import React from 'react';
+import placeHolder from '../Images/placeHolder2.jpg';
+import stylesImg from '../CSS/images.module.css'
+import TextPart from './textPartEdition';
+
+
+function CurrentEdition (props) { //agregar la imagen a los parametros 
+    return(
+        <div style={{display:'flex', flexDirection:'row', marginTop:'5%', marginLeft:'3%', marginRight:'3%'}}>
+            <TextPart data={props} isPrincipal={true} />
+            <div>
+                <img src={placeHolder} alt='currentEditionImg' className={stylesImg.secondSize}/>
+            </div>
+        </div>
+    );
+} 
+
+export default CurrentEdition;

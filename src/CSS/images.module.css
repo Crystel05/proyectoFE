@@ -1,0 +1,34 @@
+.editionPrincipal{
+    width: 100%;
+    height: 500px;
+}
+
+.secondSize{
+    height: 80%;
+    width: 97%;
+    margin-right: 10px;
+    margin-left: 30px;
+}
+
+.sponsorsRight{
+    width: 20%;
+    display: block;
+    margin-right: 30%;
+    margin-left: 30px;
+    
+}
+
+.sponsorsLeft{
+    width: 20%;
+    display: block;
+    margin-left: 30%;
+    margin-right: 30px;
+    margin-bottom: 50px;
+}
+
+.carousel{
+    width: 10%;
+    height: 10%;
+    background-image: url(../Images/carPh.jpeg)
+}
+

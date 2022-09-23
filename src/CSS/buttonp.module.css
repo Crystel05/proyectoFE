@@ -1,0 +1,80 @@
+.principal {
+  background-color: #ce1717;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.circle{
+  background-color: #ce1717;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 50%;
+}
+
+.reserve_button{
+  background-color: #ce1717;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  margin: 4px 2px;
+  margin-right: 10px;
+  cursor: pointer;
+  font-family: 'Krona One', sans-serif;
+  border-radius: 15px;
+}
+
+.webSite{
+  background-color: #2a1463;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  margin-right: 10px;
+  margin-top: 3%;
+  cursor: pointer;
+  font-family: 'Krona One', sans-serif;
+  border-radius: 15px;
+  width: 120px;
+  height: 32px;
+  
+}
+
+.plans{
+  border-color: #2a1463;
+  border-width: 1px;
+  color: black;
+  width: 300px;
+  height: 40px;
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.plansClicked{
+  background-color: #2a1463;
+  color: white;
+  width: 300px;
+  height: 40px;
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 25px;
+  cursor: pointer;
+}

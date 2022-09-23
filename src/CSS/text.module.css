@@ -1,0 +1,123 @@
+.principal_small{
+    font-family: 'Krona One', sans-serif;
+    font-size: 8px;
+    margin: 0px;
+}
+
+.principal_big{
+    font-family: 'Krona One', sans-serif;
+    font-size: 13px;
+    margin: 0px;
+    font-weight: bold;
+}
+
+.editionPrimaryTitle{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 17px;
+    margin-bottom: 10%;
+}
+
+.editionTitle{
+    font-family: 'Krona One', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.pastEditionsTitle{
+    font-family: 'Krona One', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.body{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 20px;
+    margin-top: 10%;
+}
+
+.bodyParticipation{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 20px;
+}
+
+.subtitleSmall{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 25px;
+    margin-top: 10px;
+}
+
+.contactsTitle{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 17px;
+    margin-bottom: 10%;
+    margin-top: 10%;
+}
+
+.contactsNames{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.routesTitle{
+    font-family: 'Krona One', sans-serif;
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5%;
+}
+
+.routesNames{
+    font-family: 'Krona One', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 10%;
+}
+
+.routesBody{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    margin-top: 2%;
+}
+
+.header {
+    font-size: 30px;
+    color: white;
+    text-align: left;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 3%;
+    right: 0;
+    height: fit-content;
+    margin: auto;
+   
+}
+
+.bodyMemberships{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 20px;
+    color: white;
+    text-align: left;
+    position: absolute;
+    top: 150px;
+    bottom: 0;
+    left: 3%;
+    right: 0;
+    height: fit-content;
+    margin: auto;
+}
+
+.membershipTitle{
+    color: #2a1463;
+    font-family: 'Krona One', sans-serif;
+    font-size: 15px;
+    margin-bottom: 2%;
+}
+
+.membershiPrice{
+    font-weight: bold;
+    margin-bottom: 10%;
+}
