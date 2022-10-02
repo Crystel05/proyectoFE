@@ -9,7 +9,7 @@ function CurrentEdition (props) { //agregar la imagen a los parametros
         <div style={{display:'flex', flexDirection:'row', marginTop:'5%', marginLeft:'3%', marginRight:'3%'}}>
             <TextPart data={props} isPrincipal={true} />
             <div>
-                <img src={placeHolder} alt='currentEditionImg' className={stylesImg.secondSize}/>
+                <img src={props.image} alt='currentEditionImg' className={stylesImg.secondSize}/>
             </div>
         </div>
     );

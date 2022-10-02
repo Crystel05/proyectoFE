@@ -9,7 +9,7 @@ import MainRoutes from '../Routes/main';
 import Memberships from '../Memberships/memberships';
 
 export default function LabTabs() {
-    const [value, setValue] = React.useState('edicion');
+    const [value, setValue] = React.useState('principal'); 
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -20,38 +20,41 @@ export default function LabTabs() {
     <Box sx={{ width: '100%' }} >
         <TabContext value={value}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider'}} >
-            <TabList 
-                    onChange={handleChange} 
-                    style={{marginLeft:'10%', fontSize:'13px'}}
-                    TabIndicatorProps={{
-                        hidden: true
-                    }}
-                    sx={{
-                        '& button.Mui-selected': {backgroundColor: tabColor, color: 'white', borderTopLeftRadius: '15px', borderTopRightRadius: '15px'}
-                    }}
-                >
-                <Tab label="La Edicición" value="edicion" />
-                <Tab label="Rutas" value="rutas" />
-                <Tab label="Planear Itinerario" value="itinerario" />
-                <Tab label="Membresías" value="membresias" />
-            </TabList>
+                <TabList 
+                        onChange={handleChange} 
+                        style={{marginLeft:'10%', fontSize:'13px'}}
+                        TabIndicatorProps={{
+                            hidden: true
+                        }}
+                        sx={{
+                            '& button.Mui-selected': {backgroundColor: tabColor, color: 'white', borderTopLeftRadius: '15px', borderTopRightRadius: '15px'}
+                        }}
+                    >
+                    <Tab label="La Edición" value="edicion" />
+                    <Tab label="Rutas" value="rutas" />
+                    <Tab label="Planear Itinerario" value="itinerario" />
+                    <Tab label="Membresías" value="membresias" />
+                </TabList>
             </Box>
-            <TabPanel value="edicion" style={{padding: 0}} index={0} >
+            <TabPanel value="principal" style={{padding: 0}} index={0} >
+                PAGINA PRINCIPAL
+            </TabPanel>
+
+            <TabPanel value="edicion" style={{padding: 0}} index={1} >
                 <EditionPage/>
             </TabPanel>
 
-            <TabPanel value="rutas" style={{padding: 0}} index={1} >
+            <TabPanel value="rutas" style={{padding: 0}} index={2} >
                 <MainRoutes/>
             </TabPanel>
 
-            <TabPanel value="itinerario" style={{padding: 0}} index={2} >
+            <TabPanel value="itinerario" style={{padding: 0}} index={3} >
                 Item Three
             </TabPanel>
 
-            <TabPanel value="membresias" style={{padding: 0}} index={3} >
+            <TabPanel value="membresias" style={{padding: 0}} index={4} >
                 <Memberships/>
             </TabPanel>
-            
         </TabContext>
     </Box>
   );

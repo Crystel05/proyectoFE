@@ -23,20 +23,23 @@
   border-radius: 50%;
 }
 
-.reserve_button{
+.reserveButton{
   background-color: #ce1717;
   border: none;
   color: white;
-  padding: 7px;
+  padding: 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 10px;
+  font-size: 14px;
+  font-weight: bold;
   margin: 4px 2px;
   margin-right: 10px;
   cursor: pointer;
-  font-family: 'Krona One', sans-serif;
-  border-radius: 15px;
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 30px;
+  width: 150px;
+  height: min-content;
 }
 
 .webSite{
