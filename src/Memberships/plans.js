@@ -1,7 +1,7 @@
 import { React, useState } from 'react'
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
-import styles from '../CSS/buttonp.module.css'
+import styles from '../CSS/button.module.css'
 
 export default function Plans(){ //cambiar esto por una lista de base de datos después 
     
@@ -11,7 +11,7 @@ export default function Plans(){ //cambiar esto por una lista de base de datos d
         'Plus ₡5.000',
         'Premium ₡8.000'
     ]
-    const [clicked, setClicked] = useState(false);
+    //const [clicked, setClicked] = useState(false);
 
     // const desing = clicked ? styles.plansClicked : styles.plans;
     

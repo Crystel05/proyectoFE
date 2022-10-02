@@ -1,18 +1,18 @@
 import { Box } from '@mui/material';
 import React from 'react';
 import styles from '../CSS/text.module.css'
-import stylesButton from '../CSS/buttonp.module.css'
+import stylesButton from '../CSS/button.module.css'
 import map from '../Images/mapaDavivienda.PNG'
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import lugar from '../Images/lugarRutas.png'
 function Route(props){
 
-    const body = props.details;
+    const body = props.lugares[0].detalles;
     function replaceWithBr() {
-        return body.replace(/\n/g, "<br />")
+        return body.replaceAll('\\n', "<br />")
     }
     
-    const color = props.color;
+    const color = '#E2368E'; //cambiar por un método por colores random
     return(
         <div style={{display:'flex', flexDirection:'column', marginTop:'5%'}} >
             <div style={{display:'flex', flexDirection:'row'}} >
@@ -28,13 +28,13 @@ function Route(props){
                     borderBottomRightRadius: '10%',
                     border: 'none'
                 }}/>
-                <a className={styles.editionTitle}> {props.title} </a>
+                <a className={styles.editionTitle}> {props.nombre} </a>
             </div>
             <Box style={{display:'flex', flexDirection:'row', justifyContent:'center'}}>
                 <img src={map} style={{width:'500px', height:'300px', marginLeft:'5%', marginTop:'1%', marginRight:'2%'}}></img>
                 <Box sx={{ p: 2, border: 1, borderColor: 'grey.500', borderRadius: '7px' }} style={{marginTop:'1%', display:'flex', flexDirection:'row'}}>
                     <div style={{display:'flex', flexDirection:'column', marginRight:'5%'}} >
-                        <a className={styles.routesNames}> {props.placeName} </a>
+                        <a className={styles.routesNames}> {props.lugares[0].nombre} </a>
                         <a className={styles.routesBody} dangerouslySetInnerHTML={{__html: replaceWithBr()}}/>
                         <button className={stylesButton.webSite}> 
                             Sitio Web 

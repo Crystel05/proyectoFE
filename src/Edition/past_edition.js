@@ -5,6 +5,8 @@ import TextPart from './textPartEdition';
 import placeHolder1 from  '../Images/carPh.png'
 
 function PastEdition(props){
+
+    const months = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
     
     const slideImages = [
         {
@@ -27,10 +29,11 @@ function PastEdition(props){
         margin: "0 auto"
     }
 
+    const dateDate = new Date(props.date);
     const data = {
-        title: props.title, 
+        title: 'Edición ' + months[dateDate.getMonth()] + " " + dateDate.getFullYear(), 
         editionTitle: props.name, 
-        body:props.body
+        body:props.details
     }
     return(
         <div style={{ display:'flex', flexDirection:'row'}} >

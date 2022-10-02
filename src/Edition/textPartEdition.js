@@ -5,7 +5,9 @@ function TextPart(props){
 
     const body = props.data.body;
     function replaceWithBr() {
-        return body.replace(/\n/g, "<br />")
+    
+        const remplazo = body.replaceAll('\\n', "<br />")
+        return remplazo
     }
     const className =  props.isPrincipal ? styles.editionTitle : styles.pastEditionsTitle;
     return(

@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import React from 'react'
-import styles from '../CSS/buttonp.module.css'
+import styles from '../CSS/button.module.css'
 import textStyles from '../CSS/text.module.css'
 import lugar from '../Images/membership.png'
 
@@ -8,7 +8,7 @@ export default function PlanDetails(props){
 
     const info = props.benefits;
     function replaceWithBr() {
-        return info.replace(/\n/g, "<br />")
+        return info.replaceAll('-', "<br />")
     }
 
     return(

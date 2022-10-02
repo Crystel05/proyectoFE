@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../CSS/text.module.css'
-import stylesButton from '../CSS/buttonp.module.css'
+import stylesButton from '../CSS/button.module.css'
 import mapIcon from '../Images/mapIcon.png'
 import ticket from '../Images/ticket.png'
 
