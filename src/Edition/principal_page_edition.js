@@ -14,16 +14,19 @@ function EditionPage(){
     const [edition, setEdition] = useState({});
     const [body, setBody] = useState("");
     const [image, setImage] = useState("");
+    const [sponsors, setSponsors] = useState([]);
 
     useEffect(()=>{
-        axios.get('http://localhost:8080/edition/getById?id=121')
+        axios.get('http://localhost:8080/edition/getCurrent')
         .then(response =>{
             setEdition(response.data);
             setBody(response.data.details);
             setImage(response.data.secondImagePath);
+            setSponsors(response.data.sponsors);
         })
     }, [])
 
+    // console.log("SPONSORS: ", sponsors)
     const dateDate = new Date(edition.date);
     const params = {
         title:"ART CITY TOUR " + months[dateDate.getMonth()+1] + " " + dateDate.getFullYear(),
@@ -37,7 +40,7 @@ function EditionPage(){
         <div> 
             <img src={edition.imagePath} alt="edicionActual" className={styles.editionPrincipal}/>
             <CurrentEdition {...params} /> {/* agarrar esto de un endpoint */}
-            <Sponsors />
+            <Sponsors sponsors = {sponsors} />
             <Divider sx={{ borderBottomWidth: 10 }} style={{ marginBotton:'10%', background: '#ce1717'}} />
             <EditionsThroughYears />
         </div>

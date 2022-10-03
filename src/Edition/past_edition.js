@@ -29,16 +29,18 @@ function PastEdition(props){
         margin: "0 auto"
     }
 
+    console.log("EDITION: ", props)
     const dateDate = new Date(props.date);
     const data = {
         title: 'Edición ' + months[dateDate.getMonth()] + " " + dateDate.getFullYear(), 
         editionTitle: props.name, 
-        body:props.details
+        body:props.details,
+        image: props.secondImagePath
     }
     return(
         <div style={{ display:'flex', flexDirection:'row'}} >
             <TextPart data = {data} isPrincipal = {false}/>
-            <img src={placeHolder1} style={{width:'60%', height:'250px', marginLeft:'10%', marginTop:'1%'}} ></img>
+            <img src={data.image} style={{width:'60%', height:'300px', marginRight:'5%', marginLeft:'5%', marginTop:'1%'}} ></img>
             {/* <div style={containerStyles}>
                 <ImageSlider slides={slideImages} />
             </div> */}

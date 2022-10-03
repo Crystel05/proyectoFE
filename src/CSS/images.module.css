@@ -5,20 +5,12 @@
 
 .secondSize{
     height: 80%;
-    width: 97%;
+    width: 90%;
     margin-right: 10px;
     margin-left: 30px;
 }
 
-.sponsorsRight{
-    width: 20%;
-    display: block;
-    margin-right: 30%;
-    margin-left: 30px;
-    
-}
-
-.sponsorsLeft{
+.sponsors{
     width: 20%;
     display: block;
     margin-left: 30%;
