@@ -36,7 +36,7 @@ function EditionPage(){
     return(
         <div> 
             <img src={edition.imagePath} alt="edicionActual" className={styles.editionPrincipal}/>
-            <CurrentEdition {...params} /> {/* agarrar esto de un endpoint */}
+            <CurrentEdition {...params} />
             <Sponsors sponsors = {sponsors} />
             <Divider sx={{ borderBottomWidth: 10 }} style={{ marginBotton:'10%', background: '#ce1717'}} />
             <EditionsThroughYears />

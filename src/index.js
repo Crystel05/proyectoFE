@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import PrincipalPage from './Common/principal_page';
 import reportWebVitals from './reportWebVitals';
+import ImageCarousel from './Edition/Carousel/carrousel';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <PrincipalPage/>
+    {/* <ImageCarousel></ImageCarousel> */}
   </React.StrictMode>
 );
 
