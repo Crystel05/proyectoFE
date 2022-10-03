@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import placeHolder from '../Images/placeHolder.png'
 import styles from '../CSS/images.module.css'
 import CurrentEdition from './current_edition';
 import Sponsors from './sponsors';
 import { Divider } from '@mui/material';
 import EditionsThroughYears from './editions';
-import get from '../Connection/api';
 import axios from 'axios';
 
 
@@ -26,7 +24,6 @@ function EditionPage(){
         })
     }, [])
 
-    // console.log("SPONSORS: ", sponsors)
     const dateDate = new Date(edition.date);
     const params = {
         title:"ART CITY TOUR " + months[dateDate.getMonth()+1] + " " + dateDate.getFullYear(),

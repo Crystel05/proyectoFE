@@ -1,5 +1,4 @@
 import React from 'react';
-import placeHolder from '../Images/placeHolder2.jpg';
 import stylesImg from '../CSS/images.module.css'
 import TextPart from './textPartEdition';
 

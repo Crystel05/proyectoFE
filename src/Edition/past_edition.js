@@ -29,7 +29,6 @@ function PastEdition(props){
         margin: "0 auto"
     }
 
-    console.log("EDITION: ", props)
     const dateDate = new Date(props.date);
     const data = {
         title: 'Edición ' + months[dateDate.getMonth()] + " " + dateDate.getFullYear(), 
