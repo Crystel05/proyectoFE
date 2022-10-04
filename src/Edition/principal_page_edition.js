@@ -11,7 +11,8 @@ function EditionPage(){
     const months = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
     const [edition, setEdition] = useState({});
     const [body, setBody] = useState("");
-    const [image, setImage] = useState("");
+    const [principalImage, setPrincipalImage] = useState({})
+    const [imgCurrentEdition, setImgCurrentEdition] = useState({})
     const [sponsors, setSponsors] = useState([]);
 
     useEffect(()=>{
@@ -19,24 +20,24 @@ function EditionPage(){
         .then(response =>{
             setEdition(response.data);
             setBody(response.data.details);
-            setImage(response.data.secondImagePath);
+            setImgCurrentEdition(response.data.images[1]);
+            setPrincipalImage(response.data.images[0])
             setSponsors(response.data.sponsors);
         })
     }, [])
+
 
     const dateDate = new Date(edition.date);
     const params = {
         title:"ART CITY TOUR " + months[dateDate.getMonth()+1] + " " + dateDate.getFullYear(),
         editionTitle: edition.name,
         body: body,
-        image: image,
-        isPrincipal: true
+        isPrincipal: true,
     }
-
     return(
         <div> 
-            <img src={edition.imagePath} alt="edicionActual" className={styles.editionPrincipal}/>
-            <CurrentEdition {...params} />
+            <img src={principalImage.drivePath} alt={principalImage.name} className={styles.editionPrincipal}/>
+            <CurrentEdition edition={params} image ={imgCurrentEdition} />
             <Sponsors sponsors = {sponsors} />
             <Divider sx={{ borderBottomWidth: 10 }} style={{ marginBotton:'10%', background: '#ce1717'}} />
             <EditionsThroughYears />

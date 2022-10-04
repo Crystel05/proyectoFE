@@ -11,7 +11,7 @@ function TextPart(props){
     }
     const className =  props.isPrincipal ? styles.editionTitle : styles.pastEditionsTitle;
     return(
-        <div style={{display:'flex', flexDirection:'column', width:'550px'}}>
+        <div style={{display:'flex', flexDirection:'column', width:'550px', marginRight: '5%'}}>
             <a className={styles.editionPrimaryTitle} > { props.data.title } </a>
             {props.isPrincipal ? <a className={styles.editionTitle} > La Edición: </a> : <></>} 
             <a className={className} > { props.data.editionTitle } </a>
