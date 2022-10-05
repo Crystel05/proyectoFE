@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import placeHolder from '../Images/memberships.png';
 import styles from '../CSS/images.module.css';
-import textStyles from '../CSS/text.module.css';
-import Plans from './plans';
 import PlanDetails from './plan_details';
-import axios from 'axios';
+import Stack from '@mui/material/Stack';
+import stylesB from '../CSS/button.module.css'
+
+
 
 export default function Memberships (){
     /*const info = '¡Descube más como un miembro únete hoy y \n experimenta el arte que amas con mayor acceso, \n programación exclusiva'
@@ -13,36 +15,52 @@ export default function Memberships (){
     function replaceWithBr() {
         return info.replace(/\n/g, "<br />")
     }*/
-    const [memberships, setMemberships] = useState([]);
+
     const [selectedMembership, setSelectedMembership] = useState({})
     const [details, setDetails] = useState("")
+    const [selectedMembershipId, setSelectedMembershipId] = useState(0)
+    const [memberships, setMemberships] = useState([]);
 
     useEffect(() =>{
         axios.get('http://localhost:8080/membership/getAll').then(response =>{
             setMemberships(response.data);
         })
-        axios.get('http://localhost:8080/membership/getById?id=2')
-        .then(response =>{
-            setSelectedMembership(response.data);
-            setDetails(response.data.details)
-        })
     },[])
-
-    console.log(selectedMembership, "SELECTED")
 
     const data = {
         name: selectedMembership.name,
         price: selectedMembership.precio,
         benefits: details
     }
-   return ( 
+    return ( 
         <div>
             <article>
-                <img src={placeHolder} alt="edicionActual" className={styles.editionPrincipal}/>
-                
+                <img src={placeHolder} alt="membresías" className={styles.editionPrincipal}/>
             </article>
-            <div style={{display:'flex', flexDirection:'row'}}>
-                <Plans/>
+            <div style={{display:'flex', flexDirection:'row', marginLeft:'3%', marginRight:'3%'}}>
+            <Stack direction="column" spacing={2} style={{ marginTop:'5%', marginRight:'10%'}}>
+                {memberships.map((plan, index) =>{
+                    return(
+                        <button 
+                            key={index}
+                            className={index === 0 ? stylesB.plansClicked : stylesB.plans}
+                            style={{ marginLeft:'15%' }}
+                            // onClick={handleClick()}
+                        >
+                        <a 
+                            style={{
+                                marginRight:'60%'
+                            }}
+                        >
+                            {plan.name} 
+                        </a>  
+                        <a>
+                            {" ₡" + plan.price} 
+                        </a>  
+                        </button>
+                    )
+                })}
+            </Stack>
                 <PlanDetails {...data} />
             </div>
         </div>
