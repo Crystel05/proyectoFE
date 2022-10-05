@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from '../CSS/text.module.css'
-import stylesButton from '../CSS/button.module.css'
-import mapIcon from '../Images/mapIcon.png'
-import ticket from '../Images/ticket.png'
+import MapIcon from '@mui/icons-material/Map';
+import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
+import ButtonRoundDescription from './round_description_button';
 
 function Participation(){
 
@@ -12,34 +12,15 @@ function Participation(){
     }
 
     return(
-        <div style={{display:'flex', flexDirection:'row', marginTop:'3%' }} >
-            <div style={{display:'flex', flexDirection:'column', marginLeft: '11%'}} >
+        <div style={{display:'flex', flexDirection:'row', marginTop:'3%', marginLeft:'5%' }} >
+            <div style={{display:'flex', flexDirection:'column'}} >
                 <a className={styles.editionTitle}> ¿Cómo participar? </a>
                 <a className={styles.bodyParticipation} dangerouslySetInnerHTML={{__html: replaceWithBr()}}/>
             </div>
-            <div style={{display:'flex', flexDirection:'row', marginLeft:'15%', justifyContent:'space-between'}}>
-                <div style={{display:'flex', flexDirection:'column', marginRight:'15%'}}>
-                    <button 
-                        disabled
-                        className = { stylesButton.circle } 
-                        style={{ padding:'10px'}} >
-                        <img src={mapIcon}/>
-                    </button> 
-                    <button className={ stylesButton.reserve_button } style={{}} >
-                            Reserva de cupo
-                    </button>
-                </div>
+            <div style={{display:'flex', flexDirection:'row', marginLeft:'15%'}}>
+                <ButtonRoundDescription Icon={MapIcon} text='Reserva de cupo' style={{ marginRight:'100%' }} />
+                <ButtonRoundDescription Icon={ConfirmationNumberIcon} text='Planear Itinerario'/>
 
-                <div style={{display:'flex', flexDirection:'column', marginRight: '15%'}}>
-                    <button 
-                        disabled
-                        className = { stylesButton.circle } style={{ padding:'10px' }} >
-                        <img src={ticket}/>
-                    </button> 
-                    <button className={ stylesButton.reserve_button }>
-                        Planear Itinerario
-                    </button>
-                </div>
             </div>
         </div>
     )

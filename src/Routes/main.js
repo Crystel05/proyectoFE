@@ -1,4 +1,4 @@
-import TimelineConnector from '@mui/lab/TimelineConnector';
+import { colors } from '../Util/constants';
 import React, { useEffect, useState } from 'react';
 import styles from '../CSS/text.module.css';
 import Route from './path';
@@ -9,42 +9,36 @@ function MainRoutes(){
 
    const [routes, setRoutes] = useState([]);
 
-    // const routes = [
-    //     {
-    //         title: "Davivienda",
-    //         placeName: "Alianza Francesa",
-    //         details: "La asociación Alianza Francesa es reconocida de\ninterés público en Costa Rica desde 1984, y forma\nparte de la red de difusión educativa y cultural del\nMinisterio de Asuntos Exteriores de Francia,\nfuncionando en este sentido como socio privilegiado\nde la Embajada de Francia en Costa Rica.\n\n",
-    //         color: '#009CC1'
-    //     },
-    //     {
-    //         title: "Norte",
-    //         placeName: "Galería Nacional",
-    //         details: "La Galería Nacional es todo un referente del arte\nvisual costarricense, convirtiéndose sus exposiciones\nen las más importantes de Costa Rica.\n\n",
-    //         color: '#FFA506'
-    //     },
-    //     {
-    //         title: "Escalante",
-    //         placeName: "Museo Nacional",
-    //         details: "Desde sus primeros años, el museo se orientó hacia la\ninvestigación científica, la educación, la exhibición y la\ndefensa del patrimonio cultural y natural. \n\n",
-    //         color: '#E2368E'
-    //     }
-    // ]
+   const usedColors = [];
+
+    function setColor(){
+        let color = colors[(Math.floor(Math.random() * 10))];
+    
+        if(usedColors.length === routes.length)
+            usedColors = [];
+        
+        while(usedColors.includes(color)){
+            color = colors[(Math.floor(Math.random() * 10))];
+        }
+        usedColors.push(color);
+        
+        console.log("USED COLORS: ", usedColors)
+        return color;
+    }
 
     useEffect(() =>{
         axios.get('http://localhost:8080/routes/getAll')
         .then(response =>{
             setRoutes(response.data);
-            
         })
        
     }, [])
-    console.log(routes, " ROUTES")
     return(
         <div style={{display:'flex', flexDirection:'column'}}>
             <a className={styles.routesTitle} >Rutas</a>
             {routes.map((route, index) => {
                 return(
-                    <Route key={index} {...route}/>
+                    <Route key={index} route={route} color={setColor()}/>
                 )
             })}
             <Participation/>
