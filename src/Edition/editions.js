@@ -45,7 +45,7 @@ function EditionsThroughYears(){
                         <TimelineItem key={index}>
                             <TimelineSeparator>
                                 <TimeDot/>
-                                {dots.map((e, index) => {
+                                {dots.map((_, index) => {
                                     return(
                                         <TimelineConnector 
                                         key={index}

@@ -5,7 +5,7 @@ import stylesText from '../CSS/text.module.css'
 export const ArtCityTourButton = () => {
     return (
         <button 
-            className = { styles.principal } style={{padding:'20px', marginLeft:'3%', marginTop:'2%'}} >
+            className = { styles.principal } >
             <p className = { stylesText.principal_small }> 
                 ART CITY
             </p>

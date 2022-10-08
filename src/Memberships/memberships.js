@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import placeHolder from '../Images/memberships.png';
 import styles from '../CSS/images.module.css';
+import stylesText from '../CSS/text.module.css';
 import PlanDetails from './plan_details';
 import Stack from '@mui/material/Stack';
 import stylesB from '../CSS/button.module.css'
@@ -9,43 +9,65 @@ import stylesB from '../CSS/button.module.css'
 
 
 export default function Memberships (){
-    /*const info = '¡Descube más como un miembro únete hoy y \n experimenta el arte que amas con mayor acceso, \n programación exclusiva'
-    + ' y nuevas formas de hacer \n conexiones!';
-
-    function replaceWithBr() {
-        return info.replace(/\n/g, "<br />")
-    }*/
+    const info = '¡Descube más como un miembro únete hoy y experimenta el arte que amas con mayor acceso, programación exclusiva'
+    + ' y nuevas formas de hacer conexiones!';
 
     const [selectedMembership, setSelectedMembership] = useState({})
     const [details, setDetails] = useState("")
+    const [photo, setPhoto] = useState({})
     const [selectedMembershipId, setSelectedMembershipId] = useState(0)
+    const [principalImage, setPrincipalImage] = useState("");
     const [memberships, setMemberships] = useState([]);
 
     useEffect(() =>{
         axios.get('http://localhost:8080/membership/getAll').then(response =>{
             setMemberships(response.data);
+            setSelectedMembership(response.data[0]);
+            setDetails(response.data[0].details);
+            setPhoto(response.data[0].photo)
+        })
+        axios.get('http://localhost:8080/membership/getPrincipal')
+        .then(response =>{
+            setPrincipalImage(response.data);
         })
     },[])
 
+    function handleClick(event, index){
+        if(event.detail >=2 ){
+            setSelectedMembershipId(index)
+            setSelectedMembership(memberships[index])
+            setDetails(memberships[index].details)
+            setPhoto(memberships[index].photo)
+        }       
+        
+    }
+    
     const data = {
         name: selectedMembership.name,
-        price: selectedMembership.precio,
-        benefits: details
+        price: selectedMembership.price,
+        benefits: details,
+        image: photo
     }
     return ( 
         <div>
-            <article>
-                <img src={placeHolder} alt="membresías" className={styles.editionPrincipal}/>
+           <article>
+                <picture>
+                    <source  srcSet={principalImage} />
+                    <img src={principalImage} alt="background" className={styles.image} />
+                </picture>
+                <h3 className={stylesText.header}>Membresías</h3>
+                <a className={stylesText.bodyMemberships} > {info} </a>
             </article>
             <div style={{display:'flex', flexDirection:'row', marginLeft:'3%', marginRight:'3%'}}>
             <Stack direction="column" spacing={2} style={{ marginTop:'5%', marginRight:'10%'}}>
                 {memberships.map((plan, index) =>{
                     return(
+                        index !== 4 && 
                         <button 
                             key={index}
-                            className={index === 0 ? stylesB.plansClicked : stylesB.plans}
+                            className={index === selectedMembershipId ? stylesB.plansClicked : stylesB.plans}
                             style={{ marginLeft:'15%' }}
-                            // onClick={handleClick()}
+                            onClick={event => handleClick(event, index)}
                         >
                         <a 
                             style={{

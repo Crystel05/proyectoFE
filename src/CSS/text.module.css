@@ -1,12 +1,12 @@
 .principal_small{
     font-family: 'Krona One', sans-serif;
-    font-size: 8px;
+    font-size: 11px;
     margin: 0px;
 }
 
 .principal_big{
     font-family: 'Krona One', sans-serif;
-    font-size: 13px;
+    font-size: 19px;
     margin: 0px;
     font-weight: bold;
 }
@@ -83,17 +83,16 @@
 }
 
 .header {
-    font-size: 30px;
+    font-size: 25px;
+    font-family: 'Krona One', sans-serif;
     color: white;
     text-align: left;
     position: absolute;
-    top: 0;
+    top: 40%;
     bottom: 0;
     left: 3%;
     right: 0;
     height: fit-content;
-    margin: auto;
-   
 }
 
 .bodyMemberships{
@@ -102,12 +101,13 @@
     color: white;
     text-align: left;
     position: absolute;
-    top: 150px;
+    top: 50%;
     bottom: 0;
     left: 3%;
     right: 0;
     height: fit-content;
-    margin: auto;
+    width: 35%;
+    margin-right: auto;
 }
 
 .membershipTitle{
