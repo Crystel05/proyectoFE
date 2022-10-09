@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import PrincipalPage from './Common/principal_page';
 import reportWebVitals from './reportWebVitals';
-import ImageCarousel from './Edition/Carousel/carrousel';
+import Login from './Users/login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <PrincipalPage/>
+    <Login />
   </React.StrictMode>
 );
 
