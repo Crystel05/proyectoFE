@@ -1,9 +1,7 @@
 import { Box, Button } from '@mui/material';
 import React from 'react';
 import styles from '../CSS/text.module.css'
-import stylesButton from '../CSS/button.module.css'
 import map from '../Images/mapaDavivienda.PNG'
-import lugar from '../Images/lugarRutas.png'
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 function Route({ route, color }){
