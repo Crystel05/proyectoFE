@@ -5,10 +5,10 @@ import Sponsors from './sponsors';
 import { Divider } from '@mui/material';
 import EditionsThroughYears from './editions';
 import axios from 'axios';
+import { months } from '../Util/constants';
 
 
 function EditionPage(){
-    const months = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
     const [edition, setEdition] = useState({});
     const [body, setBody] = useState("");
     const [principalImage, setPrincipalImage] = useState({})
@@ -39,7 +39,7 @@ function EditionPage(){
             <img src={principalImage.drivePath} alt={principalImage.name} className={styles.editionPrincipal}/>
             <CurrentEdition edition={params} image ={imgCurrentEdition} />
             <Sponsors sponsors = {sponsors} />
-            <Divider sx={{ borderBottomWidth: 10 }} style={{ marginBotton:'10%', background: '#ce1717'}} />
+            <Divider sx={{ borderBottomWidth: 10 }} style={{ marginBotton:'10%', background: '#ce1717' }} />
             <EditionsThroughYears />
         </div>
     )

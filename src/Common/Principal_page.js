@@ -5,11 +5,14 @@ import Contacts from './contacts';
 import { ArtCityTourButton } from './button_principal_page';
 import { ReservationButton } from './button_reservation.js';
 
+import stylesButton from '../CSS/button.module.css'
+
+
 function PrincipalPage() {
     return ( 
         <div >
             <Box style={{display:'flex', justifyContent: 'space-between'}}>
-                <ArtCityTourButton/>
+                <ArtCityTourButton className={stylesButton.principal}/>
                 <Box style={{display:'flex', justifyContent: 'center', marginTop: '3%', marginRight: '3%'}}>
                     <ReservationButton/>
                     <Avatar src="../Images/profilePicPH.png"/>    

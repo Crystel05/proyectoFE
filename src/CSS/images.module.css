@@ -13,9 +13,7 @@
 .sponsors{
     width: 20%;
     display: block;
-    margin-left: 30%;
-    margin-right: 30px;
-    margin-bottom: 50px;
+    margin-bottom: 2vh;
 }
 
 .article {
@@ -29,5 +27,10 @@
     width: 100%;
     height: 500px;
     filter: brightness(50%); 
+}
+
+.login{
+    height: 100vh;
+    width: 100vh;
 }
 

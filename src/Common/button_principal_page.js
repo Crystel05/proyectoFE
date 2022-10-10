@@ -1,11 +1,10 @@
 import React from 'react';
-import styles from '../CSS/button.module.css';
 import stylesText from '../CSS/text.module.css'
 
-export const ArtCityTourButton = () => {
+export const ArtCityTourButton = ({ className }) => {
     return (
         <button 
-            className = { styles.principal } >
+            className = { className }>
             <p className = { stylesText.principal_small }> 
                 ART CITY
             </p>

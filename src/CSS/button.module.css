@@ -10,6 +10,31 @@
   margin-top: 2%;
 }
 
+.principalLogin {
+  background-color: #ce1717;
+  border: none;
+  color: white;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-left: 2%;
+  margin-top: 2%;
+  margin:auto
+}
+
+.principalCreateUser {
+  background-color: #ce1717;
+  border: none;
+  color: white;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-left: 2%;
+  margin-top: 2vh;
+  margin-left:auto;
+  margin-right: 2vh;
+}
+
 .circle{
   background-color: #ce1717;
   border: none;
