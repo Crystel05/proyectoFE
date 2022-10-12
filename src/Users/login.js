@@ -15,7 +15,7 @@ import Fields from './fields';
 import { NONE, PASSWORD, TEXT_FIELD } from '../Util/constants';
 import GenericRoundButton from '../Buttons/generic_button';
 
-const Login = () =>{
+const Login = ({ setAuthorization }) =>{
 
     const navigate = useNavigate();
     const [image, setImage] = useState("");
@@ -57,6 +57,7 @@ const Login = () =>{
         setIncorrect("")
         getLogin();
         if(isCorrect){
+            setAuthorization();
             goToApplication();
         }else{
             if(event.detail >= 2)
