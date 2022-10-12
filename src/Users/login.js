@@ -1,4 +1,4 @@
-import { Box, Stack } from '@mui/system';
+import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -6,22 +6,28 @@ import styles from '../CSS/images.module.css'
 import textStyle from '../CSS/text.module.css'
 import stylesButton from '../CSS/button.module.css'
 import stylesContainer from '../CSS/container.module.css'
+import stylesShapes from '../CSS/shapes.module.css'
 
-import { ArtCityTourButton } from '../Common/button_principal_page';
-import { Button, TextField } from '@mui/material';
+import { ArtCityTourButton } from '../Buttons/art_city_tour_button';
+import { makeStyles, withStyles } from '@mui/styles'
 import { useNavigate } from 'react-router-dom';
-;
-
+import Fields from './fields';
+import { NONE, PASSWORD, TEXT_FIELD } from '../Util/constants';
+import GenericRoundButton from '../Buttons/generic_button';
 
 const Login = () =>{
 
     const navigate = useNavigate();
-
     const [image, setImage] = useState("");
     const [incorrect, setIncorrect] = useState("")
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isCorrect, setIsCorrect] = useState();
+    
+    const fields = [
+        {name:'Correo', type: TEXT_FIELD, isRequired:true, onChange: () => handleEmailChange()},
+        {name:'Contraseña', type: PASSWORD, isRequired:true, onChange: () => handlePasswordChange()}
+    ]
 
     async function getImage(){
         await axios.get('http://localhost:8080/images/getLogin').then(response => {
@@ -29,12 +35,10 @@ const Login = () =>{
         })
     }
 
-    useEffect(() =>{
-        getImage();
-    }, [])
-
     async function getLogin(){
+        console.log("GET LOGIN")
         const link = 'http://localhost:8080/user/login?email='+email+'&password='+password;
+        console.log(email, " ", password, " credenciales")
         await axios.get(link)
         .then(response => {
             setIsCorrect(response.data);
@@ -45,13 +49,16 @@ const Login = () =>{
         navigate("/application");
     }
 
-    const login = () => (event) =>{
-        setIncorrect("");
+    function createAccount(){
+        navigate("/createAccount");
+    }
+
+    const login = () => (event) => {
+        setIncorrect("")
         getLogin();
         if(isCorrect){
             goToApplication();
         }else{
-            console.log(event.details)
             if(event.detail >= 2)
                 setIncorrect("El usuario o la contraseña ingresados con incorrectos");
         }
@@ -65,94 +72,25 @@ const Login = () =>{
         setPassword(event.target.value);
     }
 
-    function createAccount(){
-        navigate("/createAccount");
-    }
+    useEffect(() =>{
+        getImage();
+    }, [])
 
     return(
-        <Box style={{ display:'flex', flexDirection:'row' }} className={stylesContainer.scrolls} >
+        <Box className={ stylesContainer.displayRow } >
             <img src={ image } alt='login' className={styles.login} />
-            <hr  style={{
-                color: '#ce1717',
-                backgroundColor: '#ce1717',
-                height: '100vh',
-                width: '15px',
-                borderColor : '#ce1717',
-                marginLeft: '0px',
-                marginTop: '0px'
-            }}/>
-            <Box style={{ display:'flex', flexDirection:'column', margin:'auto', marginTop:'10vh'}} >
-                <div style={{ margin:'auto', display:'flex', flexDirection:'column' }} >
+            <hr className={ stylesShapes.verticalDivider }/>
+            <Box className={ `${stylesContainer.displayColumn} ${stylesContainer.centerTop}` } >
+                <Box className={ stylesContainer.displayColumn } >
                     <ArtCityTourButton className={stylesButton.principalLogin}/>
-                    <h1 className={textStyle.editionTitle}> Inicio de Sesión </h1>
-                </div>
-                <Stack
-                    component="form"
-                    sx={{
-                        '& fieldset': {
-                            borderRadius: '25px',
-                        },
-                        width: '75vh',
-                    }}
-                    spacing={3}
-                    >
-                    <TextField
-                        label="Correo"
-                        id="correo"
-                        variant="outlined"
-                        onChange={handleEmailChange()}
-                        sx={{
-                            '& label.Mui-focused': {
-                                color: '#ce1717',
-                              },
-                              '& .MuiOutlinedInput-root': {
-                                '&.Mui-focused fieldset': {
-                                  borderColor: '#ce1717',
-                                },
-                              },
-                        }}
-                    />
-                    <TextField
-                        label="Contraseña"
-                        id="contraseña"
-                        variant="outlined"
-                        type="password"
-                        onChange={handlePasswordChange()}
-                        sx={{
-                            '& label.Mui-focused': {
-                                color: '#ce1717',
-                              },
-                              '& .MuiOutlinedInput-root': {
-                                '&.Mui-focused fieldset': {
-                                  borderColor: '#ce1717',
-                                },
-                              },
-                        }}
-                    />
-                    </Stack>
-                    <a className={textStyle.link} style={{ marginTop:'2vh', marginLeft:'5px' }}> ¿Olvidó su contraseña </a>
-                    <Button sx={{
-                                width: '200px',
-                                height: '32px',
-                                backgroundColor:'#ce1717',
-                                border: 'none',
-                                color: 'white',
-                                padding: '10px',
-                                textAlign: 'center',
-                                fontSize: '15px',
-                                margin: 'auto',
-                                marginTop: '3%',
-                                cursor: 'pointer',
-                                fontFamily: 'Open Sans, sans-serif',
-                                fontWeight: 'bold',
-                                borderRadius: '15px'
-                            }}
-                            onClick={login()}> 
-                            Inciar Sesión 
-                        </Button>
-                    <a className={textStyle.crearCuentaLink} onClick={() => createAccount()}> Crear Cuenta </a>
-                    <a className={textStyle.incorrectUser} > {incorrect} </a>
+                    <h1 className={ `${textStyle.kronaText} ${textStyle.editionTitle} ${textStyle.margins}` }> Inicio de Sesión </h1>
                 </Box>
+                <Fields fields={ fields }/>
+                <a className={ `${textStyle.kronaText} ${textStyle.link}` } > ¿Olvidó su contraseña </a>
+                <GenericRoundButton Icon={<></>} backgroundColor='#ce1717' text='Iniciar Sesión' iconPosition={NONE} onClick={() => login()}/>
+                <a className={ `${textStyle.kronaText}  ${textStyle.crearCuentaLink}` } onClick={() => createAccount()}> Crear Cuenta </a>
+                <a className={ `${textStyle.kronaText} ${textStyle.incorrectUser}` } > {incorrect} </a>
+            </Box>
         </Box>
     )
 }

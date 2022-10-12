@@ -5,10 +5,10 @@ export const ArtCityTourButton = ({ className }) => {
     return (
         <button 
             className = { className }>
-            <p className = { stylesText.principal_small }> 
+            <p className = { `${stylesText.kronaText} ${stylesText.principal_small}` }> 
                 ART CITY
             </p>
-            <p className = { stylesText.principal_big } > 
+            <p className = { `${stylesText.kronaText} ${stylesText.principal_big}` } > 
                 TOUR 
             </p>
         </button> 

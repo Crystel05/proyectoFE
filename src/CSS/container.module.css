@@ -1,3 +1,22 @@
-.scrolls{
-    overflow: hidden;
+.displayColumn{
+    display: flex;
+    flex-direction: column;
+}
+
+.displayRow{
+    display: flex;
+    flex-direction: row;
+}
+
+.centerTop{
+    margin: auto; 
+    margin-top: 10vh;
+}
+
+.center{
+    margin: auto
+}
+
+.buttonTitle{
+    margin-bottom: 100px;
 }

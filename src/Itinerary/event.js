@@ -7,7 +7,8 @@ export default function Event({ event }){
     return(
         <Box sx={{
             boxShadow:'1px 3px 18px #a19999',
-            borderRadius:'10px'
+            borderRadius:'10px',
+            width:'370px'
             }} 
         >
             <Box sx={{ p: 1 }} style={{ display:'flex', flexDirection:'row', backgroundColor:'#f4f3f7' }}>

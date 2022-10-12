@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
-import { ArtCityTourButton } from "../Common/button_principal_page";
+import { ArtCityTourButton } from "../Buttons/art_city_tour_button";
 
 import styles from '../CSS/text.module.css'
 import stylesButton from '../CSS/button.module.css'

@@ -70,12 +70,12 @@ export default function PrincipalItineraryPage(){
     const borderBottonLeftEnter = value === 'restaurantes' ?  '10px' : '0px'
     return(
         <Box >
-            <Box sx={{ p: 1, border:2, borderColor:'#f4f3f7', borderRadius:'10px', boxShadow:'1px 3px 18px #a19999' }} style={{ marginTop:'5vh', width:'500px', marginLeft:'5vh' }}>
+            <Box sx={{ p: 1, border:2, borderColor:'#f4f3f7', borderRadius:'10px', boxShadow:'1px 3px 18px #a19999' }} style={{ marginTop:'5vh', width:'430px', marginLeft:'5vh' }}>
                 <TabContext value={value} >
                     <Box sx={{ borderColor: 'divider' }} >
                         <TabList
                                 onChange={handleChange} 
-                                style={{marginLeft:'10%', fontSize:'13px'}}
+                                style={{ fontSize:'13px' }}
                                 TabIndicatorProps={{
                                     hidden: true
                                 }}
