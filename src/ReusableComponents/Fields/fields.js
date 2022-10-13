@@ -18,7 +18,7 @@ const useStyles = makeStyles({
             borderRadius: '25px',
         },
         width: '75vh',
-        marginRight:'10vh'
+        margin:'auto'
     }
 })
 

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../CSS/text.module.css'
 import MapIcon from '@mui/icons-material/Map';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
-import ButtonRoundDescription from '../Buttons/round_description_button';
+import ButtonRoundDescription from '../ReusableComponents/Buttons/round_description_button';
 
 function Participation(){
 

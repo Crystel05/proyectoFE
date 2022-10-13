@@ -59,6 +59,12 @@
     color:#635858
 }
 
+.marginsCreateAccount{
+    margin-left: 10vh; 
+    margin-top: 5vh;
+    margin-bottom:5vh;
+}
+
 .pastEditionsTitle{
     /* font-family: 'Krona One', sans-serif; */
     font-size: 20px;

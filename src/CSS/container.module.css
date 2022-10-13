@@ -14,9 +14,13 @@
 }
 
 .center{
-    margin: auto
+    margin: auto;
 }
 
 .buttonTitle{
     margin-bottom: 100px;
+}
+
+.spaceBetween{
+    margin-right: 3vh;
 }

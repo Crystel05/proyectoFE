@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { makeStyles } from '@mui/styles'
 import React from "react";
-import { END, START } from "../Util/constants";
+import { END, START } from "../../Util/constants";
 import sx from "mui-sx";
 
 export default function GenericRoundButton({ Icon, backgroundColor, text, iconPosition, onClick }){
@@ -9,7 +9,7 @@ export default function GenericRoundButton({ Icon, backgroundColor, text, iconPo
     const sxStyles = {
         width: '200px',
         height: '32px',
-        backgroundColor:'#ce1717',
+        backgroundColor: {backgroundColor},
         border: 'none',
         color: 'white',
         padding: '10px',

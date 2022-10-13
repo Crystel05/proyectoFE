@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Avatar, Box } from "@mui/material";
 import Tabs from './tabs.js'
 import Contacts from './contacts';
-import { ArtCityTourButton } from '../Buttons/art_city_tour_button';
+import ArtCityTourButton from '../ReusableComponents/Buttons/art_city_tour_button';
 import { ReservationButton } from './button_reservation.js';
 
 import stylesButton from '../CSS/button.module.css'

@@ -8,12 +8,11 @@ import stylesButton from '../CSS/button.module.css'
 import stylesContainer from '../CSS/container.module.css'
 import stylesShapes from '../CSS/shapes.module.css'
 
-import { ArtCityTourButton } from '../Buttons/art_city_tour_button';
-import { makeStyles, withStyles } from '@mui/styles'
+import ArtCityTourButton from '../ReusableComponents/Buttons/art_city_tour_button';
 import { useNavigate } from 'react-router-dom';
-import Fields from './fields';
+import Fields from '../ReusableComponents/Fields/fields';
 import { NONE, PASSWORD, TEXT_FIELD } from '../Util/constants';
-import GenericRoundButton from '../Buttons/generic_button';
+import GenericRoundButton from '../ReusableComponents/Buttons/generic_button';
 
 const Login = ({ setAuthorization }) =>{
 
@@ -53,6 +52,10 @@ const Login = ({ setAuthorization }) =>{
         navigate("/createAccount");
     }
 
+    const backToLogin = () => (event) =>{
+        navigate("/");
+    }
+
     const login = () => (event) => {
         setIncorrect("")
         getLogin();
@@ -83,7 +86,7 @@ const Login = ({ setAuthorization }) =>{
             <hr className={ stylesShapes.verticalDivider }/>
             <Box className={ `${stylesContainer.displayColumn} ${stylesContainer.centerTop}` } >
                 <Box className={ stylesContainer.displayColumn } >
-                    <ArtCityTourButton className={stylesButton.principalLogin}/>
+                    <ArtCityTourButton className={stylesButton.principalLogin} goToPage={() => {}} />
                     <h1 className={ `${textStyle.kronaText} ${textStyle.editionTitle} ${textStyle.margins}` }> Inicio de Sesión </h1>
                 </Box>
                 <Fields fields={ fields }/>
