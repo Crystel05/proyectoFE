@@ -12,6 +12,10 @@ export default function Map({ latitude, longitude, places}){
 
     const [popUpLocation, setPopUpLocation] = React.useState(null);
 
+    const setPopUp = (place) => (event) =>{
+        setPopUpLocation(place)
+    }
+
     return (
         <MapContainer center = {[latitude, longitude]} zoom = {17}>
             <TileLayer
@@ -19,7 +23,7 @@ export default function Map({ latitude, longitude, places}){
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             {places.map (place => (
-                <Marker key={place.id} position={[place.latitude, place.longitude]} onClick={() => {setPopUpLocation(place);}}/>
+                <Marker key={place.id} position={[place.latitude, place.longitude]} onClick={() => {setPopUp(place);}}/>
             ))}
         {popUpLocation && (
         <Popup position={[popUpLocation.latitude, popUpLocation.longitude]} onClose={() => {setPopUpLocation(null);}}>
