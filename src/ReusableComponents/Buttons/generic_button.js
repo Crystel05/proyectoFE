@@ -4,7 +4,9 @@ import React from "react";
 import { END, START } from "../../Util/constants";
 import sx from "mui-sx";
 
-export default function GenericRoundButton({ Icon, backgroundColor, text, iconPosition, onClick }){
+export default function GenericRoundButton({ Icon, backgroundColor, text, iconPosition, onClick, marginRight }){
+
+    const hoverColor =  backgroundColor === '#ce1717' ? '#db5e5e' : '#694cb5';
 
     const sxStyles = {
         width: '200px',
@@ -21,8 +23,9 @@ export default function GenericRoundButton({ Icon, backgroundColor, text, iconPo
         fontFamily: 'Open Sans, sans-serif',
         fontWeight: 'bold',
         borderRadius: '15px',
+        marginRight: {marginRight},
         '&:hover': {
-            backgroundColor: '#db5e5e',
+            backgroundColor: hoverColor,
             color: 'white',
         },
     }

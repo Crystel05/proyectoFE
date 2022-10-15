@@ -10,7 +10,6 @@ import { Navigate } from 'react-router-dom';
 
 
 function PrincipalPage({ authorization }) {
-    console.log("AUTORIZACIÓN: ", authorization)
     if(authorization){
         return ( 
             <div >

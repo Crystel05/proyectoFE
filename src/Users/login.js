@@ -35,9 +35,7 @@ const Login = ({ setAuthorization }) =>{
     }
 
     async function getLogin(){
-        console.log("GET LOGIN")
         const link = 'http://localhost:8080/user/login?email='+email+'&password='+password;
-        console.log(email, " ", password, " credenciales")
         await axios.get(link)
         .then(response => {
             setIsCorrect(response.data);
