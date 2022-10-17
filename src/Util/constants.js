@@ -6,3 +6,6 @@ export const NONE = 'none';
 export const TEXT_FIELD = 'text';
 export const PASSWORD = 'password';
 export const SELECT = 'select';
+export const SUCCESS = 'success';
+export const ERROR = 'error';
+export const INFO = 'info';

@@ -13,13 +13,12 @@ export default function Map({ latitude, longitude, places, width, height, margin
     const [popUpLocation, setPopUpLocation] = useState(null);
 
     const setPopUp = () => (event) =>{
-        console.log("ENTRA")
         setPopUpLocation(null)
     }
 
 
     return (
-        <MapContainer center = {[latitude, longitude]} zoom = {15} style={{ width:width, height:height, marginLeft:marginLeft, marginTop:marginTop, marginRight:marginRight }}>
+        <MapContainer center = {[latitude, longitude]} zoom = {15} style={{ width:width, height:height, marginLeft:'100px', marginTop:'1%', marginRight:'2%' }}>
             <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

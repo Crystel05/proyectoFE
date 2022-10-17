@@ -20,9 +20,7 @@ function MainRoutes(){
         while(usedColors.includes(color)){
             color = colors[(Math.floor(Math.random() * 10))];
         }
-        usedColors.push(color);
-        
-        console.log("USED COLORS: ", usedColors)
+        usedColors.push(color);  
         return color;
     }
 

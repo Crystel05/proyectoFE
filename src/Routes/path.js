@@ -7,8 +7,6 @@ import MainMap from '../Maps/main_map';
 
 function Route({ route, color }){
 
-    console.log(route, " ROUTE")
-
     const body = route.places[0].details;
     
     return(

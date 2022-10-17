@@ -5,7 +5,6 @@ import { Box } from '@mui/material';
 
 function Sponsors(sponsors){
     const sponsorsList = sponsors.sponsors;
-    console.log("SPONSORS: ", sponsorsList)
     return(
         <div style={{ marginLeft:'5%', marginRight:'5%', marginBotton: '5%', marginTop:'5%', display: 'flex', flexDirection:'column'}}>
             <a className= {styles.editionTitle} style={{marginBottom:'3%'}}> Patrocinan </a>

@@ -7,7 +7,6 @@ import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 
 export default function Place({ place }){
-    console.log(place)
     const priceRange = new Array(place.priceRange).fill("$ ");
     const calification = new Array(place.calification).fill(0);
     return(

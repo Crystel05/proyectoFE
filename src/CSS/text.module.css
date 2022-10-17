@@ -20,7 +20,6 @@
 .editionPrimaryTitle{
     font-weight: bold;
     font-size: 17px;
-    margin-bottom: 10%;
 }
 
 .editionTitle{
@@ -30,8 +29,12 @@
 
 .margins{
     margin: auto;
-    margin-bottom: 1vh;
-    margin-top: 1vh;
+    margin-bottom: 3vh;
+}
+
+.marginsReset{
+    margin: auto;
+    margin-top: 3vh;
 }
 
 .crearCuentaLink{
@@ -40,7 +43,7 @@
     text-align: center;
     color: #ce1717;
     font-weight: bold;
-    margin-top: 2vh;
+    margin-top: 3vh;
 }
 
 .crearCuentaLink:hover{
@@ -50,7 +53,8 @@
 .link{
     text-decoration: underline;
     cursor: pointer;
-    margin-top: 2vh; 
+    margin-top: 3vh; 
+    margin-bottom: 3vh;
     margin-left: 5px;
     
 }
@@ -63,6 +67,11 @@
     margin-left: 10vh; 
     margin-top: 5vh;
     margin-bottom:5vh;
+}
+
+.info{
+    margin: auto;
+    margin-bottom: 5vh;
 }
 
 .pastEditionsTitle{

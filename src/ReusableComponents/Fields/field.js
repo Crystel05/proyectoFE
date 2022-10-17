@@ -1,13 +1,13 @@
 import React from "react";
 import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { PASSWORD, TEXT_FIELD } from "../../Util/constants";
-import sx from "mui-sx";
 
 export const Field = ({ field }) => {
-
+   
     if(field.type === TEXT_FIELD || field.type === PASSWORD){
         return(
             <TextField
+                helperText={field.helperText}
                 required={field.isRequired}
                 label={field.name}
                 id={field.name}
