@@ -1,11 +1,11 @@
 import React from 'react';
 import stylesImg from '../CSS/images.module.css'
 import TextPart from './textPartEdition';
+import styles from '../CSS/container.module.css'
 
-
-function CurrentEdition ({ edition, image }) { //agregar la imagen a los parametros 
+function CurrentEdition ({ edition, image }) { 
     return(
-        <div style={{display:'flex', flexDirection:'row', marginTop:'5%', justifyContent:'center'}}>
+        <div className={ `${styles.displayRow} ${styles.centerTop}` } >
             <TextPart data={edition} isPrincipal={true} />
             <div>
                 <img src={image.drivePath}  className={stylesImg.secondSize}/>

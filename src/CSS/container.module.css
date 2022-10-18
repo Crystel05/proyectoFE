@@ -17,6 +17,10 @@
     margin: auto;
 }
 
+.centerContent{
+    justify-content: center;
+}
+
 .imageUploader{
     margin: auto;
     margin-top: 2vh;
@@ -29,4 +33,28 @@
 
 .spaceBetween{
     margin-right: 3vh;
+}
+
+.textPart{
+    display: flex;
+    flex-direction: column;
+    width:550px; 
+    margin: auto;
+    margin-right:5vh;
+    margin-left:3vh;
+}
+
+.sponsors{
+    margin-left:5%;
+    margin-right:5%;
+    margin-bottom: 5%; 
+    margin-top: 5%
+}
+
+.editionsThroughYears{
+    display:flex;
+    flex-direction:column;
+    margin-top: 3%;
+    justify-content:center;
+    margin-left:5vh;
 }

@@ -20,6 +20,8 @@
 .editionPrimaryTitle{
     font-weight: bold;
     font-size: 17px;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 
 .editionTitle{
@@ -81,9 +83,8 @@
 }
 
 .body{
-    /* font-family: 'Open Sans', sans-serif; */
     font-weight: 20px;
-    margin-top: 10%;
+    margin-top: 1vh;
 }
 
 .bodyParticipation{

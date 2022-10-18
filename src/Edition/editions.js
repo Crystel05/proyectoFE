@@ -8,6 +8,7 @@ import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import PastEdition from './past_edition';
 import axios from 'axios';
+import stylesContainer from '../CSS/container.module.css'
 
 function EditionsThroughYears(){
     const [editions, setEditions] = useState([]);
@@ -19,8 +20,9 @@ function EditionsThroughYears(){
         })
     },[])
     return(
-        <div style={{display:'flex', flexDirection:'column', marginTop: '3%', justifyContent:'center', marginLeft:'5vh'}}>
-            <a className={styles.editionTitle} > Art City Tour: a TRAVÉS DE LOS AÑOS </a>
+        //style={{display:'flex', flexDirection:'column', marginTop: '3%', justifyContent:'center', marginLeft:'5vh'}}
+        <div className={ stylesContainer.editionsThroughYears }>
+            <a className={ `${styles.editionTitle} ${styles.kronaText}` } > Art City Tour: a TRAVÉS DE LOS AÑOS </a>
             <a className={styles.subtitleSmall}> ¡Un viaje a lo que ha sido la experiencia Art City Tour en las pasadas ediciones!</a>
             <Timeline sx={{
                 [`& .${timelineItemClasses.root}:before`]: {
