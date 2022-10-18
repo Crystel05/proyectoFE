@@ -4,13 +4,14 @@ import { PASSWORD, TEXT_FIELD } from "../../Util/constants";
 
 export const Field = ({ field }) => {
    
+    const id = field.id === null ? field.name : field.id;
     if(field.type === TEXT_FIELD || field.type === PASSWORD){
         return(
             <TextField
                 helperText={field.helperText}
                 required={field.isRequired}
                 label={field.name}
-                id={field.name}
+                id={id}
                 variant="outlined"
                 type={field.type}
                 onChange={field.onChange()}

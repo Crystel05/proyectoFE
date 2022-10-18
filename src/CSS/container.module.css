@@ -17,6 +17,12 @@
     margin: auto;
 }
 
+.imageUploader{
+    margin: auto;
+    margin-top: 2vh;
+    margin-bottom: -2vh;
+}
+
 .buttonTitle{
     margin-bottom: 100px;
 }

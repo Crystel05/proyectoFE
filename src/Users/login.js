@@ -66,38 +66,7 @@ const Login = ({ setAuthorizationLogin, passwordChanged, setAuthorizationResetPa
         navigate('/resetPassword');
     }
 
-    // function verifyMailFormat(){
-    //     const mailRE = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    //     const mail =email
-    //     if(mailRE.test(mail))
-    //         return true;
-    //     return false;
-    // }
-
-    // function verifyPasswordRequirements(){
-    //     if(password.length >= 8)
-    //         return true;
-    //     return false;
-    // }
-
     const login = () => (event) => {
-        // if(verifyMailFormat()){
-        //     if(verifyPasswordRequirements()){
-        //         getLogin();
-        //         if(isCorrect){
-        //             setAuthorization();
-        //             goToApplication();
-        //         }else{
-
-        //         }
-        //     }else{
-        //         setIncorrect("La contraseña no cumple los requerimientos mínimos, 8 caracteres como mínimo")
-        //     }
-        // }else{
-        //     setIncorrect("El formato de correo es incorrecto; trate con algo como correo@mail.com")
-        // }
-        // const correctMailFormat = verifyMailFormat();
-        // const correctPasswordRequirements = verifyPasswordRequirements();
         if(resetPassword){
             resetPasswordFunction();
         }else{
@@ -148,7 +117,7 @@ const Login = ({ setAuthorizationLogin, passwordChanged, setAuthorizationResetPa
           return;
         }
         setOpen(false);
-      };
+    };
 
     useEffect(() =>{
         getImage();
