@@ -12,22 +12,22 @@ export default function Plans(){ //cambiar esto por una lista de base de datos d
         })
     },[])
     
-    //const [clicked, setClicked] = useState(false);
+    const [clicked, setClicked] = useState(false);
 
-    // const desing = clicked ? styles.plansClicked : styles.plans;
+    const desing = clicked ? styles.plansClicked : styles.plans;
     
-    // function handleClick(){
-    //     setClicked(true);
-    // }
+    function handleClick(){
+        setClicked(true);
+    }
     return(
         <Stack direction="column" spacing={2} style={{ marginTop:'5%', marginRight:'10%'}}>
             {memberships.map((plan, index) =>{
                 return(
                     <button 
                         key={index}
-                        className={index === 0 ? styles.plansClicked : styles.plans}
+                        className={desing}
                         style={{ marginLeft:'15%' }}
-                        // onClick={handleClick()}
+                        onClick={handleClick()}
                     >
                     <a 
                         style={{

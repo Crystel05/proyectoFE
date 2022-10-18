@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Avatar, Box } from "@mui/material";
 import Tabs from './tabs.js'
 import Contacts from './contacts';
@@ -11,8 +11,9 @@ import { NONE } from '../Util/constants.js';
 
 function PrincipalPage({ authorization }) {
 
+    const [value, setValue] = useState('principal');
     const reserve = () => (event) =>{
-        console.log("RESERVAR CUPO")
+        setValue('reserva')
     }
 
     if(authorization){
@@ -25,7 +26,7 @@ function PrincipalPage({ authorization }) {
                         <Avatar src="../Images/profilePicPH.png"/>    
                     </Box> 
                 </Box>
-                <Tabs />
+                <Tabs value={value} setValue={setValue} />
                 <Contacts />
             </div >
         );

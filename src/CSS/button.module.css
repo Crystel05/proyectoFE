@@ -86,3 +86,24 @@
   border-radius: 25px;
   cursor: pointer;
 }
+
+.steps{
+  font-family: 'Krona One', sans-serif;
+  border-color: #f0f0f0;
+  color: rgb(206, 195, 195);
+  width: 300px;
+  height: 40px;
+  border-radius: 25px;
+  font-size: 15px;
+}
+
+.stepOn{
+  font-family: 'Krona One', sans-serif;
+  background-color: #ce1717;
+  border-color: #ce1717;
+  color: rgb(206, 195, 195);
+  width: 300px;
+  height: 40px;
+  border-radius: 25px;
+  font-size: 15px;
+}

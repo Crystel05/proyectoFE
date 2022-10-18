@@ -88,18 +88,15 @@
 }
 
 .bodyParticipation{
-    /* font-family: 'Open Sans', sans-serif; */
     font-weight: 20px;
 }
 
 .subtitleSmall{
-    /* font-family: 'Open Sans', sans-serif; */
     font-weight: 25px;
     margin-top: 10px;
 }
 
 .contactsTitle{
-    /* font-family: 'Open Sans', sans-serif; */
     font-weight: bold;
     font-size: 17px;
     margin-bottom: 10%;
@@ -107,7 +104,6 @@
 }
 
 .contactsNames{
-    /* font-family: 'Open Sans', sans-serif; */
     font-weight: bold;
     font-size: 10px;
 }
@@ -128,7 +124,6 @@
 }
 
 .routesBody{
-    /* font-family: 'Open Sans', sans-serif; */
     font-size: 15px;
     margin-top: 2%;
 }
@@ -147,7 +142,6 @@
 }
 
 .bodyMemberships{
-    /* font-family: 'Open Sans', sans-serif; */
     font-weight: 20px;
     color: white;
     text-align: left;
@@ -171,16 +165,6 @@
 .membershiPrice{
     font-weight: bold;
     margin-bottom: 10%;
-}
-
-
-
-.incorrectUser{
-    color: #ce1717;
-    text-align: center;
-    margin-top: 2vh;
-    font-size: 15px;
-    font-weight: bold;
 }
 
 .address{
