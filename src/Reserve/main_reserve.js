@@ -1,13 +1,13 @@
-import { Stack } from "@mui/material";
+import { Stack, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import stylesContainer from '../CSS/container.module.css'
 import styles from '../CSS/text.module.css';
 import stylesButton from '../CSS/button.module.css'
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
-import { SELECT, TEXT_FIELD } from "../Util/constants";
+import { SELECT, TEXT_FIELD, NONE } from "../Util/constants";
 import Fields from "../ReusableComponents/Fields/fields";
-import { Field } from "../ReusableComponents/Fields/field";
+import GenericRoundButton from "../ReusableComponents/Buttons/generic_button";
 
 export default function MainReserve(){
 
@@ -25,9 +25,9 @@ export default function MainReserve(){
         {name:'Telefono', type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => {}},
     ]
     const field1 = 
-        {name:'Punto de Inicio', type: SELECT, isRequired:true, helperText:'', onChange: () => {}}
+        [{name:'Punto de Inicio', type: SELECT, isRequired:true, helperText:'', onChange: () => {}}]
     const field2 =
-        {name:'Ya he asistido al Art City Tour', type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => {}}
+        [{name:'Ya he asistido al Art City Tour', type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => {}}]
     
     function handleClick(){
         setOnStep(true);
@@ -64,8 +64,16 @@ export default function MainReserve(){
                     </div>
                     <Fields fields={fieldsCol2} />
                 </Box>
-                    <Field field={field1} />
-                    <Field field={field2} />
+                <TextField variant="standard" />
+                <Box className={ stylesContainer.displayRow } style={{ marginTop:'3vh' }} >
+                    <div className={stylesContainer.spaceBetween}>
+                        <Fields fields={field1} />
+                    </div>   
+                    <Fields fields={field2} sx={{width:'75vh'}} />
+                </Box>
+                <div>
+                <GenericRoundButton Icon={<></>} text='Enviar Formulario' backgroundColor='#ce1717' iconPosition={NONE} onClick={() => {}} />
+                </div>
             </Box>
         </Box>
     )
