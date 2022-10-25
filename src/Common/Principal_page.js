@@ -1,24 +1,38 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Avatar, Box } from "@mui/material";
 import Tabs from './tabs.js'
 import Contacts from './contacts';
-import { ArtCityTourButton } from './button_principal_page';
-import { ReservationButton } from './button_reservation.js';
+import ArtCityTourButton from '../ReusableComponents/Buttons/art_city_tour_button';
+import stylesButton from '../CSS/button.module.css'
+import { Navigate } from 'react-router-dom';
+import GenericRoundButton from '../ReusableComponents/Buttons/generic_button.js';
+import { NONE } from '../Util/constants.js';
 
-function PrincipalPage() {
-    return ( 
-        <div >
-            <Box style={{display:'flex', justifyContent: 'space-between'}}>
-                <ArtCityTourButton/>
-                <Box style={{display:'flex', justifyContent: 'center', marginTop: '3%', marginRight: '3%'}}>
-                    <ReservationButton/>
-                    <Avatar src="../Images/profilePicPH.png"/>    
-                </Box> 
-            </Box>
-            <Tabs />
-            <Contacts />
-        </div >
-    );
+
+function PrincipalPage({ authorization }) {
+
+    const [value, setValue] = useState('principal');
+    const reserve = () => (event) =>{
+        setValue('reserva')
+    }
+
+    if(authorization){
+        return ( 
+            <div >
+                <Box style={{display:'flex', justifyContent: 'space-between'}}>
+                    <ArtCityTourButton className={stylesButton.principal}/>
+                    <Box style={{display:'flex', justifyContent: 'center', marginTop: '3%', marginRight: '3%'}}>
+                        <GenericRoundButton Icon={<></>} backgroundColor='#ce1717' text='Reserva de cupo' iconPosition={NONE} onClick={() => reserve()} marginRight='1vh' />
+                        <Avatar src="../Images/profilePicPH.png"/>    
+                    </Box> 
+                </Box>
+                <Tabs value={value} setValue={setValue} />
+                <Contacts />
+            </div >
+        );
+    }else{
+        return <Navigate to='/' />
+    }
 }
 
 export default PrincipalPage;

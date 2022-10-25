@@ -1,0 +1,19 @@
+.verticalDivider{
+    color: #ce1717;
+    background-color: #ce1717;
+    height: 100vh;
+    width: 15px;
+    border-color : #ce1717;
+    margin-left: 0px;
+    margin-top: 0px;
+}
+
+.horizontalDivider{
+    color: #ce1717;
+    background-color: #ce1717;
+    height: 15px;
+    width: 100%;
+    border-color : #ce1717;
+    margin-left: 0px;
+    margin-top: 2vh;
+}

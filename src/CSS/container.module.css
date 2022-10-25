@@ -1,0 +1,60 @@
+.displayColumn{
+    display: flex;
+    flex-direction: column;
+}
+
+.displayRow{
+    display: flex;
+    flex-direction: row;
+}
+
+.centerTop{
+    margin: auto; 
+    margin-top: 10vh;
+}
+
+.center{
+    margin: auto;
+}
+
+.centerContent{
+    justify-content: center;
+}
+
+.imageUploader{
+    margin: auto;
+    margin-top: 2vh;
+    margin-bottom: -2vh;
+}
+
+.buttonTitle{
+    margin-bottom: 100px;
+}
+
+.spaceBetween{
+    margin-right: 3vh;
+}
+
+.textPart{
+    display: flex;
+    flex-direction: column;
+    width:550px; 
+    margin: auto;
+    margin-right:5vh;
+    margin-left:3vh;
+}
+
+.sponsors{
+    margin-left:5%;
+    margin-right:5%;
+    margin-bottom: 5%; 
+    margin-top: 5%
+}
+
+.editionsThroughYears{
+    display:flex;
+    flex-direction:column;
+    margin-top: 3%;
+    justify-content:center;
+    margin-left:5vh;
+}

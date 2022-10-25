@@ -10,6 +10,31 @@
   margin-top: 2%;
 }
 
+.principalLogin {
+  background-color: #ce1717;
+  border: none;
+  color: white;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin:auto;
+  margin-bottom: 3vh;
+}
+
+.principalCreateUser {
+  background-color: #ce1717;
+  border: none;
+  color: white;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-left: 2%;
+  margin-top: 2vh;
+  margin-left:auto;
+  margin-right: 2vh;
+  cursor: pointer;
+}
+
 .circle{
   background-color: #ce1717;
   border: none;
@@ -20,25 +45,6 @@
   display: inline-block;
   font-size: 16px;
   border-radius: 50%;
-}
-
-.reserveButton{
-  background-color: #ce1717;
-  border: none;
-  color: white;
-  padding: 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  font-weight: bold;
-  margin: 4px 2px;
-  margin-right: 10px;
-  cursor: pointer;
-  font-family: 'Open Sans', sans-serif;
-  border-radius: 30px;
-  width: 150px;
-  height: min-content;
 }
 
 .webSite{
@@ -79,4 +85,25 @@
   font-family: 'Open Sans', sans-serif;
   border-radius: 25px;
   cursor: pointer;
+}
+
+.steps{
+  font-family: 'Krona One', sans-serif;
+  border-color: #f0f0f0;
+  color: rgb(206, 195, 195);
+  width: 300px;
+  height: 40px;
+  border-radius: 25px;
+  font-size: 15px;
+}
+
+.stepOn{
+  font-family: 'Krona One', sans-serif;
+  background-color: #ce1717;
+  border-color: #ce1717;
+  color: rgb(206, 195, 195);
+  width: 300px;
+  height: 40px;
+  border-radius: 25px;
+  font-size: 15px;
 }

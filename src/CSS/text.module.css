@@ -1,54 +1,102 @@
-.principal_small{
+.kronaText{
     font-family: 'Krona One', sans-serif;
-    font-size: 11px;
+}
+
+.openSansText{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.principal_small{
     margin: 0px;
+    font-size: 11px;
 }
 
 .principal_big{
-    font-family: 'Krona One', sans-serif;
     font-size: 19px;
-    margin: 0px;
     font-weight: bold;
+    margin: 0px;
 }
 
 .editionPrimaryTitle{
-    font-family: 'Open Sans', sans-serif;
     font-weight: bold;
     font-size: 17px;
-    margin-bottom: 10%;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 
 .editionTitle{
-    font-family: 'Krona One', sans-serif;
     font-size: 25px;
     font-weight: bold;
 }
 
+.margins{
+    margin: auto;
+    margin-bottom: 3vh;
+}
+
+.marginsReset{
+    margin: auto;
+    margin-top: 3vh;
+}
+
+.crearCuentaLink{
+    text-decoration: underline;
+    cursor: pointer;
+    text-align: center;
+    color: #ce1717;
+    font-weight: bold;
+    margin-top: 3vh;
+}
+
+.crearCuentaLink:hover{
+    color: #db5e5e
+}
+
+.link{
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 3vh; 
+    margin-bottom: 3vh;
+    margin-left: 5px;
+    
+}
+
+.link:hover{
+    color:#635858
+}
+
+.marginsCreateAccount{
+    margin-left: 10vh; 
+    margin-top: 5vh;
+    margin-bottom:5vh;
+}
+
+.info{
+    margin: auto;
+    margin-bottom: 5vh;
+}
+
 .pastEditionsTitle{
-    font-family: 'Krona One', sans-serif;
+    /* font-family: 'Krona One', sans-serif; */
     font-size: 20px;
     font-weight: bold;
 }
 
 .body{
-    font-family: 'Open Sans', sans-serif;
     font-weight: 20px;
-    margin-top: 10%;
+    margin-top: 1vh;
 }
 
 .bodyParticipation{
-    font-family: 'Open Sans', sans-serif;
     font-weight: 20px;
 }
 
 .subtitleSmall{
-    font-family: 'Open Sans', sans-serif;
     font-weight: 25px;
     margin-top: 10px;
 }
 
 .contactsTitle{
-    font-family: 'Open Sans', sans-serif;
     font-weight: bold;
     font-size: 17px;
     margin-bottom: 10%;
@@ -56,13 +104,12 @@
 }
 
 .contactsNames{
-    font-family: 'Open Sans', sans-serif;
     font-weight: bold;
     font-size: 10px;
 }
 
 .routesTitle{
-    font-family: 'Krona One', sans-serif;
+    /* font-family: 'Krona One', sans-serif; */
     font-size: 35px;
     font-weight: bold;
     text-align: center;
@@ -70,21 +117,20 @@
 }
 
 .routesNames{
-    font-family: 'Krona One', sans-serif;
+    /* font-family: 'Krona One', sans-serif; */
     font-size: 15px;
     font-weight: bold;
     margin-top: 10%;
 }
 
 .routesBody{
-    font-family: 'Open Sans', sans-serif;
     font-size: 15px;
     margin-top: 2%;
 }
 
 .header {
     font-size: 25px;
-    font-family: 'Krona One', sans-serif;
+    /* font-family: 'Krona One', sans-serif; */
     color: white;
     text-align: left;
     position: absolute;
@@ -96,7 +142,6 @@
 }
 
 .bodyMemberships{
-    font-family: 'Open Sans', sans-serif;
     font-weight: 20px;
     color: white;
     text-align: left;
@@ -112,7 +157,7 @@
 
 .membershipTitle{
     color: #2a1463;
-    font-family: 'Krona One', sans-serif;
+    /* font-family: 'Krona One', sans-serif; */
     font-size: 15px;
     margin-bottom: 2%;
 }
@@ -121,3 +166,16 @@
     font-weight: bold;
     margin-bottom: 10%;
 }
+
+.address{
+    color: #ce1717;
+    font-size: 25px;
+    margin-left: 10vh;
+}
+
+.placeTitle{
+    font-size: 20px;
+    margin-bottom: 2vh;
+    margin-top: 1vh;
+}
+

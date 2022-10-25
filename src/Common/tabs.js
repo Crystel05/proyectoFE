@@ -7,9 +7,10 @@ import TabPanel from '@mui/lab/TabPanel';
 import EditionPage from '../Edition/principal_page_edition';
 import MainRoutes from '../Routes/main';
 import Memberships from '../Memberships/memberships';
+import PrincipalItineraryPage from '../Itinerary/principal_itinerary';
+import MainReserve from '../Reserve/main_reserve';
 
-export default function LabTabs() {
-    const [value, setValue] = React.useState('principal'); 
+export default function Tabs({value, setValue}) {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -39,17 +40,19 @@ export default function LabTabs() {
             <TabPanel value="principal" style={{padding: 0}} index={0} >
                 PAGINA PRINCIPAL
             </TabPanel>
-
+            <TabPanel value="reserva" style={{padding: 0}} index={0}>
+                <MainReserve />
+            </TabPanel>
             <TabPanel value="edicion" style={{padding: 0}} index={1} >
-                <EditionPage/>
+                <EditionPage />
             </TabPanel>
 
             <TabPanel value="rutas" style={{padding: 0}} index={2} >
-                <MainRoutes/>
+                <MainRoutes />
             </TabPanel>
 
             <TabPanel value="itinerario" style={{padding: 0}} index={3} >
-                Item Three
+                <PrincipalItineraryPage />
             </TabPanel>
 
             <TabPanel value="membresias" style={{padding: 0}} index={4} >
