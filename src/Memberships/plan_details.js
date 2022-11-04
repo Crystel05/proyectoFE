@@ -9,6 +9,10 @@ export default function PlanDetails(props){
     const benefits = info.split("-");
     const finalPrice = '₡ ' + props.price + "/mes";
 
+    function handleClick(){
+        console.log('Primero debe mostrar la vara para pagar')  
+    }
+
     return(
         <Box sx={{ p: 2, border: 3, borderColor: '#2a1463', borderRadius: '7px' }} style={{ marginLeft:'5%', marginTop: '5%', display:'flex', flexDirection:'row', width:'50%' }}>
             <div style={{ display:'flex', flexDirection:'column', marginRight:'5%' }}>
@@ -21,8 +25,11 @@ export default function PlanDetails(props){
                         )
                     })}
                 </ul>
-                <button className={styles.webSite} style={{ marginTop:'15%' }}> 
-                    Unirse
+                <button 
+                    className={styles.webSite}
+                    style={{ marginTop:'15%' }}
+                    onClick={event => handleClick()} > 
+                        Unirse
                 </button>
             </div>
             <img src={props.image.drivePath} alt={props.image.name} style={{ width:'300px', height: '400px', marginLeft:'auto' }}/>
