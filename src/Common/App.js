@@ -1,7 +1,7 @@
 import '../App.css'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import PrincipalPage from './principal_page';
+import PrincipalPage from './Principal_page';
 import Login from '../Users/login';
 import CreateAccount from '../Users/create_account';
 import { useState } from 'react';
