@@ -9,7 +9,7 @@ import stylesContainer from '../CSS/container.module.css'
 import DivederAddress from "./dividerAddress";
 import Fields from "../ReusableComponents/Fields/fields";
 import GenericRoundButton from "../ReusableComponents/Buttons/generic_button";
-import { ERROR, NONE, PASSWORD, SUCCESS, TEXT_FIELD } from "../Util/constants";
+import { ERROR, INFO, NONE, PASSWORD, SUCCESS, TEXT_FIELD } from "../Util/constants";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
 import UploadImage from "../ReusableComponents/Fields/image_uploader";
@@ -107,9 +107,15 @@ const CreateAccount = () => {
         await axios.post('http://localhost:8080/user/create', body)
         .then(response => {
             if(response.status === 200){
-                setMessage("El usuario fue registrado exitosamente")
-                setSeverity(SUCCESS)
-                setOpen(true)
+                if(response.data != ""){
+                    setMessage("El usuario fue registrado exitosamente")
+                    setSeverity(SUCCESS)
+                    setOpen(true)
+                }else{
+                    setMessage("Ya existe un usuario con este correo, escoja uno diferente")
+                    setSeverity(INFO)
+                    setOpen(true)
+                }
             }else{
                 setMessage("Hubo un error guardando el usuario")
                 setSeverity(ERROR)
