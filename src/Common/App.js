@@ -6,6 +6,8 @@ import Login from '../Users/login';
 import CreateAccount from '../Users/create_account';
 import { useState } from 'react';
 import ResetPassword from '../Users/reset_password';
+import Paypal from '../Payment/paypal';
+import Paywall from '../Payment/paywall';
 
 function App(){
     const [authorizationLogin, setAuthorizationLogin] = useState(false);

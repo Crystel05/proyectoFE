@@ -8,7 +8,7 @@ import stylesB from '../CSS/button.module.css'
 
 
 
-export default function Memberships (){
+export default function Memberships ({isPay, setPrice}){
     const info = '¡Descube más como un miembro únete hoy y experimenta el arte que amas con mayor acceso, programación exclusiva'
     + ' y nuevas formas de hacer conexiones!';
 
@@ -77,13 +77,13 @@ export default function Memberships (){
                             {plan.name} 
                         </a>  
                         <a>
-                            {" ₡" + plan.price} 
+                            {"$" + plan.price} 
                         </a>  
                         </button>
                     )
                 })}
             </Stack>
-                <PlanDetails {...data} />
+                <PlanDetails props={data} isPay={isPay} setPrice={setPrice}/>
             </div>
         </div>
     )

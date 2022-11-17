@@ -1,14 +1,19 @@
 import { Box } from '@mui/material'
-import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import styles from '../CSS/button.module.css'
 import textStyles from '../CSS/text.module.css'
 
-export default function PlanDetails(props){
+export default function PlanDetails({props, isPay, setPrice}){
 
     const info = props.benefits;
     const benefits = info.split("-");
-    const finalPrice = '₡ ' + props.price + "/mes";
-
+    const finalPrice = '$ ' + props.price + "/mes";
+    function startPay(){
+        setPrice(props.price)
+        isPay(true)
+    }
+    
     return(
         <Box sx={{ p: 2, border: 3, borderColor: '#2a1463', borderRadius: '7px' }} style={{ marginLeft:'5%', marginTop: '5%', display:'flex', flexDirection:'row', width:'50%' }}>
             <div style={{ display:'flex', flexDirection:'column', marginRight:'5%' }}>
@@ -21,7 +26,7 @@ export default function PlanDetails(props){
                         )
                     })}
                 </ul>
-                <button className={styles.webSite} style={{ marginTop:'15%' }}> 
+                <button className={styles.webSite} style={{ marginTop:'15%' }}  onClick={() => startPay()}> 
                     Unirse
                 </button>
             </div>
