@@ -7,6 +7,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import EditionPage from '../Edition/principal_page_edition';
 import MainRoutes from '../Routes/main';
 import Memberships from '../Memberships/memberships';
+import Paypal from '../Payment/paypal';
 import PrincipalItineraryPage from '../Itinerary/principal_itinerary';
 import MainReserve from '../Reserve/main_reserve';
 
@@ -38,7 +39,7 @@ export default function Tabs({value, setValue}) {
                 </TabList>
             </Box>
             <TabPanel value="principal" style={{padding: 0}} index={0} >
-                PAGINA PRINCIPAL
+                <Paypal />
             </TabPanel>
             <TabPanel value="reserva" style={{padding: 0}} index={0}>
                 <MainReserve />
