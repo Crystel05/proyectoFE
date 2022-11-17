@@ -22,7 +22,7 @@ const Login = ({ setAuthorizationLogin, passwordChanged, setAuthorizationResetPa
     const [image, setImage] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isCorrect, setIsCorrect] = useState();
+    const [isCorrect, setIsCorrect] = useState(null);
     const [open, setOpen] = useState(false);
     const [severity, setSeverity] = useState("success");
     const [message, setMessage] = useState("");
@@ -59,6 +59,10 @@ const Login = ({ setAuthorizationLogin, passwordChanged, setAuthorizationResetPa
         navigate("/application");
     }
 
+    function goToApplicationAdmin(){
+        navigate("/adminApp");
+    }
+
     function createAccount(){
         navigate("/createAccount");
     }
@@ -76,10 +80,14 @@ const Login = ({ setAuthorizationLogin, passwordChanged, setAuthorizationResetPa
                 setMessage("Para ingresar use un doble click sobre el botón de iniciar sesión")
                 setSeverity(INFO)
             }
-
-            if(isCorrect){
+            if(isCorrect != null){
+                if(isCorrect.typeUser === 'Admin'){
+                    goToApplicationAdmin();
+                }else{
+                    goToApplication();
+                }
                 setAuthorizationLogin();
-                goToApplication();
+                
             }else{
                 if(event.detail >= 2){
                 setMessage("El usuario o la contraseña ingresados son incorrectos. Si olvidó su contraseña haga click sobre \"¿Olvidó su contraseña?\". O si no tiene cuenta haga click sobre \"Crear cuenta\" ")

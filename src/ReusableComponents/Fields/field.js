@@ -1,6 +1,10 @@
 import React from "react";
 import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
-import { PASSWORD, TEXT_FIELD } from "../../Util/constants";
+import { DATE_PICKER, PASSWORD, TEXT_AREA, TEXT_FIELD } from "../../Util/constants";
+import TextareaAutosize from '@mui/material/TextareaAutosize';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 export const Field = ({ field }) => {
    
@@ -17,6 +21,29 @@ export const Field = ({ field }) => {
                 onChange={field.onChange()}
             /> 
         ) 
+    }
+    else if(field.type === TEXT_AREA){
+        return(
+            <TextareaAutosize 
+                maxRows={4}
+                minRows={4}
+                id={id}
+                required={field.isRequired}
+                onChange={field.onChange()}
+            />
+        )
+    }
+    else if(field.type === DATE_PICKER){
+        return(
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DesktopDatePicker
+                    label={field.name}
+                    inputFormat="dd/MM/YYYY"
+                    onChange={field.onChange()}
+                    renderInput={(params) => <TextField {...params} />}
+                />
+            </LocalizationProvider>
+        )
     }
     else{ 
         return(
