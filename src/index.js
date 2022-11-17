@@ -5,12 +5,12 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const cors = require('cors')
 
 root.render(
 
   <React.StrictMode>
     <App/>
-    {/* <Map latitude={9.9046} longitude={-83.6835} places={placesPlaceHolder}/> */}
   </React.StrictMode>
 );
 

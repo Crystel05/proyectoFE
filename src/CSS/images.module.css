@@ -2,6 +2,10 @@
     width: 100%;
     height: 500px;
 }
+.adminImages{
+    width: 100%;
+    height: 40vh;
+}
 
 .secondSize{
     height: 80%;
@@ -28,6 +32,13 @@
     height: 500px;
     filter: brightness(50%); 
 }
+
+.imageAdmin {
+    width: 100%;
+    height: 300px;
+    filter: brightness(50%); 
+}
+
 
 .login{
     height: 100vh;
