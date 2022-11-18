@@ -160,7 +160,7 @@ export default function PrincipalItineraryPage(){
                 </Box>
             </Box>
             <Box>
-                <MainMap width={'100vh'} height={'70vh'}/>
+                <MainMap width={'100vh'} height={'70vh'} places={"undefined"}/>
             </Box>
         </Box>
     )

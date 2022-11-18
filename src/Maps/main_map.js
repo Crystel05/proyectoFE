@@ -1,7 +1,7 @@
 import React from 'react';
 import Map from './map';
 
-export default function MainMap({ width, height }){
+export default function MainMap({ width, height, places, setPlaceToShow }){
 
     //agregar aquí la llamada de axios 
     const placesPlaceHolder = 
@@ -10,18 +10,24 @@ export default function MainMap({ width, height }){
             "id": 1,
             "name": "Teatro Nacional",
             "details": "El teatro nacional",
-            "latitude": "9.906723",
-            "longitude": "-83.683026"
+            "latitude": "9.933830",
+            "longitude": "-84.077074"
         },
         {
             "id": 2,
             "name": "Museo Nacional",
             "details": "Desde sus primeros afios, el museo se oriental hacia la investigacion cientifica, la educacion, la exhibicion y la defensa del patrimonio cultural y natural.",
-            "latitude":"9.903987",
-            "longitude":"-83.687725"
+            "latitude":"9.9335480",
+            "longitude":"-84.068525"
         }
+        
     ]
+    
+     const placeChoice = places === "undefined" ? placesPlaceHolder:places ; //Temporal, cambiar mapa de itinerarios, y eliminar placeChoice por prop places
+     const placesMapIndex = Math.floor(placeChoice.length/2)
     return(
-        <Map latitude={9.9046} longitude={-83.6835}  places={placesPlaceHolder} width={width} height={height}/>
+        <div>
+            <Map latitude={placeChoice[placesMapIndex].latitude} longitude={placeChoice[placesMapIndex].longitude}  places={placeChoice} width={width} height={height} setPlaceToShow={setPlaceToShow}/>
+        </div>
     )
 }
