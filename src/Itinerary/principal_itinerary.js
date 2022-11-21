@@ -71,6 +71,10 @@ export default function PrincipalItineraryPage(){
     const handleShare = () => (event) => {
         console.log("COMPARTIENDO"); //llamar al axios para crear cuenta
     }
+
+    const handleSave = () => (event) => { 
+        console.log("Save");
+    }
     
     const borderIntinerary = value === 'bares' ? '10px' : '0px'
     const borderBarsBottonLeft = value !== 'itinerario' ? '0px' : '10px'
@@ -156,7 +160,7 @@ export default function PrincipalItineraryPage(){
                     marginLeft:'7vh'
                 }}>
                     <GenericRoundButton Icon={ShareIcon} backgroundColor='#2a1463' text='Compartir' iconPosition={START} onClick={() => handleShare()} marginRight='2vh' />
-                    <GenericRoundButton Icon={SaveIcon} backgroundColor='#ce1717' text='Guardar' iconPosition={START} onClick={() => handleShare()} />
+                    <GenericRoundButton Icon={SaveIcon} backgroundColor='#ce1717' text='Guardar' iconPosition={START} onClick={() => handleSave()} />
                 </Box>
             </Box>
             <Box>
