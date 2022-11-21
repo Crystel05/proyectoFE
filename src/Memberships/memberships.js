@@ -33,16 +33,17 @@ export default function Memberships ({isPay, setPrice}){
     },[])
 
     function handleClick(event, index){
-        if(event.detail >=2 ){
-            setSelectedMembershipId(index)
-            setSelectedMembership(memberships[index])
-            setDetails(memberships[index].details)
-            setPhoto(memberships[index].photo)
-        }       
+        //if(event.detail >= 2 ){
+        setSelectedMembershipId(index)
+        setSelectedMembership(memberships[index])
+        setDetails(memberships[index].details)
+        setPhoto(memberships[index].photo)
+        //}       
         
     }
     
     const data = {
+        id: selectedMembership.id,
         name: selectedMembership.name,
         price: selectedMembership.price,
         benefits: details,
@@ -50,14 +51,7 @@ export default function Memberships ({isPay, setPrice}){
     }
     return ( 
         <div>
-           <article>
-                <picture>
-                    <source  srcSet={principalImage} />
-                    <img src={principalImage} alt="background" className={styles.image} />
-                </picture>
-                <h3 className={stylesText.header}>Membresías</h3>
-                <a className={stylesText.bodyMemberships} > {info} </a>
-            </article>
+           
             <div style={{display:'flex', flexDirection:'row', marginLeft:'3%', marginRight:'3%'}}>
             <Stack direction="column" spacing={2} style={{ marginTop:'5%', marginRight:'10%'}}>
                 {memberships.map((plan, index) =>{
@@ -88,3 +82,15 @@ export default function Memberships ({isPay, setPrice}){
         </div>
     )
 }
+
+/**
+ * <article>
+                <picture>
+                    <source  srcSet={principalImage} />
+                    <img src={principalImage} alt="background" className={styles.image} />
+                </picture>
+                <h3 className={stylesText.header}>Membresías</h3>
+                <a className={stylesText.bodyMemberships} > {info} </a>
+            </article>
+ * 
+ */
