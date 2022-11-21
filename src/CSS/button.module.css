@@ -10,6 +10,17 @@
   margin-top: 2%;
 }
 
+.principalAdmin {
+  background-color: #2a1463;
+  border: none;
+  color: white;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-left: 2%;
+  margin-top: 2%;
+}
+
 .principalLogin {
   background-color: #ce1717;
   border: none;

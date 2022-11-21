@@ -8,7 +8,6 @@ import { Navigate } from 'react-router-dom';
 import GenericRoundButton from '../ReusableComponents/Buttons/generic_button.js';
 import { NONE } from '../Util/constants.js';
 
-
 function PrincipalPage({ authorization }) {
 
     const [value, setValue] = useState('principal');
