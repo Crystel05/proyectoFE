@@ -46,6 +46,7 @@ const Login = ({ setAuthorizationLogin, passwordChanged, setAuthorizationResetPa
         .then(response => {
             if(response.data.name !== 'wrong'){
                 setIsCorrect(response.data);}
+                sessionStorage.setItem('userData', JSON.stringify(response.data))
         })
     }
 

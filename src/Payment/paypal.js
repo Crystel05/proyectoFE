@@ -18,38 +18,10 @@ export default function Paypal({price, membership}) {
         setOpen(false);
     };
 
-    function getCurrentDate() {
-        var today = new Date();
-        var day = today.getDate();
-        var year = today.getFullYear();
-        var month = today.getMonth()+1;
-
-        if (month == 13) {
-            month = 1;
-        }
-
-        return year+'-'+month+'-'+day;
-    }
-
-    function getEndDate() {
-        var date = new Date();
-        var month = date.getMonth()+2;
-
-        if(month == 13) {
-            month = 1; 
-        }
-        if (month == 14) {
-            month = 2;
-        }
-        
-        return date.getFullYear()+'-'+month+'-'+date.getDate();
-    }
-
     async function finalizePayment(){
         const membershipId = membership;
-        const userId = 1; // de donde se saca?
-        const startDate = getCurrentDate();
-        const endDate = getEndDate();
+        const userId = (JSON.parse(sessionStorage.getItem('userData'))).id;
+
         
         const url = 'http://localhost:8080/membership/createMembershipByUser?userId='+userId+'&membershipId='+membershipId;
         await axios.get(url)
@@ -62,8 +34,8 @@ export default function Paypal({price, membership}) {
             } else {
                 setMessage("Ha ocurrido un error, por favor intente de nuevo.");
                 setSeverity(ERROR);
+                setOpen(true);
             }
-            setOpen(true);
         })
     }
 
