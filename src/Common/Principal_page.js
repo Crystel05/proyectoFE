@@ -18,7 +18,6 @@ function PrincipalPage({ authorization }) {
     }
 
     const goToPrincipalPage = () => {
-        console.log("entra")
         navigate("/application");
         setValue('principal')
     }
