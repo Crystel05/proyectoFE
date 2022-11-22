@@ -83,7 +83,7 @@
 }
 
 .pastEditionsTitle{
-    /* font-family: 'Krona One', sans-serif; */
+    font-family: 'Krona One', sans-serif;
     font-size: 20px;
     font-weight: bold;
 }
@@ -95,6 +95,7 @@
 
 .bodyParticipation{
     font-weight: 20px;
+    
 }
 
 .subtitleSmall{
@@ -115,7 +116,7 @@
 }
 
 .routesTitle{
-    /* font-family: 'Krona One', sans-serif; */
+    font-family: 'Krona One', sans-serif;
     font-size: 35px;
     font-weight: bold;
     text-align: center;
@@ -123,7 +124,7 @@
 }
 
 .routesNames{
-    /* font-family: 'Krona One', sans-serif; */
+    font-family: 'Krona One', sans-serif;
     font-size: 15px;
     font-weight: bold;
     margin-top: 10%;
@@ -136,7 +137,7 @@
 
 .header {
     font-size: 25px;
-    /* font-family: 'Krona One', sans-serif; */
+    font-family: 'Krona One', sans-serif;
     color: white;
     text-align: left;
     position: absolute;
@@ -163,7 +164,7 @@
 
 .membershipTitle{
     color: #2a1463;
-    /* font-family: 'Krona One', sans-serif; */
+    font-family: 'Krona One', sans-serif;
     font-size: 15px;
     margin-bottom: 2%;
 }
