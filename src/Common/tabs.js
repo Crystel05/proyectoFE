@@ -20,6 +20,7 @@ export default function Tabs({value, setValue}) {
     };
     const [paywall, setPaywall] = useState(false);
     const [priceToPay, setPriceToPay] = useState(0);
+    const [membershipToBuy, setMembershipToBuy] = useState(2);
     
 
 
@@ -63,7 +64,7 @@ export default function Tabs({value, setValue}) {
             </TabPanel>
 
             <TabPanel value="membresias" style={{padding: 0}} index={4} >
-                {paywall && value === "membresias" ? <Paywall prices={priceToPay} /> : <Memberships isPay={setPaywall} setPrice={setPriceToPay}/>}
+                {paywall && value === "membresias" ? <Paywall prices={priceToPay} membership={membershipToBuy} /> : <Memberships isPay={setPaywall} setPrice={setPriceToPay} setMembership={setMembershipToBuy}/>}
             </TabPanel>
         </TabContext>
     </Box>
