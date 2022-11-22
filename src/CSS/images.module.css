@@ -14,6 +14,12 @@
     margin-left: 30px;
 }
 
+.newSize{
+    height: 30%;
+    width: 90%;
+    
+}
+
 .sponsors{
     width: 20%;
     display: block;

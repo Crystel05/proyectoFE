@@ -16,3 +16,15 @@ export const SPONSORS = 'SPONSORS';
 export const EDITIONS = 'EDITIONS';
 export const NEWS = 'NEWS';
 export const USERS = 'USERS';
+//user info sections
+export const PROFILE = 'profileSection';
+export const RESERVATIONS = 'reservationSection'
+export const MYITINERARY = 'myItinerarySection'
+export const MEMBERSHIPS = 'myMembershipsSection'
+
+//actions icons
+export const PROFILEICON ='profileIcon'
+export const RESERVATIONSICON = 'reservationIcon'
+export const MYITINERARYICON = 'myItineraryIcon'
+export const MEMBERSHIPSICON = 'myMembershipsIcon'
+export const LOGOUT = 'logOutIcon'

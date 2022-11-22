@@ -9,7 +9,7 @@ import GenericGrid from "./generic_grid";
 import GenericRoundButton from "../../ReusableComponents/Buttons/generic_button";
 import stylesContainer from '../../CSS/container.module.css'
 
-export default function AdminCRUD({type, setValue, setRow}){
+export default function AdminCRUD({type, setValue, setRow, setIsNew}){
     const [image, setImage] = useState()
     const [columns, setColumns] = useState([])
     const [rows, setRows] = useState([])
@@ -34,7 +34,13 @@ export default function AdminCRUD({type, setValue, setRow}){
     
     function handleSeeDetails(row){
         setValue(true);
+        setIsNew(false)
         setRow(row);
+    }
+
+    function handleNew (){
+        setIsNew(true)
+        setValue(true);
     }
 
     return(
@@ -43,7 +49,7 @@ export default function AdminCRUD({type, setValue, setRow}){
             <Box style={{ marginLeft: '5vh', marginRight: '5vh', marginTop:'10vh' }} >
                 <GenericGrid columns={columns} rows={rows} handleSeeDetails={handleSeeDetails}/>
             </Box>
-            <GenericRoundButton Icon={<></>} backgroundColor='#2a1463' text='AGREGAR NUEVO' iconPosition={NONE} onClick={() => {}}/>
+            <GenericRoundButton Icon={<></>} backgroundColor='#2a1463' text='AGREGAR NUEVO' iconPosition={NONE} onClick={()=>handleNew}/>
         </Box>
     )
 }

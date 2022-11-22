@@ -31,7 +31,7 @@ function App(){
                 <Route exact path='/' element={<Login setAuthorizationLogin={() => giveAuthorizationLogin()} passwordChanged={passwordChanged} setAuthorizationResetPass={() => giveAuthorizationResetPass()} />} />
                 <Route exact path='/application' element={<PrincipalPage authorization={ authorizationLogin } />}/>
                 <Route exact path='/adminApp' element={<AdminApp authorization={ authorizationLogin }/>} />
-                <Route exact path='/createAccount' element={<CreateAccount />} />
+                <Route exact path='/createAccount' element={<CreateAccount isAdmin={false} isNew={true}/>} />
                 <Route exact path='/resetPassword' element={<ResetPassword passwordReset={() => passwordReset()} authorization={authorizationResetPass} />} />
              </Routes> 
         </Router>
