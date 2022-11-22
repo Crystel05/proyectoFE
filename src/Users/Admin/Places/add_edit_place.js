@@ -10,7 +10,7 @@ import FieldsAdmin from "../../../ReusableComponents/Fields/fields_admin";
 import GenericRoundButton from "../../../ReusableComponents/Buttons/generic_button";
 
 export default function AddEditPlace({isNew, type}){
-    const title = isNew ? "Agregar un nuevo lugar" : "Editar lugar"
+    const title = isNew ? "Agregar un nuevo lugar" : "Editar lugar";
     const [image, setImage] = useState()
     const [imageForPlace, setImageForPlace] = useState()
 

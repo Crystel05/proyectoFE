@@ -14,8 +14,9 @@ import { Navigate } from "react-router-dom";
 import axios from "axios";
 import UploadImage from "../ReusableComponents/Fields/image_uploader";
 import { Alert, Snackbar } from "@mui/material";
+import FieldsAdmin from "../ReusableComponents/Fields/fields_admin";
 
-const CreateAccount = () => {
+const CreateAccount = ({isAdmin, isNew}) => {
 
     const [open, setOpen] = useState(false);
     const [severity, setSeverity] = useState("success");
@@ -156,6 +157,8 @@ const CreateAccount = () => {
         setOpen(false);
     };
 
+    
+    const text =(isAdmin && !isNew) ? 'Editar usuario' : 'Agregar usuario'
     return(
         <Box className={ stylesContainer.displayColumn }>
             <Snackbar
@@ -166,27 +169,27 @@ const CreateAccount = () => {
                 <Alert severity={severity}>{message}</Alert>
             </Snackbar>
             <div className={ stylesContainer.displayRow } >
-                <h1 className={ `${textStyle.kronaText} ${textStyle.editionTitle} ${textStyle.marginsCreateAccount}` } >Crear cuenta</h1>
-                <ArtCityTourButton className={stylesButton.principalCreateUser} goToPage={() => returnToLogin()}/>
+                <h1 className={ `${textStyle.kronaText} ${textStyle.editionTitle} ${textStyle.marginsCreateAccount}` } >{text}</h1>
+                {!isAdmin && <ArtCityTourButton className={stylesButton.principalCreateUser} goToPage={() => returnToLogin()}/>}
             </div>
             <div            
                 className={ `${stylesContainer.displayRow} ${stylesContainer.center}` }
             >
                 <div className={ stylesContainer.spaceBetween } >
-                    <Fields fields={fieldsColumn1}/>
+                    {isAdmin ? <FieldsAdmin fields={fieldsColumn1}/> : <Fields fields={fieldsColumn1}/> }
                 </div>
                 
-                <Fields fields={fieldsColumn2}/>
+                {isAdmin ? <FieldsAdmin fields={fieldsColumn2}/> : <Fields fields={fieldsColumn2}/>}
             </div> 
-            <DivederAddress/>
+            <DivederAddress isAdmin={isAdmin}/>
             <Box className={ `${stylesContainer.displayRow} ${stylesContainer.center}` }>
                 <div className={ stylesContainer.spaceBetween } >
-                    <Fields fields={addressCol1}/>
+                    {isAdmin ? <FieldsAdmin fields={addressCol1}/> : <Fields fields={addressCol1}/>}
                 </div>
-                <Fields fields={addressCol2}/>
+                {isAdmin ? <FieldsAdmin fields={addressCol2}/> : <Fields fields={addressCol2}/>}
             </Box>
             <UploadImage setImage={setImage} />
-            <GenericRoundButton Icon={<></>} backgroundColor='#ce1717' text='Crear Cuenta' iconPosition={NONE} onClick={() => createAccount()}/>
+            <GenericRoundButton Icon={<></>} backgroundColor={isAdmin ? '#2a1463' : '#ce1717'} text="guardar" iconPosition={NONE} onClick={() => createAccount()}/>
         </Box>
     )
 }

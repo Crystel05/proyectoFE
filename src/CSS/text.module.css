@@ -24,10 +24,16 @@
     margin-bottom: 1vh;
 }
 
+.subTitle{
+    font-size: 15px;
+    font-weight: bold;
+}
+
 .editionTitle{
     font-size: 25px;
     font-weight: bold;
 }
+
 
 .margins{
     margin: auto;
@@ -169,6 +175,12 @@
 
 .address{
     color: #ce1717;
+    font-size: 25px;
+    margin-left: 10vh;
+}
+
+.addressAdmin{
+    color: #2a1463;
     font-size: 25px;
     margin-left: 10vh;
 }

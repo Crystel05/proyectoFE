@@ -47,7 +47,9 @@ export default function Memberships ({isPay, setPrice, setMembership}){
         name: selectedMembership.name,
         price: selectedMembership.price,
         benefits: details,
-        image: photo
+        image: photo,
+        border: true,
+        button: 'Unirse'
     }
     return ( 
         <div>

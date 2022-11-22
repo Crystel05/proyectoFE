@@ -1,16 +1,18 @@
 import React from "react";
 import textStyles from '../CSS/text.module.css'
 
-export default function DivederAddress(){
+export default function DivederAddress({isAdmin}){
+    const color = isAdmin ? '#2a1463' : '#ce1717'
+    const className = isAdmin ? textStyles.addressAdmin : textStyles.address;
     return(
         <div style={{ display:'flex', flexDirection:'row', marginTop:'2vh', marginBottom:'2vh' }}>
-            <a className={textStyles.address}> Dirección </a>
+            <a className={className}> Dirección </a>
             <hr  style={{
-                color: '#ce1717',
-                backgroundColor: '#ce1717',
+                color: color,
+                backgroundColor: color,
                 height: '15px',
                 width: '85%',
-                borderColor : '#ce1717',
+                borderColor : color,
                 marginRight:'0',
                 borderTopLeftRadius: '25px',
                 borderBottomLeftRadius: '25px'

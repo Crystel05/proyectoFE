@@ -10,16 +10,20 @@ import { PLACES, SPONSORS, EDITIONS, NEWS, USERS } from "../../Util/constants";
 import AddEditPlace from "./Places/add_edit_place";
 import AddEditSponsor from "./Sponsors/add_edit_sponsor";
 import AddEditEdition from "./Editions/add_edit_editions";
+import AddEditNews from "./News/add_edit_news";
+import CreateAccount from "../create_account";
 
 export default function AdminTabs(){
 
     const [value, setValue] = useState('lugares')
     const [row, setRow] = useState({})
     const [isEditing, setEditing] = useState(false)
+    const [isNew, setIsNew] = useState(false)
 
     const handleChange = (_, newValue) => {
         setValue(newValue)
-        setEditing(false)
+        setEditing(false) 
+        setIsNew(false)
     };
     return(
         <Box sx={{ width: '100%' }} >
@@ -43,28 +47,28 @@ export default function AdminTabs(){
                 </TabList>
             </Box>
             <TabPanel value="lugares" style={{padding: 0}} index={0} >
-                {isEditing && value === 'lugares' ? <AddEditPlace isNew={!isEditing} type={PLACES} /> :
-                    <AdminCRUD type={PLACES} setValue={setEditing} setRow={setRow}/>
+                {isEditing && value === 'lugares' ? <AddEditPlace isNew={isNew} type={PLACES} /> :
+                    <AdminCRUD type={PLACES} setValue={setEditing} setIsNew={setIsNew} setRow={setRow}/>
                 }
             </TabPanel>
             <TabPanel value="patrocinadores" style={{padding: 0}} index={1}>
-                {isEditing && value === 'patrocinadores' ? <AddEditSponsor  isNew={!isEditing} type={SPONSORS}  /> :
-                    <AdminCRUD type={SPONSORS} setValue={setEditing} setRow={setRow}/>
+                {isEditing && value === 'patrocinadores' ? <AddEditSponsor  isNew={isNew} type={SPONSORS}  /> :
+                    <AdminCRUD type={SPONSORS} setValue={setEditing} setIsNew={setIsNew} setRow={setRow}/>
                 }
             </TabPanel>
             <TabPanel value="ediciones" style={{padding: 0}} index={2} >
-                {isEditing && value === 'ediciones' ? <AddEditEdition isNew={!isEditing} type={EDITIONS}/> :
-                    <AdminCRUD type={EDITIONS} setValue={setEditing} setRow={setRow}/>
+                {isEditing && value === 'ediciones' ? <AddEditEdition isNew={isNew} type={EDITIONS}/> :
+                    <AdminCRUD type={EDITIONS} setValue={setEditing} setIsNew={setIsNew} setRow={setRow}/>
                 }
             </TabPanel>
             <TabPanel value="noticias" style={{padding: 0}} index={3} >
-                {isEditing && value === 'noticias' ? <a> EDITANDO NOTICIA </a> :
-                    <AdminCRUD type={NEWS} setValue={setEditing} setRow={setRow}/>
+                {isEditing && value === 'noticias' ? <AddEditNews isNew={isNew} type={NEWS}/> :
+                    <AdminCRUD type={NEWS} setValue={setEditing} setIsNew={setIsNew} setRow={setRow}/>
                 }
             </TabPanel>
             <TabPanel value="usuarios" style={{padding: 0}} index={4} >
-                {isEditing && value === 'usuarios' ? <a> EDITANDO USUARIO </a> :
-                    <AdminCRUD type={USERS} setValue={setEditing} setRow={setRow}/>
+                {isEditing && value === 'usuarios' ? <CreateAccount isAdmin={true} isNew={isNew}/> :
+                    <AdminCRUD type={USERS} setValue={setEditing} setIsNew={setIsNew} setRow={setRow}/>
                 }
             </TabPanel>
         </TabContext>
