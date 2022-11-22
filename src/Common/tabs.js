@@ -47,7 +47,7 @@ export default function Tabs({value, setValue}) {
                 </TabList>
             </Box>
             <TabPanel value="principal" style={{padding: 0}} index={0} >
-                <ACTPrincipalPage />
+                <ACTPrincipalPage setValue={setValue}/>
             </TabPanel>
             <TabPanel value="userInformation" style={{padding: 0}} index={0} >
                 <UserInformation />
