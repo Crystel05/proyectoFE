@@ -10,10 +10,12 @@ export default function PlanDetails({data, isPay, setPrice, setMembership}){
 
     const info = data.benefits;
     const benefits = info.split("-");
-    const finalPrice = '$ ' + props.price + "/mes";
-    const border = props.border ? 3 : 0
-    const buttonText = props.button;
-    function startPay(){
+    const finalPrice = '$ ' + data.price + "/mes";
+    const border = data.border ? 3 : 0
+    const buttonText = data.button;
+
+    const startPay = () => (event) =>{
+        console.log("entra")
         setPrice(data.price)
         setMembership(data.id)
         isPay(true)
@@ -30,7 +32,7 @@ export default function PlanDetails({data, isPay, setPrice, setMembership}){
                         )
                     })}
                 </ul>
-                <GenericRoundButton Icon={<></>} backgroundColor='#2a1463' text={buttonText} iconPosition={NONE} onClick={()=>{}}/>
+                <GenericRoundButton Icon={<></>} backgroundColor='#2a1463' text={buttonText} iconPosition={NONE} onClick={()=>startPay()}/>
             </div>
             <img src={data.image.drivePath} alt={data.image.name} style={{ width:'300px', height: '400px', marginLeft:'auto' }}/>
         </Box>
