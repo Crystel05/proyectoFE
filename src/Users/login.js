@@ -44,9 +44,7 @@ const Login = ({ setAuthorizationLogin, passwordChanged, setAuthorizationResetPa
         const link = 'http://localhost:8080/user/login?email='+email+'&password='+password;
         await axios.get(link)
         .then(response => {
-            if(response.data.name !== 'wrong'){
-                setIsCorrect(response.data);}
-                sessionStorage.setItem('userData', JSON.stringify(response.data))
+            setIsCorrect(response.data);
         })
     }
 

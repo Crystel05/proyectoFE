@@ -57,7 +57,7 @@ const CreateAccount = ({isAdmin, isNew}) => {
         {id:'Sennas', name:'Señas',type: TEXT_FIELD, isRequired:true, onChange: () => handleFieldChange()}
     ]
 
-    const handleFieldChange = (userDataField) => (event) => {
+    const handleFieldChange = () => (event) => {
         const value = event.target.value;
         setUserData({
             ...userData,
