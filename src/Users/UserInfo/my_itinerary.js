@@ -1,46 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from '@mui/material';
 import HeaderUserInfo from "./header";
 import MyItinerary from "../../Itinerary/my_itinerary";
+import axios from "axios";
 
-export default function MyItinerarySection(){
-    //llamar al endpoint del itinerario
-    const myItinineraryList = [
-        {place:
-            {
-                name:'Museo de Jade'
-            },
-            timeStart: '10:00',
-            timeEnd: '11:00'
-        },
-        {place:
-            {
-                name:'Museo de Jade'
-            },
-            timeStart: '10:00',
-            timeEnd: '11:00'
-        },
-        {place:
-            {
-                name:'Museo de Jade'
-            },
-            timeStart: '10:00',
-            timeEnd: '11:00'
-        },
-        {place:
-            {
-                name:'Museo de Jade'
-            },
-            timeStart: '10:00',
-            timeEnd: '11:00'
-        },
-    ];
-    const myItinerary ={title: 'Chepe de Moda', date: '20 Mayo 2022', list: myItinineraryList}
-    const subtitle = myItinerary.date + ": " + myItinerary.title;
+export default function MyItinerarySection() {
+
+    const [itinerary, setItinerary] = useState();
+    const [events, setEvents] = useState([]);
+
+    async function getItineraryByUser() {
+        const userId = (JSON.parse(sessionStorage.getItem('userData'))).id;
+        const url = 'http://localhost:8080/itinerary/getByUserId?userId=' + userId;
+
+        await axios.get(url).then(response => {
+            setItinerary(response.data);
+            setEvents(response.data.events);
+            console.log(response.data.events);
+        })
+    }
+
+    useEffect(() => {
+        getItineraryByUser();
+    }, []);
+
+    const myItinerary ={title: 'Chepe de Moda', date: '20 Mayo 2022', list: itinerary}
+    const subtitle = myItinerary.date + ": " + myItinerary.title;   // alambrar por ahora porque no lo tenemos en BD
     return (
         <Box sx={{ marginLeft: '10vh' }}>
+            {console.log(events)}
             <HeaderUserInfo title='Mi Itinerario' subtitle={subtitle}/>
-            <MyItinerary />
+            <MyItinerary setEvents={setEvents} events = {events} />
         </Box>
     )
 }
