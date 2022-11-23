@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import styles from '../CSS/images.module.css';
-import stylesText from '../CSS/text.module.css';
 import PlanDetails from './plan_details';
 import Stack from '@mui/material/Stack';
 import stylesB from '../CSS/button.module.css'
