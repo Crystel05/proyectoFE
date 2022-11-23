@@ -45,6 +45,7 @@ const Login = ({ setAuthorizationLogin, passwordChanged, setAuthorizationResetPa
         await axios.get(link)
         .then(response => {
             setIsCorrect(response.data);
+            sessionStorage.setItem('userData', JSON.stringify(response.data));
         })
     }
 
