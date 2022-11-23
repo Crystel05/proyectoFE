@@ -7,7 +7,7 @@ import stylesB from '../CSS/button.module.css'
 
 
 export default function Memberships ({isPay, setPrice, setMembership}){
-    const info = '¡Descube más como un miembro únete hoy y experimenta el arte que amas con mayor acceso, programación exclusiva'
+    const info = '¡Descubre más como un miembro únete hoy y experimenta el arte que amas con mayor acceso, programación exclusiva'
     + ' y nuevas formas de hacer conexiones!';
 
     const [selectedMembership, setSelectedMembership] = useState({})
@@ -50,8 +50,7 @@ export default function Memberships ({isPay, setPrice, setMembership}){
         button: 'Unirse'
     }
     return ( 
-        <div>
-           
+        <div>   
             <div style={{display:'flex', flexDirection:'row', marginLeft:'3%', marginRight:'3%'}}>
             <Stack direction="column" spacing={2} style={{ marginTop:'5%', marginRight:'10%'}}>
                 {memberships.map((plan, index) =>{
