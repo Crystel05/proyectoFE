@@ -1,6 +1,6 @@
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LocalBarIcon from '@mui/icons-material/LocalBar';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
@@ -12,6 +12,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import { START } from "../Util/constants";
 import MainMap from "../Maps/main_map";
 import containerStyles from '../CSS/container.module.css';
+import axios from 'axios';
 
 export default function PrincipalItineraryPage(){
     const [value, setValue] = useState('itinerario'); 
@@ -68,12 +69,26 @@ export default function PrincipalItineraryPage(){
         }
     ]
 
-    const handleShare = () => (event) => {
-        console.log("COMPARTIENDO"); //llamar al axios para crear cuenta
+    const [events, setEvents] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:8080/event/getAll').then(response =>{
+            setEvents(response.data);
+        })
+    }, [])
+
+    const handleSave = () => () => { 
+        const userId = (JSON.parse(sessionStorage.getItem('userData'))).id;
+        const url = 'http://localhost:8080/itinerary/create?userId='+userId;
+
+        saveItinerary(url);
     }
 
-    const handleSave = () => (event) => { 
-        console.log("Save");
+    async function saveItinerary (url) {
+        await axios.get(url)
+        .then(response => {
+            console.log(response.data);
+        })
     }
     
     const borderIntinerary = value === 'bares' ? '10px' : '0px'
@@ -82,6 +97,7 @@ export default function PrincipalItineraryPage(){
     const borderBottonLeftRest = value === 'bares' ? '10px' : '0px'
     const borderBottonRightRest = value === 'entretenimiento' ?  '10px' : '0px'
     const borderBottonLeftEnter = value === 'restaurantes' ?  '10px' : '0px'
+
     return(
         <Box className={ containerStyles.displayRow }>
             <Box sx={{ widht:'fit-content'}}>
@@ -139,7 +155,7 @@ export default function PrincipalItineraryPage(){
                             </TabList>
                         </Box>
                         <TabPanel value="itinerario" style={{padding: 0}} index={1} >
-                            <MyItinerary />
+                            <MyItinerary setEvents={setEvents} events = {events} />
                         </TabPanel>
 
                         <TabPanel value="bares" style={{padding: 0}} index={2} >
@@ -159,7 +175,6 @@ export default function PrincipalItineraryPage(){
                 <Box sx={{
                     marginLeft:'7vh'
                 }}>
-                    <GenericRoundButton Icon={ShareIcon} backgroundColor='#2a1463' text='Compartir' iconPosition={START} onClick={() => handleShare()} marginRight='2vh' />
                     <GenericRoundButton Icon={SaveIcon} backgroundColor='#ce1717' text='Guardar' iconPosition={START} onClick={() => handleSave()} />
                 </Box>
             </Box>

@@ -3,7 +3,7 @@ import React from "react";
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
-export default function Event({ event, handleDelete }){
+export default function Event({ event, events, handleDelete }){
 
     return(
         <Box sx={{
@@ -14,7 +14,7 @@ export default function Event({ event, handleDelete }){
         >
             <Box sx={{ p: 1 }} style={{ display:'flex', flexDirection:'row', backgroundColor:'#f4f3f7' }}>
                 <a style={{ marginRight:'1vh' }} > {event.place.name} </a>
-                <button style={{ marginLeft:'auto', border:'none'}} onClick={() => handleDelete(event)}><CancelOutlinedIcon/></button>
+                <button style={{ marginLeft:'auto', border:'none'}} onClick={() => handleDelete(event, events)}><CancelOutlinedIcon/></button>
             </Box>
             <Box sx={{ p: 1, border:2, borderColor:'#f4f3f7' }} style={{ display:'flex', flexDirection:'row' }} >
                 <AccessAlarmIcon style={{ color:'#8c8888' }}/>
