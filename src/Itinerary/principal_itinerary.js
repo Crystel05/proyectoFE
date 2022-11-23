@@ -7,87 +7,70 @@ import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import MyItinerary from "./my_itinerary";
 import Places from "./places";
 import GenericRoundButton from "../ReusableComponents/Buttons/generic_button";
-import ShareIcon from '@mui/icons-material/Share';
 import SaveIcon from '@mui/icons-material/Save';
 import { START } from "../Util/constants";
 import MainMap from "../Maps/main_map";
 import containerStyles from '../CSS/container.module.css';
 import axios from 'axios';
+import { ERROR, SUCCESS } from "../Util/constants";
+import { Alert, Snackbar } from "@mui/material";
 
 export default function PrincipalItineraryPage(){
     const [value, setValue] = useState('itinerario'); 
+    const [events, setEvents] = useState([]);
+    const [bar, setBar] = useState([]);
+    const [restaurants, setRestaurant] = useState([]);
+    const [entertainments, setEntertainment] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [severity, setSeverity] = useState("success");
+    const [message, setMessage] = useState("");
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
-    const restaurants = [
-        {
-            name: 'Lugar 1',
-            priceRange: 2,
-            calification: 4,
-            image:{
-                name: 'image',
-                pathDrive:'https://drive.google.com/uc?id=1mlDXIWIdMPm0Krv_2O5unrvWP3bwWZ9i'
-            }
-        },
-        {
-            name: 'Lugar 1',
-            priceRange: 2,
-            calification: 4,
-            image:{
-                name: 'image',
-                pathDrive:'https://drive.google.com/uc?id=1mlDXIWIdMPm0Krv_2O5unrvWP3bwWZ9i'
-            }
-        },
-        {
-            name: 'Lugar 1',
-            priceRange: 2,
-            calification: 4,
-            image:{
-                name: 'image',
-                pathDrive:'https://drive.google.com/uc?id=1mlDXIWIdMPm0Krv_2O5unrvWP3bwWZ9i'
-            }
-        },
-        {
-            name: 'Lugar 1',
-            priceRange: 2,
-            calification: 4,
-            image:{
-                name: 'image',
-                pathDrive:'https://drive.google.com/uc?id=1mlDXIWIdMPm0Krv_2O5unrvWP3bwWZ9i'
-            }
-        },
-        {
-            name: 'Lugar 1',
-            priceRange: 2,
-            calification: 4,
-            image:{
-                name: 'image',
-                pathDrive:'https://drive.google.com/uc?id=1mlDXIWIdMPm0Krv_2O5unrvWP3bwWZ9i'
-            }
-        }
-    ]
-
-    const [events, setEvents] = useState([]);
-
+    
     useEffect(() => {
         axios.get('http://localhost:8080/event/getAll').then(response =>{
             setEvents(response.data);
         })
+        axios.get('http://localhost:8080/places/getAllCategory?category=Bar').then(response => {
+            setBar(response.data);
+        })
+        axios.get('http://localhost:8080/places/getAllCategory?category=Restaurante').then(response => {
+            setRestaurant(response.data);
+        })
+        axios.get('http://localhost:8080/places/getAllCategory?category=Entretenimiento').then(response => {
+            setEntertainment(response.data);
+        })
     }, [])
 
     const handleSave = () => () => { 
-        const userId = (JSON.parse(sessionStorage.getItem('userData'))).id;
-        const url = 'http://localhost:8080/itinerary/create?userId='+userId;
+        const userId = (JSON.parse(sessionStorage.getItem('userData'))).id;        
+        const url = 'http://localhost:8080/itinerary/createFullItinerary?userId='+userId;
 
         saveItinerary(url);
     }
 
+    const handleClose = (_, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpen(false);
+    };
+
     async function saveItinerary (url) {
-        await axios.get(url)
+        await axios.post(url, events)
         .then(response => {
-            console.log(response.data);
+            if(response.status === 200){
+                setMessage("Su itinerario ha sido guardado exitosamente")
+                setSeverity(SUCCESS)
+                setOpen(true)
+            }else{
+                setMessage("Hubo un error guardando el itinerario, intente de nuevo")
+                setSeverity(ERROR)
+                setOpen(true)
+            }
         })
     }
     
@@ -100,6 +83,13 @@ export default function PrincipalItineraryPage(){
 
     return(
         <Box className={ containerStyles.displayRow }>
+            <Snackbar
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+            >
+                <Alert severity={severity}>{message}</Alert>
+            </Snackbar>
             <Box sx={{ widht:'fit-content'}}>
                 <Box sx={{ p: 1, border:2, borderColor:'#f4f3f7', borderRadius:'10px', boxShadow:'1px 3px 18px #a19999' }} style={{ marginTop:'5vh', width:'430px', marginLeft:'5vh' }}>
                     <TabContext value={value} >
@@ -159,7 +149,7 @@ export default function PrincipalItineraryPage(){
                         </TabPanel>
 
                         <TabPanel value="bares" style={{padding: 0}} index={2} >
-                            <Places places={restaurants} />
+                            <Places places={bar} />
                         </TabPanel>
 
                         <TabPanel value="restaurantes" style={{padding: 0}} index={3} >
@@ -167,7 +157,7 @@ export default function PrincipalItineraryPage(){
                         </TabPanel>
                             
                         <TabPanel value="entretenimiento" style={{padding: 0}} index={4} >
-                            <Places places={restaurants} />
+                            <Places places={entertainments} />
                         </TabPanel>
                     </TabContext>
                     
@@ -178,7 +168,7 @@ export default function PrincipalItineraryPage(){
                     <GenericRoundButton Icon={SaveIcon} backgroundColor='#ce1717' text='Guardar' iconPosition={START} onClick={() => handleSave()} />
                 </Box>
             </Box>
-            <Box>
+            <Box style={{marginTop:'5vh'}}>
                 <MainMap width={'100vh'} height={'70vh'} places={"undefined"}/>
             </Box>
         </Box>
