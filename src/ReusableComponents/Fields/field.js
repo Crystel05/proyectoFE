@@ -14,6 +14,7 @@ export const Field = ({ field }) => {
             <TextField
                 helperText={field.helperText}
                 required={field.isRequired}
+                value={field?.value}
                 label={field.name}
                 id={id}
                 variant="outlined"
@@ -54,11 +55,11 @@ export const Field = ({ field }) => {
                         labelId={field.name}
                         id={field.name}
                         label= {field.name}
-                        // onChange={handleChange}
-                    >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        onChange={field.onChange()}
+                >
+                {field.values.map((value, index)=>{
+                    return <MenuItem value={value.id} key={index}>{value.name}</MenuItem>
+                })}
                 </Select>
             </FormControl>
         )
