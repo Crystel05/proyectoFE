@@ -19,7 +19,7 @@ export default function RouteACT({route, color}){
                 borderBottomRightRadius: '10px',
                 border: 'none'
             }}/>
-            <img src={route.image.drivePath} style={{width:'300px', height:'250px'}}/>
+            <img src={route.pic} style={{width:'300px', height:'250px'}}/>
             <a className={textStyle.kronaText}>{route.name}</a>
             <hr style={{
                 color: color,

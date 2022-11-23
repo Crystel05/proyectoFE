@@ -5,6 +5,9 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import Box from '@mui/material/Box';
+import stylesContainer from '../../CSS/container.module.css'
+
 
 export const Field = ({ field }) => {
    
@@ -14,6 +17,7 @@ export const Field = ({ field }) => {
             <TextField
                 helperText={field.helperText}
                 required={field.isRequired}
+                value={field?.value}
                 label={field.name}
                 id={id}
                 variant="outlined"
@@ -24,13 +28,19 @@ export const Field = ({ field }) => {
     }
     else if(field.type === TEXT_AREA){
         return(
-            <TextareaAutosize 
+            <Box className={stylesContainer.displayColumn}>
+                <a>Detalles</a>
+                <TextareaAutosize 
                 maxRows={4}
                 minRows={4}
                 id={id}
                 required={field.isRequired}
                 onChange={field.onChange()}
+                placeholder={field.name}
+                value={field?.value}
             />
+            </Box>
+            
         )
     }
     else if(field.type === DATE_PICKER){

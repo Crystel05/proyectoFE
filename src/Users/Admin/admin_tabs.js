@@ -6,12 +6,14 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { useState } from "react";
 import AdminCRUD from "./admin_principal_generic";
-import { PLACES, SPONSORS, EDITIONS, NEWS, USERS } from "../../Util/constants";
+import { PLACES, SPONSORS, EDITIONS, NEWS, USERS, EVENTS, ROUTES } from "../../Util/constants";
 import AddEditPlace from "./Places/add_edit_place";
 import AddEditSponsor from "./Sponsors/add_edit_sponsor";
 import AddEditEdition from "./Editions/add_edit_editions";
 import AddEditNews from "./News/add_edit_news";
 import CreateAccount from "../create_account";
+import AddEditEvent from "./Events/add_edit_event";
+import AddEditRoute from "./Routes/add_edit_route";
 
 export default function AdminTabs(){
 
@@ -40,6 +42,8 @@ export default function AdminTabs(){
                         }}
                     >
                     <Tab label="Lugares" value="lugares" />
+                    <Tab label="Eventos" value="eventos" />
+                    <Tab label="Rutas" value="rutas" />
                     <Tab label="Patrocinadores" value="patrocinadores" />
                     <Tab label="Ediciones" value="ediciones" />
                     <Tab label="Noticias" value="noticias" />
@@ -47,8 +51,18 @@ export default function AdminTabs(){
                 </TabList>
             </Box>
             <TabPanel value="lugares" style={{padding: 0}} index={0} >
-                {isEditing && value === 'lugares' ? <AddEditPlace isNew={isNew} type={PLACES} /> :
+                {isEditing && value === 'lugares' ? <AddEditPlace isNew={isNew} type={PLACES} id={row}/> :
                     <AdminCRUD type={PLACES} setValue={setEditing} setIsNew={setIsNew} setRow={setRow}/>
+                }
+            </TabPanel>
+            <TabPanel value="eventos" style={{padding: 0}} index={0} >
+                {isEditing && value === 'eventos' ? <AddEditEvent isNew={isNew} type={EVENTS} /> :
+                    <AdminCRUD type={EVENTS} setValue={setEditing} setIsNew={setIsNew} setRow={setRow}/>
+                }
+            </TabPanel>
+            <TabPanel value="rutas" style={{padding: 0}} index={0} >
+                {isEditing && value === 'rutas' ? <AddEditRoute isNew={isNew} type={ROUTES} /> :
+                    <AdminCRUD type={ROUTES} setValue={setEditing} setIsNew={setIsNew} setRow={setRow}/>
                 }
             </TabPanel>
             <TabPanel value="patrocinadores" style={{padding: 0}} index={1}>
