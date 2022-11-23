@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import styles from '../CSS/images.module.css';
-import stylesText from '../CSS/text.module.css';
 import PlanDetails from './plan_details';
 import Stack from '@mui/material/Stack';
 import stylesB from '../CSS/button.module.css'
 
 
 
-export default function Memberships (){
+export default function Memberships ({isPay, setPrice, setMembership}){
     const info = '¡Descube más como un miembro únete hoy y experimenta el arte que amas con mayor acceso, programación exclusiva'
     + ' y nuevas formas de hacer conexiones!';
 
@@ -33,16 +31,17 @@ export default function Memberships (){
     },[])
 
     function handleClick(event, index){
-        if(event.detail >=2 ){
-            setSelectedMembershipId(index)
-            setSelectedMembership(memberships[index])
-            setDetails(memberships[index].details)
-            setPhoto(memberships[index].photo)
-        }       
+        //if(event.detail >= 2 ){
+        setSelectedMembershipId(index)
+        setSelectedMembership(memberships[index])
+        setDetails(memberships[index].details)
+        setPhoto(memberships[index].photo)
+        //}       
         
     }
     
     const data = {
+        id: selectedMembership.id,
         name: selectedMembership.name,
         price: selectedMembership.price,
         benefits: details,
@@ -52,14 +51,7 @@ export default function Memberships (){
     }
     return ( 
         <div>
-           <article>
-                <picture>
-                    <source  srcSet={principalImage} />
-                    <img src={principalImage} alt="background" className={styles.image} />
-                </picture>
-                <h3 className={stylesText.header}>Membresías</h3>
-                <a className={stylesText.bodyMemberships} > {info} </a>
-            </article>
+           
             <div style={{display:'flex', flexDirection:'row', marginLeft:'3%', marginRight:'3%'}}>
             <Stack direction="column" spacing={2} style={{ marginTop:'5%', marginRight:'10%'}}>
                 {memberships.map((plan, index) =>{
@@ -79,14 +71,26 @@ export default function Memberships (){
                             {plan.name} 
                         </a>  
                         <a>
-                            {" ₡" + plan.price} 
+                            {"$" + plan.price} 
                         </a>  
                         </button>
                     )
                 })}
             </Stack>
-                <PlanDetails {...data} />
+                <PlanDetails data={data} isPay={isPay} setPrice={setPrice} setMembership={setMembership}/>
             </div>
         </div>
     )
 }
+
+/**
+ * <article>
+                <picture>
+                    <source  srcSet={principalImage} />
+                    <img src={principalImage} alt="background" className={styles.image} />
+                </picture>
+                <h3 className={stylesText.header}>Membresías</h3>
+                <a className={stylesText.bodyMemberships} > {info} </a>
+            </article>
+ * 
+ */

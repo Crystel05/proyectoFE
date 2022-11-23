@@ -10,18 +10,17 @@ import DivederAddress from "./dividerAddress";
 import Fields from "../ReusableComponents/Fields/fields";
 import GenericRoundButton from "../ReusableComponents/Buttons/generic_button";
 import { ERROR, INFO, NONE, PASSWORD, SUCCESS, TEXT_FIELD } from "../Util/constants";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import UploadImage from "../ReusableComponents/Fields/image_uploader";
 import { Alert, Snackbar } from "@mui/material";
 import FieldsAdmin from "../ReusableComponents/Fields/fields_admin";
 
 const CreateAccount = ({isAdmin, isNew}) => {
 
+    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const [severity, setSeverity] = useState("success");
     const [message, setMessage] = useState("");
-    const [image, setImage] = useState("");
     const [userData, setUserData] = useState({
         Cedula: '',
         Nombre: '',
@@ -99,16 +98,12 @@ const CreateAccount = ({isAdmin, isNew}) => {
             identification: userData.Cedula,
             phoneNumber: userData.NumeroTelefono,
             address: userData.Provincia + ", " + userData.Canton + ", " + userData.Sennas,
-            age: userData.Edad,
-            image: {
-                name: userData.Cedula,
-                drivePath: image
-            }
+            age: userData.Edad
         }
         await axios.post('http://localhost:8080/user/create', body)
         .then(response => {
             if(response.status === 200){
-                if(response.data != ""){
+                if(response.data !== ""){
                     setMessage("El usuario fue registrado exitosamente")
                     setSeverity(SUCCESS)
                     setOpen(true)
@@ -146,8 +141,8 @@ const CreateAccount = ({isAdmin, isNew}) => {
         }
     }
 
-    const returnToLogin = () => (event) => {
-        Navigate("/");
+    const returnToLogin = () => {
+        navigate("/");
     }
 
     const handleClose = (_, reason) => {
@@ -170,7 +165,7 @@ const CreateAccount = ({isAdmin, isNew}) => {
             </Snackbar>
             <div className={ stylesContainer.displayRow } >
                 <h1 className={ `${textStyle.kronaText} ${textStyle.editionTitle} ${textStyle.marginsCreateAccount}` } >{text}</h1>
-                {!isAdmin && <ArtCityTourButton className={stylesButton.principalCreateUser} goToPage={() => returnToLogin()}/>}
+                {!isAdmin && <ArtCityTourButton className={stylesButton.principalCreateUser} onClick={() => returnToLogin()}/>}
             </div>
             <div            
                 className={ `${stylesContainer.displayRow} ${stylesContainer.center}` }
@@ -188,7 +183,6 @@ const CreateAccount = ({isAdmin, isNew}) => {
                 </div>
                 {isAdmin ? <FieldsAdmin fields={addressCol2}/> : <Fields fields={addressCol2}/>}
             </Box>
-            <UploadImage setImage={setImage} />
             <GenericRoundButton Icon={<></>} backgroundColor={isAdmin ? '#2a1463' : '#ce1717'} text="guardar" iconPosition={NONE} onClick={() => createAccount()}/>
         </Box>
     )

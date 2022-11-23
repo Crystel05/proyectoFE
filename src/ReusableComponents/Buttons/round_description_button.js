@@ -2,7 +2,7 @@ import { Button, IconButton } from '@mui/material';
 import { Box } from "@mui/system";
 import React from "react";
 
-export default function ButtonRoundDescription({ Icon, text, style={} }){
+export default function ButtonRoundDescription({ Icon, text, style={}, onClick }){
     return(
         <Box 
             sx={{
@@ -20,8 +20,13 @@ export default function ButtonRoundDescription({ Icon, text, style={} }){
                     boxSizing: 'border-box',
                     width: '70px',
                     height: '70px',
-                    margin:'auto'
+                    margin:'auto',
+                    '&:hover': {
+                        backgroundColor: '#db5e5e',
+                        color: 'white',
+                    },
                 }}
+                onClick={onClick()}
             >
                 <Icon  fontSize="inherit" />
             </IconButton>
@@ -35,8 +40,13 @@ export default function ButtonRoundDescription({ Icon, text, style={} }){
                     cursor: 'pointer',
                     fontFamily: 'Open Sans, sans-serif',
                     borderRadius: '30px',
-                    width: '150px'
+                    width: '150px',
+                    '&:hover': {
+                        backgroundColor: '#db5e5e',
+                        color: 'white',
+                    },
                 }}
+                onClick={onClick()}
             >
                 {text}
             </Button>

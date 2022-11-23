@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -11,12 +11,19 @@ import PrincipalItineraryPage from '../Itinerary/principal_itinerary';
 import MainReserve from '../Reserve/main_reserve';
 import ACTPrincipalPage from '../PincipalPage/principal_page_act';
 import UserInformation from '../Users/UserInfo/user_information';
+import Paywall from '../Payment/paywall';
 
 export default function Tabs({value, setValue}) {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+        setPaywall(false);
     };
+    const [paywall, setPaywall] = useState(false);
+    const [priceToPay, setPriceToPay] = useState(0);
+    const [membershipToBuy, setMembershipToBuy] = useState(2);
+    
+
 
     const tabColor = value !== 'membresias' ? '#ce1717' :' #2a1463';
     return (
@@ -40,7 +47,7 @@ export default function Tabs({value, setValue}) {
                 </TabList>
             </Box>
             <TabPanel value="principal" style={{padding: 0}} index={0} >
-                <ACTPrincipalPage />
+                <ACTPrincipalPage setValue={setValue}/>
             </TabPanel>
             <TabPanel value="userInformation" style={{padding: 0}} index={0} >
                 <UserInformation />
@@ -61,7 +68,7 @@ export default function Tabs({value, setValue}) {
             </TabPanel>
 
             <TabPanel value="membresias" style={{padding: 0}} index={4} >
-                <Memberships/>
+                {paywall && value === "membresias" ? <Paywall prices={priceToPay} membership={membershipToBuy} /> : <Memberships isPay={setPaywall} setPrice={setPriceToPay} setMembership={setMembershipToBuy}/>}
             </TabPanel>
         </TabContext>
     </Box>

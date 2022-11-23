@@ -10,13 +10,13 @@ import RoutesACT from "./routes_act.js";
 import News from "./news.js";
 
 
-export default function ACTPrincipalPage(){
+export default function ACTPrincipalPage({setValue}){
     const [image, setImage] = useState();
     const title = 'El Art City Tour'
     const info = 'Es una experiencia nocturna de recorridos por museos, galerias y centros culturales de la ciudad de San José'
     
     async function getImage(){
-        await axios.get('http://localhost:8080/images/getLogin').then(response => { //cambiar por la imagen principal
+        await axios.get('http://localhost:8080/images/getPrincipalPageImage').then(response => { 
             setImage(response.data);
         })
     }
@@ -27,8 +27,8 @@ export default function ACTPrincipalPage(){
     return(
         <Box className={stylesContainer.displayColumn} style={{ margin:'auto' }}>
             <ImageHeaderAdmin title={title} info={info} image={image} headerTitle='' />
-            <Participation />
-            <RoutesACT />
+            <Participation setValue={setValue}/>
+            <RoutesACT /> 
             <News />
         </Box>
         
