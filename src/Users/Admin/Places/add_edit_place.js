@@ -19,6 +19,7 @@ export default function AddEditPlace({isNew, type, id}){
     const [image, setImage] = useState()
     const [imageForPlace, setImageForPlace] = useState()
     const [place, setPlace] = useState({})
+    const [values, setValues] = useState([])
     const [placeData, setPlaceData] = useState({
         id: '',
         name: '',
@@ -32,6 +33,7 @@ export default function AddEditPlace({isNew, type, id}){
     })
     useEffect(() =>{
         getImage()
+        getCategories()
         if(!isNew){
             getCurrentPlace()
         }
@@ -40,6 +42,12 @@ export default function AddEditPlace({isNew, type, id}){
     async function getImage(){
         await axios.get('http://localhost:8080/images/getAdminPH', {params:{sectionPH: type}}).then(response => {
             setImage(response.data);
+        })
+    }
+
+    async function getCategories(){
+        await axios.get('http://localhost:8080/places/getCategories', {params:{sectionPH: type}}).then(response => {
+            setValues(response.data);
         })
     }
 
@@ -112,9 +120,11 @@ export default function AddEditPlace({isNew, type, id}){
     const secondCol = [
                         {id:'latitude', value: placeData.latitude, name:'Latitud', type: TEXT_FIELD, isRequired:true, onChange: () => handleFieldChange()},
                         {id: 'longitude', value:placeData.longitude, name:'Longitud', type: TEXT_FIELD, isRequired:true, onChange: () => handleFieldChange()},
-                        {id: 'category', value:placeData.category, name:'Categoría', type: SELECT, isRequired:true, onChange: () => handleFieldChange()},
+                        {id: 'category', value:placeData.category, values: values, name:'Categoría', type: SELECT, isRequired:true, onChange: () => handleFieldChange()},
                         {id:'details', value:placeData.details, name:'Detalles', type: TEXT_AREA, isRequired:false, onChange: () => handleFieldChange()}
                     ]
+
+    console.log(values)
     return(
         <Box className={stylesContainer.displayColumn}>
             <Snackbar

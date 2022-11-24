@@ -32,7 +32,7 @@ export default function AddEditRoute({isNew, type}){
     const nombre = [{id:'1', name:'Nombre', type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => {}}]
     const secondCol = [
                         {id:'2', name:'Edición', type: SELECT, isRequired:true, helperText:'', onChange: () => {}},
-                        {id: '3', name:'Lugares', type: SELECT, isRequired:true, helperText:'', onChange: () => {}}
+                        {id: '3', name:'Lugares', values:[], type: SELECT, isRequired:true, helperText:'', onChange: () => {}}
                     ]
     return(
         <Box className={stylesContainer.displayColumn}>
