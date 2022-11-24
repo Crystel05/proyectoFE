@@ -10,7 +10,7 @@ export default function UserInformation(){
     const [action, setAction] = useState(PROFILE)
 
     return(
-        <Box className={stylesContainer.displayRow} style={{ marginLeft: '50vh', marginTop: '5vh'}}>
+        <Box className={stylesContainer.displayRow} style={{ marginLeft: '3vh', marginTop: '5vh'}}>
             <ActionsBar setAction={setAction} action={action} />
             <ShowUserInfoAction action={action}/>
         </Box>
