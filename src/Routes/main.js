@@ -33,7 +33,6 @@ function MainRoutes(){
     }, [])
     return(
         <div style={{display:'flex', flexDirection:'column'}}>
-            {console.log(routes, "divRoutes")}
             <a className={styles.routesTitle} >Rutas</a>
             {routes.map((route, index) => {
                 return(

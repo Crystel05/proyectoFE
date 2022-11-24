@@ -1,7 +1,6 @@
 import { Box, Button } from '@mui/material';
 import React, { useState } from 'react';
 import styles from '../CSS/text.module.css'
-import map from '../Images/mapaDavivienda.PNG'
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import MainMap from '../Maps/main_map';
 
@@ -29,7 +28,6 @@ function Route({ route, color }){
             </div>
             <Box style={{display:'flex', flexDirection:'row', justifyContent:'center'}}>
                 {/* <img src={map} style={{width:'500px', height:'300px', marginLeft:'5%', marginTop:'1%', marginRight:'2%'}}></img> */}
-                {console.log(route.places, "route")}
                 <MainMap width={'500px'} height={'300px'} marginLeft={'100px'} marginTop={'1%'} marginRight={'2%'} places={route.places} setPlaceToShow={setPlaceToShow}/>
                 
                 <Box sx={{ p: 2, border: 1, borderColor: 'grey.500', borderRadius: '7px' }} style={{marginTop:'1%', display:'flex', flexDirection:'row', width:'80%', marginRight:'2%'}}>

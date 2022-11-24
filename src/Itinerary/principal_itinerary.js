@@ -78,24 +78,7 @@ export default function PrincipalItineraryPage(){
         })
     }
     
-    const placesPlaceHolder = 
-    [
-        {
-            "id": 1,
-            "name": "Teatro Nacional",
-            "details": "El teatro nacional",
-            "latitude": "9.933830",
-            "longitude": "-84.077074"
-        },
-        {
-            "id": 2,
-            "name": "Museo Nacional",
-            "details": "Desde sus primeros afios, el museo se oriental hacia la investigacion cientifica, la educacion, la exhibicion y la defensa del patrimonio cultural y natural.",
-            "latitude":"9.9335480",
-            "longitude":"-84.068525"
-        }
-        
-    ]
+   
     const borderIntinerary = value === 'bares' ? '10px' : '0px'
     const borderBarsBottonLeft = value !== 'itinerario' ? '0px' : '10px'
     const borderBarsBottonRight = value === 'restaurantes' ? '10px' : '0px'
@@ -193,7 +176,7 @@ export default function PrincipalItineraryPage(){
             </Box>
             <Box style={{marginTop:'5vh'}}>
                 {console.log(generalPlaces)}
-                <MainMap width={'100vh'} height={'70vh'} places={placesPlaceHolder}/>
+                <MainMap width={'100vh'} height={'70vh'} places={generalPlaces}/>
             </Box>
         </Box>
     )

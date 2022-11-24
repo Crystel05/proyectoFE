@@ -24,7 +24,6 @@ export default function Map({ latitude, longitude, places, width, height, setPla
             />
             {places.map ((place, index) => (
                 <div>
-                {console.log(place, "mapcontainer")}
                 <Marker key={place?.id} position={[place?.latitude, place?.longitude]} eventHandlers={{
                     click: () => { setPopUp(index);  },
                   }}/>
