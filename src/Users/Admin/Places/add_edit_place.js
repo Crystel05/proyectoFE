@@ -5,7 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import ImageHeaderAdmin from "../header_add_edit";
-import { TEXT_AREA, TEXT_FIELD, NONE, SELECT, ERROR, SUCCESS } from "../../../Util/constants";
+import { TEXT_AREA, TEXT_FIELD, NONE, SELECT, ERROR, SUCCESS, PLACES } from "../../../Util/constants";
 import FieldsAdmin from "../../../ReusableComponents/Fields/fields_admin";
 import GenericRoundButton from "../../../ReusableComponents/Buttons/generic_button";
 import { Alert, Snackbar } from "@mui/material";
@@ -119,12 +119,11 @@ export default function AddEditPlace({isNew, type, id}){
                     {id:'link', value:placeData.link, name:'Enlace', type: TEXT_FIELD, helperText: 'Enlace de la página del lugar',isRequired:false, onChange: () => handleFieldChange()},]
     const secondCol = [
                         {id:'latitude', value: placeData.latitude, name:'Latitud', type: TEXT_FIELD, isRequired:true, onChange: () => handleFieldChange()},
-                        {id: 'longitude', value:placeData.longitude, name:'Longitud', type: TEXT_FIELD, isRequired:true, onChange: () => handleFieldChange()},
-                        {id: 'category', value:placeData.category, values: values, name:'Categoría', type: SELECT, isRequired:true, onChange: () => handleFieldChange()},
+                        {id:'longitude', value:placeData.longitude, name:'Longitud', type: TEXT_FIELD, isRequired:true, onChange: () => handleFieldChange()},
+                        {id:'category', value:placeData.category, values: PLACES, name:'Categoría', type: SELECT, isRequired:true, onChange: () => handleFieldChange()},
                         {id:'details', value:placeData.details, name:'Detalles', type: TEXT_AREA, isRequired:false, onChange: () => handleFieldChange()}
                     ]
 
-    console.log(values)
     return(
         <Box className={stylesContainer.displayColumn}>
             <Snackbar

@@ -15,6 +15,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 export const Field = ({ field, color }) => {
    
     const id = field.id === null ? field.name : field.id;
+      
     if(field.type === TEXT_FIELD || field.type === PASSWORD){
         return(
             <TextField
@@ -32,7 +33,7 @@ export const Field = ({ field, color }) => {
     else if(field.type === TEXT_AREA){
         return(
             <Box className={stylesContainer.displayColumn}>
-                <a>Detalles</a>
+                <InputLabel id={field.name}>{field.name}</InputLabel>
                 <TextareaAutosize 
                 maxRows={4}
                 minRows={4}
@@ -84,33 +85,30 @@ export const Field = ({ field, color }) => {
                 <IconButton onClick={field.onAdd()}>
                     <AddIcon sx={{ color: color}}/>
                 </IconButton>
-                <a>Se han agregado {field.saved.length} imágenes</a>
+                <a>{field.saved.length} imágenes</a>
             </FormControl>
         )
     }
     else if(field.type === SELECTMULTIPLE){
-        const names =['luis', 'juan', 'pedro']
         return(
-            <FormControl fullWidth>
+            <FormControl style={{ display: 'flex', flexDirection: 'row'}}>
                 <InputLabel id={field.name}>{field.name}</InputLabel>
                 <Select
-                    labelId={field.name}
-                    id={field.id}
-                    multiple
-                    value={field.value}
-                    onChange={field.onChange()}
-                    input={<OutlinedInput label={field.name} />}
+                        required={field.isRequired}
+                        labelId={field.name}
+                        id={field.name}
+                        label= {field.name}
+                        onChange={field.onChange}
+                        style={{width:'210px'}}
                 >
-                {names.map((name) => (
-                    <MenuItem
-                    key={name}
-                    value={name}
-                    //style={getStyles(name, personName, theme)}
-                    >
-                    {name}
-                    </MenuItem>
-                ))}
+                {field.values.map((value, index)=>{
+                    return <MenuItem value={value.id} key={index}>{value.name ? value.name : value} </MenuItem>
+                })}
                 </Select>
+                <IconButton onClick={field.onAdd()}>
+                    <AddIcon sx={{ color: color}}/>
+                </IconButton>
+                <a>{field.saved.length} {field.name}</a>
             </FormControl>
         )
     }
@@ -123,7 +121,7 @@ export const Field = ({ field, color }) => {
                         labelId={field.name}
                         id={field.name}
                         label= {field.name}
-                        onChange={field.onChange()}
+                        onChange={field.onChange}
                 >
                 {field.values.map((value, index)=>{
                     return <MenuItem value={value.id} key={index}>{value.name ? value.name : value} </MenuItem>

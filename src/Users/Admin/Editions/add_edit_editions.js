@@ -5,27 +5,26 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import ImageHeaderAdmin from "../header_add_edit";
-import { TEXT_AREA, TEXT_FIELD, NONE, CHECKBOX, MULTIPLE, SELECTMULTIPLE } from "../../../Util/constants";
+import { TEXT_AREA, TEXT_FIELD, NONE, CHECKBOX, MULTIPLE, SELECTMULTIPLE, SELECT } from "../../../Util/constants";
 import FieldsAdmin from "../../../ReusableComponents/Fields/fields_admin";
 import GenericRoundButton from "../../../ReusableComponents/Buttons/generic_button";
+import { RepeatOneSharp } from "@mui/icons-material";
 
 export default function AddEditEdition({type}){
     const [image, setImage] = useState()
     const [imagesEdition, setImagesEdition] = useState([])
-    const [events, setEvents] = useState([])
     const [routes, setRoutes] = useState([])
     const [sponsors, setSponsors] = useState([])
 
+    const [routesList, setRoutesList] = useState([])
+    const [sponsorsList, setSponsorsList] = useState([])
     const [editionData, setEditionData] = useState({
         id: '',
         name: '',
-        events:[],
         eventId: '',
         details:'',
-        sponsors: [],
         sponsorId: '',
-        routes: [],
-        routeId:[],
+        routeId:'',
         imageLink: '',
         images: [],
         isCurrent: ''
@@ -33,11 +32,21 @@ export default function AddEditEdition({type}){
 
     useEffect(() =>{
         getImage()
+        getSelects()
     },[])
 
     async function getImage(){
         await axios.get('http://localhost:8080/images/getAdminPH', {params:{sectionPH: type}}).then(response => {
             setImage(response.data);
+        })
+    }
+
+    async function getSelects(){
+        await axios.get('http://localhost:8080/routes/getAll').then(response => {
+            setRoutesList(response.data)
+        })
+        await axios.get('http://localhost:8080/sponsor/getAll').then(response => {
+            setSponsorsList(response.data)
         })
     }
 
@@ -57,38 +66,39 @@ export default function AddEditEdition({type}){
         })
     }
 
-    const handleChangeMultipleEvents  = () => (event) =>  {
-        const value = event.target.value;
-        setEvents(
-          typeof value === 'string' ? value.split(',') : value,
-        );
-        console.log(events)
-    };
-
     const handleChangeMultipleRoutes  = () => (event) =>  {
         const value = event.target.value;
-        setRoutes(
-          typeof value === 'string' ? value.split(',') : value,
-        );
+        setEditionData({
+            ...editionData, 
+            sponsorId: value
+        })
     };
 
-    const handleChangeMultipleSponsors = () => (event) => {
-        const value = event.target.value;
-        setSponsors(
-          typeof value === 'string' ? value.split(',') : value,
-        );
-    };
+    const onAddSponsor = () => () =>{
+        setEditionData({
+            ...editionData, 
+            sponsorId: ''
+        })
+        sponsors.push(editionData.sponsorId);
+    }
+
+    const onAddRoute = () => () =>{
+        setEditionData({
+            ...editionData, 
+            routeId: ''
+        })
+        sponsors.push(editionData.sponsorId);
+    }
 
     const info = 'En esta sección puede agregar una nueva edición'
     const headerTitle = 'Agregar Edición'
     const col1 = [{id:'name', name:'Nombre', type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
-                    {id:'events', value:events, name:'Eventos', type: SELECTMULTIPLE, isRequired:true, helperText:'', onChange: () => handleChangeMultipleEvents()},
                     {id:'details', name:'Detalles', type: TEXT_AREA, isRequired:true, helperText:'', onChange: () => handleFieldChange()}
                 ]
-        const secondCol = [
-            {id:'sponsors', value:editionData.sponsors, name:'Patrocinadores', type: SELECTMULTIPLE, isRequired:true, helperText:'', onChange: () => handleChangeMultipleSponsors()},
-            {id:'routes', value:routes, name:'Rutas', type: SELECTMULTIPLE, isRequired:true, helperText:'', onChange: () => handleChangeMultipleRoutes()},           
-            {id:'imageLink', value:routes, name:'Foto', type: MULTIPLE, isRequired:true, helperText:'', onChange: () => handleFieldChange(), onAdd: () => onAddEdition(), saved: imagesEdition},
+        const secondCol = [ 
+            {id:'sponsors', value:editionData.sponsorId, name:'Patrocinadores', type: SELECTMULTIPLE, isRequired:true, values:sponsorsList, onChange: () => handleFieldChange(), onAdd: () => onAddSponsor(), saved: sponsors},
+            {id:'routes', value:editionData.routeId, name:'Rutas', type: SELECTMULTIPLE, isRequired:true, values:routesList, onChange: () => handleChangeMultipleRoutes(),  onAdd: () => onAddRoute(), saved: routes },           
+            {id:'imageLink', value:editionData.imageLink, name:'Foto', type: MULTIPLE, isRequired:true, onChange: () => handleFieldChange(), onAdd: () => onAddEdition(), saved: imagesEdition},
             {id:'isCurrent', name:'Edicion Actual', type: CHECKBOX, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
             ]
     return(
