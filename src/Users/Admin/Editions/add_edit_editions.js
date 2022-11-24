@@ -5,14 +5,31 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import ImageHeaderAdmin from "../header_add_edit";
-import { DATE_PICKER, TEXT_AREA, TEXT_FIELD, NONE, SELECT } from "../../../Util/constants";
+import { TEXT_AREA, TEXT_FIELD, NONE, CHECKBOX, MULTIPLE, SELECTMULTIPLE } from "../../../Util/constants";
 import FieldsAdmin from "../../../ReusableComponents/Fields/fields_admin";
 import GenericRoundButton from "../../../ReusableComponents/Buttons/generic_button";
 
-export default function AddEditEdition({isNew, type}){
-    const title = isNew ? "Agregar un nueva edición" : "Editar edición"
+export default function AddEditEdition({type}){
     const [image, setImage] = useState()
-    const [imageForPlace, setImageForPlace] = useState()
+    const [imagesEdition, setImagesEdition] = useState([])
+    const [events, setEvents] = useState([])
+    const [routes, setRoutes] = useState([])
+    const [sponsors, setSponsors] = useState([])
+
+    const [editionData, setEditionData] = useState({
+        id: '',
+        name: '',
+        events:[],
+        eventId: '',
+        details:'',
+        sponsors: [],
+        sponsorId: '',
+        routes: [],
+        routeId:[],
+        imageLink: '',
+        images: [],
+        isCurrent: ''
+    })
 
     useEffect(() =>{
         getImage()
@@ -24,15 +41,56 @@ export default function AddEditEdition({isNew, type}){
         })
     }
 
-    const info = isNew ? 'En esta sección puede agregar una nueva edición' : 'En esta sección puede editar y eliminar una edición existente';
-    const headerTitle = isNew ? 'Agregar Edición' : 'Editar Edición';
-    const col1 = [{id:'1', name:'Nombre', type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => {}},
-                    {id:'1', name:'Eventos', type: SELECT, isRequired:true, helperText:'', onChange: () => {}},
-                    {id:'1', name:'Detalles', type: TEXT_AREA, isRequired:true, helperText:'', onChange: () => {}}
+    const handleFieldChange = () => (event) => {
+        const value = event.target.value;
+        setEditionData({
+            ...editionData,
+            [event.target.id]: value
+        });
+    }
+
+    const onAddEdition = () => () =>{
+        imagesEdition.push(editionData.imageLink);
+        setEditionData({
+            ...editionData, 
+            imageLink: ''
+        })
+    }
+
+    const handleChangeMultipleEvents  = () => (event) =>  {
+        const value = event.target.value;
+        setEvents(
+          typeof value === 'string' ? value.split(',') : value,
+        );
+        console.log(events)
+    };
+
+    const handleChangeMultipleRoutes  = () => (event) =>  {
+        const value = event.target.value;
+        setRoutes(
+          typeof value === 'string' ? value.split(',') : value,
+        );
+    };
+
+    const handleChangeMultipleSponsors = () => (event) => {
+        const value = event.target.value;
+        setSponsors(
+          typeof value === 'string' ? value.split(',') : value,
+        );
+    };
+
+    const info = 'En esta sección puede agregar una nueva edición'
+    const headerTitle = 'Agregar Edición'
+    const col1 = [{id:'name', name:'Nombre', type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
+                    {id:'events', value:events, name:'Eventos', type: SELECTMULTIPLE, isRequired:true, helperText:'', onChange: () => handleChangeMultipleEvents()},
+                    {id:'details', name:'Detalles', type: TEXT_AREA, isRequired:true, helperText:'', onChange: () => handleFieldChange()}
                 ]
-    const secondCol = [{id:'2', name:'Edicion Actual', type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => {}},
-                        {id:'3', name:'Patrocinadores', type: SELECT, isRequired:true, helperText:'', onChange: () => {}}
-                    ]
+        const secondCol = [
+            {id:'sponsors', value:editionData.sponsors, name:'Patrocinadores', type: SELECTMULTIPLE, isRequired:true, helperText:'', onChange: () => handleChangeMultipleSponsors()},
+            {id:'routes', value:routes, name:'Rutas', type: SELECTMULTIPLE, isRequired:true, helperText:'', onChange: () => handleChangeMultipleRoutes()},           
+            {id:'imageLink', value:routes, name:'Foto', type: MULTIPLE, isRequired:true, helperText:'', onChange: () => handleFieldChange(), onAdd: () => onAddEdition(), saved: imagesEdition},
+            {id:'isCurrent', name:'Edicion Actual', type: CHECKBOX, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
+            ]
     return(
         <Box className={stylesContainer.displayColumn}>
             <ImageHeaderAdmin title='Ediciones' info={info} image={image} headerTitle={headerTitle}/>
@@ -44,10 +102,6 @@ export default function AddEditEdition({isNew, type}){
                 </Box>
                 <Box className={stylesContainer.displayColumn}>
                     <FieldsAdmin fields={secondCol}/>
-                    <Box clasName={stylesContainer.displayRow}>
-                        <image src={imageForPlace} style={{height:'100px', width:'100px'}}> </image>{/*cambiar esto por un carrosouel*/} 
-                        <GenericRoundButton Icon={<></>} backgroundColor='#2a1463' text='agregar imagen' iconPosition={NONE} onClick={()=>{}}/>
-                    </Box>
                 </Box>
             </Box>
             <GenericRoundButton Icon={<></>} backgroundColor='#2a1463' text='guardar' iconPosition={NONE} onClick={()=>{}}/>

@@ -33,7 +33,7 @@ const Fields = ({ fields }) =>{
         >
             {fields.map((field, index) =>{
                 return (
-                    <Field field={field} key={index} />
+                    <Field field={field} key={index} color='#ce1717'/>
                 )
             })}
         </Stack>

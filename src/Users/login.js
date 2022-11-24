@@ -81,7 +81,7 @@ const Login = ({ setAuthorizationLogin, passwordChanged, setAuthorizationResetPa
                 setMessage("Para ingresar use un doble click sobre el botón de iniciar sesión")
                 setSeverity(INFO)
             }
-            if(isCorrect != null){
+            if(isCorrect.name !== 'wrong'){
                 if(isCorrect.typeUser === 'Admin'){
                     goToApplicationAdmin();
                 }else{

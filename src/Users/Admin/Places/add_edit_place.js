@@ -5,7 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import ImageHeaderAdmin from "../header_add_edit";
-import { TEXT_AREA, TEXT_FIELD, NONE } from "../../../Util/constants";
+import { TEXT_AREA, TEXT_FIELD, NONE, SELECT, ERROR, SUCCESS } from "../../../Util/constants";
 import FieldsAdmin from "../../../ReusableComponents/Fields/fields_admin";
 import GenericRoundButton from "../../../ReusableComponents/Buttons/generic_button";
 import { Alert, Snackbar } from "@mui/material";
@@ -27,6 +27,7 @@ export default function AddEditPlace({isNew, type, id}){
         latitude: '',
         longitude: '',
         imageId: '',
+        category: '',
         image:{name:'', drivePath:''}
     })
     useEffect(() =>{
@@ -50,11 +51,11 @@ export default function AddEditPlace({isNew, type, id}){
                 setPlaceData({
                     id: response.data.id, 
                     name: response.data.name,
-                    imageLink: response.data.image?.drivePath,
                     details: response.data.details,
                     latitude: response.data.latitude,
-                    longitude: response.data.longitud,
+                    longitude: response.data.longitude,
                     imageId: response.data.image.imageId,
+                    category: response.data.category,
                     image:{imageId: response.data.image.imageId, name:response.data.image.name, drivePath: response.data.image.drivePath}
                 })
             }
@@ -67,6 +68,12 @@ export default function AddEditPlace({isNew, type, id}){
             ...placeData,
             [event.target.id]: value
         });
+        if(event.target.id === 'imageLink'){
+            setPlaceData({
+                ...placeData,
+                image:{name:placeData.name, drivePath:value}
+            })
+        }
     }
 
     const handleClose = (_, reason) => {
@@ -78,16 +85,21 @@ export default function AddEditPlace({isNew, type, id}){
 
     const save = () => () =>{
         if(placeData.name === '' || placeData.imageLink === '' || placeData.details === '' || placeData.latitude === '' || placeData.longitude === '' ){
-
+            setMessage("Alguno de los campos requeridos está vacío")
+            setOpen(true)
+            setSeverity(ERROR)
         }else{
             if(isNew){
-                //llamar al save de uno nuevo
-            }else{
-                
+                axios.post('http://localhost:8080/places/create', placeData).then(response => {
+                    setMessage("Lugar creado exitosamente")
+                })
+            }else{ 
                 axios.post('http://localhost:8080/places/update', placeData).then(response => {
-                    console.log(response.data)
+                    setMessage("Lugar actualizado exitosamente")
                 })
             }
+            setOpen(true)
+            setSeverity(SUCCESS)
         }
         
     }
@@ -95,14 +107,16 @@ export default function AddEditPlace({isNew, type, id}){
     const info = isNew ? 'En esta sección puede agregar un nuevo lugar' : 'En esta sección puede editar y eliminar un luegar existente';
     const headerTitle = title;
     const nombre = [{id:'name', name:'Nombre', value:placeData.name, type: TEXT_FIELD, isRequired:true, onChange: () => handleFieldChange()}, 
-    {id:'imageLink', name:'Imagen', value:placeData.imageLink, type: TEXT_FIELD, isRequired:true, helperText:'Link de google drive', onChange: () => handleFieldChange()}]
-    const secondCol = [{id:'details', value:placeData.details, name:'Detalles', type: TEXT_AREA, isRequired:true, onChange: () => handleFieldChange()},
+                    {id:'imageLink', name:'Imagen', value:placeData.image.drivePath, type: TEXT_FIELD, isRequired:true, helperText:'Link de google drive', onChange: () => handleFieldChange()},
+                    {id:'link', value:placeData.link, name:'Enlace', type: TEXT_FIELD, helperText: 'Enlace de la página del lugar',isRequired:false, onChange: () => handleFieldChange()},]
+    const secondCol = [
                         {id:'latitude', value: placeData.latitude, name:'Latitud', type: TEXT_FIELD, isRequired:true, onChange: () => handleFieldChange()},
-                        {id: 'longitude', value:placeData.longitude, name:'Longitud', type: TEXT_FIELD, isRequired:true, onChange: () => handleFieldChange()}
+                        {id: 'longitude', value:placeData.longitude, name:'Longitud', type: TEXT_FIELD, isRequired:true, onChange: () => handleFieldChange()},
+                        {id: 'category', value:placeData.category, name:'Categoría', type: SELECT, isRequired:true, onChange: () => handleFieldChange()},
+                        {id:'details', value:placeData.details, name:'Detalles', type: TEXT_AREA, isRequired:false, onChange: () => handleFieldChange()}
                     ]
     return(
         <Box className={stylesContainer.displayColumn}>
-            {console.log(place)}
             <Snackbar
                 open={open}
                 autoHideDuration={6000}
@@ -116,11 +130,11 @@ export default function AddEditPlace({isNew, type, id}){
                     <div className={ stylesContainer.spaceBetween } >
                         <FieldsAdmin fields={nombre}/>
                     </div>
-                    <Box clasName={stylesContainer.displayRow} sx={{ margin:'auto', p: 1, border:2, borderColor:'#f4f3f7', borderRadius:'10px', boxShadow:'1px 3px 18px #a19999', width:'150px', height:'150px' }}>
+                    {!isNew && <Box clasName={stylesContainer.displayRow} sx={{ margin:'auto', marginTop:'1vh', p: 1, border:2, borderColor:'#f4f3f7', borderRadius:'10px', boxShadow:'1px 3px 18px #a19999', width:'150px', height:'150px' }}>
                         <img src={imageForPlace} style={{ margin:'auto', width:'150px', height:'150px' }}/>
-                    </Box>
+                    </Box>}
                 </Box>
-                <Box className={stylesContainer.displayColumn}>
+                <Box className={stylesContainer.displayColumn } >
                     <FieldsAdmin fields={secondCol}/>
                 </Box>
             </Box>
