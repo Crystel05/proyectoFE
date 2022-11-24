@@ -1,20 +1,43 @@
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import ImageHeaderAdmin from '../Users/Admin/header_add_edit.js'
 import { Box } from '@mui/material';
 import stylesContainer from '../CSS/container.module.css'
-import New from "./new";
+import Participation from "../Routes/participation.js";
+import RoutesACT from "./routes_act.js";
+import News from "./news.js";
 
-export default function OtherNews(){
-    const news =[{title:'Regresa el Art City Tour: Chepe de Moda', image:'https://drive.google.com/uc?id=1NWSlUfLWhb2JgNqrCCTtxfmzvU1-_4S7', details:'dbdsjfd dfdsjfh dsfhjkdsf dsfjhsjdkfhs djfhjsdhf jhdfsjksdhf jdhfjsd jdshfjkds hdsfkjsdf'},
-    {title:'Regresa el Art City Tour: Chepe de Moda', image:'https://drive.google.com/uc?id=1NWSlUfLWhb2JgNqrCCTtxfmzvU1-_4S7',details:'dbdsjfd dfdsjfh dsfhjkdsf dsfjhsjdkfhs djfhjsdhf jhdfsjksdhf jdhfjsd jdshfjkds hdsfkjsdf'},
-    {title:'Regresa el Art City Tour: Chepe de Moda', image:'https://drive.google.com/uc?id=1NWSlUfLWhb2JgNqrCCTtxfmzvU1-_4S7',details:'dbdsjfd dfdsjfh dsfhjkdsf dsfjhsjdkfhs djfhjsdhf jhdfsjksdhf jdhfjsd jdshfjkds hdsfkjsdf'},
-    {title:'Regresa el Art City Tour: Chepe de Moda', image:'https://drive.google.com/uc?id=1NWSlUfLWhb2JgNqrCCTtxfmzvU1-_4S7',details:'dbdsjfd dfdsjfh dsfhjkdsf dsfjhsjdkfhs djfhjsdhf jhdfsjksdhf jdhfjsd jdshfjkds hdsfkjsdf'}]
+
+export default function ACTPrincipalPage({setValue}){
+    const [image, setImage] = useState();
+    const [news, setNews] = useState([]);
+    const title = 'El Art City Tour'
+    const info = 'Es una experiencia nocturna de recorridos por museos, galerias y centros culturales de la ciudad de San José'
+    
+    async function getImage(){
+        await axios.get('http://localhost:8080/images/getPrincipalPageImage').then(response => { 
+            setImage(response.data);
+        })
+    }
+    async function getNews() {
+        await axios.get('http://localhost:8080/news/getAll').then(response => { 
+            setNews(response.data);
+        })
+    }
+
+    useEffect(() => {
+        getImage();
+        getNews();
+    }, [])
     return(
-        <Box className={stylesContainer.displayColumn}>
-            {news.map((value, index) =>{
-                return(
-                    <New value={value} key={index}/>
-                )
-            })}
-        </Box>        
+        <Box className={stylesContainer.displayColumn} style={{ margin:'auto' }}>
+            <ImageHeaderAdmin title={title} info={info} image={image} headerTitle='' />
+            <Participation setValue={setValue}/>
+            <RoutesACT /> 
+            <News news = {news}/>
+        </Box>
+        
     )
 }

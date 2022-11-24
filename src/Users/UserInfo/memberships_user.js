@@ -1,20 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from '@mui/material';
 import HeaderUserInfo from "./header";
 import styles from '../../CSS/text.module.css';
 import PlanDetails from "../../Memberships/plan_details";
+import axios from "axios";
 
 export default function MemershipSection(){
-    //get membresia de usuario
-    const membership = {title: 'Plus', benefits: 'Ofertas digitales exclusivas que incluyen noches comunitarias virtuales con creacion de arte en vivo, actuaciones y mas.-Oportunidades de visualizacion solo para miembros, incluidas vistas previas de exhibiciones y acceso fuera del horario de atencian.-Eventos con organizaciones culturales en la GAM y mas alba.-15 % de descuento en la tienda del ACT, mas envio estandar gratuito.', 
-    price:'2500', 
-    image:{drivePath:'https://drive.google.com/uc?id=1zRoDbGkgmKuXHOiMFcVlfxv9bWd44zw3', name:'plus'}, button:'Renovar'}
-    //const props = {}
+
+    const [membership, setMembership] = useState();
+
+    async function getMembershipByUser() {
+        const userId = (JSON.parse(sessionStorage.getItem('userData'))).id;
+        const url  = 'http://localhost:8080/membership/getByUserId?userId=' + userId;
+
+        await axios.get(url).then(response => {
+            let membership = response.data[0];
+            membership.button = 'Renovar';
+            setMembership(membership);
+        })
+    }
+
+    useEffect(() => {
+        getMembershipByUser();
+    }, [])
+
     return(
         <Box sx={{ marginLeft: '10vh' }}>
             {membership && 
                 <Box>
-                    <HeaderUserInfo title='Mis Membresías' subtitle={membership.title} />
+                    <HeaderUserInfo title='Mis Membresías' subtitle={membership.name} />
                     <PlanDetails data={membership}/>
                 </Box>
             }

@@ -1,6 +1,5 @@
 import { Box } from '@mui/material'
-import React, {useEffect, useState } from 'react'
-import styles from '../CSS/button.module.css'
+import React from 'react'
 import textStyles from '../CSS/text.module.css'
 import GenericRoundButton from '../ReusableComponents/Buttons/generic_button';
 import { NONE } from '../Util/constants';
@@ -8,14 +7,13 @@ import { NONE } from '../Util/constants';
 
 export default function PlanDetails({data, isPay, setPrice, setMembership}){
 
-    const info = data.benefits;
+    const info = data.details;
     const benefits = info.split("-");
     const finalPrice = '$ ' + data.price + "/mes";
     const border = data.border ? 3 : 0
     const buttonText = data.button;
 
     const startPay = () => (event) =>{
-        console.log("entra")
         setPrice(data.price)
         setMembership(data.id)
         isPay(true)
@@ -34,7 +32,7 @@ export default function PlanDetails({data, isPay, setPrice, setMembership}){
                 </ul>
                 <GenericRoundButton Icon={<></>} backgroundColor='#2a1463' text={buttonText} iconPosition={NONE} onClick={()=>startPay()}/>
             </div>
-            <img src={data.image.drivePath} alt={data.image.name} style={{ width:'300px', height: '400px', marginLeft:'auto' }}/>
+            <img src={data.photo.drivePath} alt={data.photo.name} style={{ width:'300px', height: '400px', marginLeft:'auto' }}/>
         </Box>
     )
 }

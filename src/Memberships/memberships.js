@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import styles from '../CSS/images.module.css';
-import stylesText from '../CSS/text.module.css';
 import PlanDetails from './plan_details';
 import Stack from '@mui/material/Stack';
 import stylesB from '../CSS/button.module.css'
@@ -9,7 +7,7 @@ import stylesB from '../CSS/button.module.css'
 
 
 export default function Memberships ({isPay, setPrice, setMembership}){
-    const info = '¡Descube más como un miembro únete hoy y experimenta el arte que amas con mayor acceso, programación exclusiva'
+    const info = '¡Descubre más como un miembro únete hoy y experimenta el arte que amas con mayor acceso, programación exclusiva'
     + ' y nuevas formas de hacer conexiones!';
 
     const [selectedMembership, setSelectedMembership] = useState({})
@@ -38,22 +36,20 @@ export default function Memberships ({isPay, setPrice, setMembership}){
         setSelectedMembership(memberships[index])
         setDetails(memberships[index].details)
         setPhoto(memberships[index].photo)
-        //}       
-        
+        //}          
     }
     
     const data = {
         id: selectedMembership.id,
         name: selectedMembership.name,
         price: selectedMembership.price,
-        benefits: details,
-        image: photo,
+        details: details,
+        photo: photo,
         border: true,
         button: 'Unirse'
     }
     return ( 
-        <div>
-           
+        <div>   
             <div style={{display:'flex', flexDirection:'row', marginLeft:'3%', marginRight:'3%'}}>
             <Stack direction="column" spacing={2} style={{ marginTop:'5%', marginRight:'10%'}}>
                 {memberships.map((plan, index) =>{

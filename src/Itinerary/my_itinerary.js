@@ -1,23 +1,14 @@
 import { Timeline, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator, timelineItemClasses, TimelineConnector  } from "@mui/lab";
 import { Box } from "@mui/system";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
 import Event from "./event";
 
-export default function MyItinerary(){
-
-    const [events, setEvents] = useState([]);
-
-    useEffect(() => {
-        axios.get('http://localhost:8080/event/getAll').then(response =>{
-            setEvents(response.data);
-        })
-    }, [])
+export default function MyItinerary({setEvents, events}){
 
     const dots = new Array(5).fill(0);
 
-    function handleDelete(event){ 
-        console.log(event) // llamar endpoint que elimine elemento de lista
+    function handleDelete(event, events){ 
+        const newEvents = events.filter(events => events.id !== event.id);
+        setEvents(newEvents);
     }
 
     return(
@@ -53,7 +44,7 @@ export default function MyItinerary(){
                                 })}
                             </TimelineSeparator>
                             <TimelineContent>
-                                <Event event={itinerary} handleDelete={handleDelete}/>
+                                <Event event={itinerary} events={events} handleDelete={handleDelete}/>
                             </TimelineContent>
                         </TimelineItem>
                     )
