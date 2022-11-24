@@ -1,6 +1,6 @@
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import LocalBarIcon from '@mui/icons-material/LocalBar';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
@@ -21,6 +21,7 @@ export default function PrincipalItineraryPage(){
     const [bar, setBar] = useState([]);
     const [restaurants, setRestaurant] = useState([]);
     const [entertainments, setEntertainment] = useState([]);
+    const [generalPlaces, setgeneralPlaces] = useState([]);
     const [open, setOpen] = useState(false);
     const [severity, setSeverity] = useState("success");
     const [message, setMessage] = useState("");
@@ -30,7 +31,10 @@ export default function PrincipalItineraryPage(){
     };
 
     
-    useEffect(() => {
+    useLayoutEffect(() => {
+        axios.get('http://localhost:8080/places/getAll').then(response =>{
+            setgeneralPlaces(response.data);
+        })
         axios.get('http://localhost:8080/event/getAll').then(response =>{
             setEvents(response.data);
         })
@@ -74,6 +78,24 @@ export default function PrincipalItineraryPage(){
         })
     }
     
+    const placesPlaceHolder = 
+    [
+        {
+            "id": 1,
+            "name": "Teatro Nacional",
+            "details": "El teatro nacional",
+            "latitude": "9.933830",
+            "longitude": "-84.077074"
+        },
+        {
+            "id": 2,
+            "name": "Museo Nacional",
+            "details": "Desde sus primeros afios, el museo se oriental hacia la investigacion cientifica, la educacion, la exhibicion y la defensa del patrimonio cultural y natural.",
+            "latitude":"9.9335480",
+            "longitude":"-84.068525"
+        }
+        
+    ]
     const borderIntinerary = value === 'bares' ? '10px' : '0px'
     const borderBarsBottonLeft = value !== 'itinerario' ? '0px' : '10px'
     const borderBarsBottonRight = value === 'restaurantes' ? '10px' : '0px'
@@ -83,6 +105,7 @@ export default function PrincipalItineraryPage(){
 
     return(
         <Box className={ containerStyles.displayRow }>
+            {console.log(generalPlaces, 'useEffect')}
             <Snackbar
                 open={open}
                 autoHideDuration={6000}
@@ -169,7 +192,8 @@ export default function PrincipalItineraryPage(){
                 </Box>
             </Box>
             <Box style={{marginTop:'5vh'}}>
-                <MainMap width={'100vh'} height={'70vh'} places={"undefined"}/>
+                {console.log(generalPlaces)}
+                <MainMap width={'100vh'} height={'70vh'} places={placesPlaceHolder}/>
             </Box>
         </Box>
     )
