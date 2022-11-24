@@ -39,7 +39,7 @@ export default function MyItinerarySection() {
     return (
         <Box sx={{ marginLeft: '10vh' }}>
             <HeaderUserInfo title='Mi Itinerario' subtitle={subtitle}/>
-            <MyItinerary setEvents={setEvents} events = {events} />
+            <MyItinerary setEvents={setEvents} events = {events} readOnly={true}/>
         </Box>
     )
 }

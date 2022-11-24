@@ -18,7 +18,6 @@ function PastEdition(props){
             <ImageCarousel slides={props.images} />
         </div>
     )
-
 }
 
 export default PastEdition;

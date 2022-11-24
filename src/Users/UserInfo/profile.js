@@ -1,12 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Box } from '@mui/material';
+import { Alert, Box, Snackbar } from '@mui/material';
 import stylesContainer from '../../CSS/container.module.css'
 import Fields from "../../ReusableComponents/Fields/fields";
-import { NONE, TEXT_AREA, TEXT_FIELD } from "../../Util/constants";
+import { SUCCESS, ERROR, INFO, NONE, TEXT_AREA, TEXT_FIELD } from "../../Util/constants";
 import stylesText from '../../CSS/text.module.css';
 import GenericRoundButton from "../../ReusableComponents/Buttons/generic_button";
+import axios from 'axios';
 
 export default function ProfileSection(){
     const [userData, setUserData] = useState({
@@ -20,6 +21,9 @@ export default function ProfileSection(){
         address: ''
     })
     const [name, setName] = useState();
+    const [open, setOpen] = useState(false);
+    const [severity, setSeverity] = useState("success");
+    const [message, setMessage] = useState("");
 
     useEffect(() => {
         setUserData ({
@@ -44,8 +48,36 @@ export default function ProfileSection(){
         });
     }
 
-    const handleSave = () => () => { 
-        const userId = (JSON.parse(sessionStorage.getItem('userData'))).id;        
+    const handleSave =  ()=> async ()=> {
+         
+        const body = {
+            id: userData.id,
+            name: userData.name,
+            email: userData.email,
+            lastName: userData.lastName,
+            age: userData.age,
+            identification: userData.identification,
+            phoneNumber: userData.phoneNumber,
+            address: userData.address
+        } 
+        await axios.post('http://localhost:8080/user/update', body)
+        .then(response => {
+            if(response.status === 200){
+                if(response.data !== ""){
+                    setMessage("La reservación fue registrada exitosamente")
+                    setSeverity(SUCCESS)
+                    setOpen(true)
+                }else{
+                    setMessage("Hubo un error creando la reservación")
+                    setSeverity(INFO)
+                    setOpen(true)
+                }
+            }else{
+                setMessage("Hubo un error guardando el usuario")
+                setSeverity(ERROR)
+                setOpen(true)
+            }
+        })
     }
     
     const col1 = [
@@ -59,8 +91,24 @@ export default function ProfileSection(){
         {id:'identification', name:'Cédula', value: userData.identification, type: TEXT_FIELD, isRequired:false, onChange: () => handleFieldChange()},
         {id:'phoneNumber', name:'Número de teléfono', value: userData.phoneNumber, type: TEXT_FIELD, isRequired:false, onChange: () => handleFieldChange()},
     ]
+
+
+    const handleClose = (_, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpen(false);
+    };
+
     return(
         <Box className={stylesContainer.displayColumn} sx={{ marginLeft: '10vh' }}>
+            <Snackbar
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+            >
+                <Alert severity={severity}>{message}</Alert>
+            </Snackbar>
             <Box className={stylesContainer.displayRow}>
                 <h1 className={ `${stylesText.editionTitle} ${stylesText.kronaText}` } style={{ marginLeft: '1vh', marginTop: '5vh'}} > Hola {name}!  </h1>
             </Box>

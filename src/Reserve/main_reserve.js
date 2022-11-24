@@ -19,27 +19,26 @@ export default function MainReserve(){
     const [severity, setSeverity] = useState("success");
     const [message, setMessage] = useState("");
     const [userInfo, setUserInfo] = useState({
-        Cedula: "10001",
-        Edad: "55",
-        Nombre: "Carlos",
-        Apellidos: "Varela",
-        Correo: "cvarela@gmail.com",
-        Telefono: "12127777",
-        PrimeraVez: true,
-        PuntoInicioId: 1
+        Cedula: '',
+        Edad: '',
+        Nombre: '',
+        Apellidos: '',
+        Correo: '',
+        Telefono: '',
+        PuntoInicioId: ''
     })
 
     const steps = ['1 Datos Personales', '2 Agregar Acompañantes', '3 Punto de Inicio', '4 Enviar Formulario']
     const desing = onStep ? stylesButton.stepOn : stylesButton.steps;
     const fieldsCol1 = [
-        {name:'Cedula', type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
-        {name:'Nombre', type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
-        {name:'Correo', type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => handleFieldChange()}
+        {id:'Cedula', name:'Cedula', value: userInfo.Cedula, type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
+        {id:'Nombre', name:'Nombre', value: userInfo.Nombre, type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
+        {id:'Correo', name:'Correo', value: userInfo.Correo, type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => handleFieldChange()}
     ]
     const fieldsCol2 = [
-        {name:'Edad', type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
-        {name:'Apellidos', type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
-        {name:'Telefono', type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
+        {id:'Edad', name:'Edad', value: userInfo.Edad, type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
+        {id:'Apellidos', name:'Apellidos', value: userInfo.Apellidos, type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
+        {id:'Telefono', name:'Telefono', value: userInfo.Telefono, type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
     ]
     const field1 = 
         [{name:'Punto de Inicio', value: places[0]?.id, values: places, type: SELECT, isRequired:true, helperText:'', onChange: () => handleFieldChange()}]
@@ -55,12 +54,22 @@ export default function MainReserve(){
         const value = event.target.value;
         setUserInfo({
             ...userInfo,
-            PuntoInicioId: value
+            [event.target.id]: value
         });
     }
 
 
     useEffect(() =>{
+        
+        setUserInfo ({
+            Cedula: userData.identification,
+            Edad: userData.age,
+            Nombre: userData.name,
+            Apellidos: userData.lastName,
+            Correo: userData.email,
+            Telefono: userData.phoneNumber,
+            PuntoInicioId: '1'
+        })
         getAllPlaces();
     },[])
 
@@ -71,13 +80,14 @@ export default function MainReserve(){
     }
 
 
-    async function createReservation(){
+    const createReservation =  ()=> async ()=> {
+        
         const body = {
             name: userInfo.Nombre,
-            lastname: userInfo.Apellidos,
+            lastName: userInfo.Apellidos,
             email: userInfo.Correo,
             identification: userInfo.Cedula,
-            phoneNumber: userInfo.NumeroTelefono,
+            phoneNumber: userInfo.Telefono,
             age: userInfo.Edad,
             isFirstTime: true,
             placeId: userInfo.PuntoInicioId,
@@ -89,12 +99,12 @@ export default function MainReserve(){
                     lastName: 'Tenorio'
                 }
             ]
-        }       
+        }      
+        console.log('crea reservacion ', body.phoneNumber); 
         await axios.post('http://localhost:8080/reservation/create', body)
         .then(response => {
             if(response.status === 200){
                 if(response.data !== ""){
-                    console.log(' sexo')
                     setMessage("La reservación fue registrada exitosamente")
                     setSeverity(SUCCESS)
                     setOpen(true)

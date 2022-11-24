@@ -5,7 +5,7 @@ import GenericRoundButton from '../ReusableComponents/Buttons/generic_button';
 import { NONE } from '../Util/constants';
 
 
-export default function PlanDetails({data, isPay, setPrice, setMembership}){
+export default function PlanDetails({data, isPay, setPrice, setMembership, readOnly}){
 
     const info = data.details;
     const benefits = info.split("-");
@@ -30,7 +30,7 @@ export default function PlanDetails({data, isPay, setPrice, setMembership}){
                         )
                     })}
                 </ul>
-                <GenericRoundButton Icon={<></>} backgroundColor='#2a1463' text={buttonText} iconPosition={NONE} onClick={()=>startPay()}/>
+                {!readOnly && <GenericRoundButton Icon={<></>} backgroundColor='#2a1463' text={buttonText} iconPosition={NONE} onClick={()=>startPay()}/>}
             </div>
             <img src={data.photo.drivePath} alt={data.photo.name} style={{ width:'300px', height: '400px', marginLeft:'auto' }}/>
         </Box>
