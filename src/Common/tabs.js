@@ -13,6 +13,7 @@ import ACTPrincipalPage from '../PincipalPage/principal_page_act';
 import UserInformation from '../Users/UserInfo/user_information';
 import Paywall from '../Payment/paywall';
 
+
 export default function Tabs({value, setValue}) {
 
     const handleChange = (event, newValue) => {
