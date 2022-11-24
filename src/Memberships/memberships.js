@@ -48,14 +48,14 @@ export default function Memberships ({isPay, setPrice, setMembership}){
     }
     return ( 
         <div>  
-            <article>
+            {/* <article>
                 <picture>
                     <source  srcSet={principalImage} />
                     <img src={principalImage} alt="background" className={styles.image} />
                 </picture>
                 <h3 className={stylesText.header}>Membresías</h3>
                 <a className={stylesText.bodyMemberships} > {info} </a>
-            </article>
+            </article> */}
             <div style={{display:'flex', flexDirection:'row', marginLeft:'3%', marginRight:'3%'}}>
             <Stack direction="column" spacing={2} style={{ marginTop:'5%', marginRight:'10%'}}>
                 {memberships.map((plan, index) =>{

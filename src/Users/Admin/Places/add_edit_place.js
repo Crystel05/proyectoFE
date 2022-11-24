@@ -92,11 +92,11 @@ export default function AddEditPlace({isNew, type, id}){
     };
 
     const save = () => () =>{
-        if(placeData.name === '' || placeData.imageLink === '' || placeData.details === '' || placeData.latitude === '' || placeData.longitude === '' ){
-            setMessage("Alguno de los campos requeridos está vacío")
-            setOpen(true)
-            setSeverity(ERROR)
-        }else{
+        // if(placeData.name === '' || placeData.imageLink === '' || placeData.details === '' || placeData.latitude === '' || placeData.longitude === '' ){
+        //     setMessage("Alguno de los campos requeridos está vacío")
+        //     setOpen(true)
+        //     setSeverity(ERROR)
+        // }else{
             if(isNew){
                 axios.post('http://localhost:8080/places/create', placeData).then(response => {
                     setMessage("Lugar creado exitosamente")
@@ -108,7 +108,7 @@ export default function AddEditPlace({isNew, type, id}){
             }
             setOpen(true)
             setSeverity(SUCCESS)
-        }
+       // }
         
     }
 
@@ -120,7 +120,7 @@ export default function AddEditPlace({isNew, type, id}){
     const secondCol = [
                         {id:'latitude', value: placeData.latitude, name:'Latitud', type: TEXT_FIELD, isRequired:true, onChange: () => handleFieldChange()},
                         {id:'longitude', value:placeData.longitude, name:'Longitud', type: TEXT_FIELD, isRequired:true, onChange: () => handleFieldChange()},
-                        {id:'category', value:placeData.category, values: PLACES, name:'Categoría', type: SELECT, isRequired:true, onChange: () => handleFieldChange()},
+                        {id:'category', value:placeData.category, values: values, name:'Categoría', type: SELECT, isRequired:true, onChange: () => handleFieldChange()},
                         {id:'details', value:placeData.details, name:'Detalles', type: TEXT_AREA, isRequired:false, onChange: () => handleFieldChange()}
                     ]
 
