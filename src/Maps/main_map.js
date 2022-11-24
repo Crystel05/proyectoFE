@@ -23,11 +23,11 @@ export default function MainMap({ width, height, places, setPlaceToShow }){
         
     ]
     
-     const placeChoice = places === "undefined" ? placesPlaceHolder:places ; //Temporal, cambiar mapa de itinerarios, y eliminar placeChoice por prop places
+     const placeChoice = ((places !== undefined) && (places.length != 0)) ? places:placesPlaceHolder; //Temporal, cambiar mapa de itinerarios, y eliminar placeChoice por prop places
      const placesMapIndex = Math.floor(placeChoice.length/2)
     return(
         <div>
-            <Map latitude={placeChoice[placesMapIndex].latitude} longitude={placeChoice[placesMapIndex].longitude}  places={placeChoice} width={width} height={height} setPlaceToShow={setPlaceToShow}/>
+            <Map latitude={placeChoice[placesMapIndex]?.latitude} longitude={placeChoice[placesMapIndex]?.longitude}  places={placeChoice} width={width} height={height} setPlaceToShow={setPlaceToShow}/>
         </div>
     )
 }

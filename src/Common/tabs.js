@@ -13,6 +13,7 @@ import ACTPrincipalPage from '../PincipalPage/principal_page_act';
 import UserInformation from '../Users/UserInfo/user_information';
 import Paywall from '../Payment/paywall';
 
+
 export default function Tabs({value, setValue}) {
 
     const handleChange = (event, newValue) => {
@@ -23,8 +24,6 @@ export default function Tabs({value, setValue}) {
     const [priceToPay, setPriceToPay] = useState(0);
     const [membershipToBuy, setMembershipToBuy] = useState(2);
     
-
-
     const tabColor = value !== 'membresias' ? '#ce1717' :' #2a1463';
     return (
     <Box sx={{ width: '100%' }} >
@@ -60,7 +59,7 @@ export default function Tabs({value, setValue}) {
             </TabPanel>
 
             <TabPanel value="rutas" style={{padding: 0}} index={2} >
-                <MainRoutes />
+                <MainRoutes setValue = {setValue} />
             </TabPanel>
 
             <TabPanel value="itinerario" style={{padding: 0}} index={3} >

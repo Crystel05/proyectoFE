@@ -23,9 +23,11 @@ export default function Map({ latitude, longitude, places, width, height, setPla
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             {places.map ((place, index) => (
-                <Marker key={place.id} position={[place.latitude, place.longitude]} eventHandlers={{
-                    click: () => { setPopUp(index) },
+                <div>
+                <Marker key={place?.id} position={[place?.latitude, place?.longitude]} eventHandlers={{
+                    click: () => { setPopUp(index);  },
                   }}/>
+                </div>
             ))}
         </MapContainer>
     )

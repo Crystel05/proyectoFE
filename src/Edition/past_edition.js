@@ -5,7 +5,7 @@ import { months } from '../Util/constants';
 
 function PastEdition(props){
 
-    const dateDate = new Date(props.date);
+    const dateDate = new Date(props.date+ 'T00:00');    
     const data = {
         title: 'Edición ' + months[dateDate.getMonth()] + " " + dateDate.getFullYear(), 
         editionTitle: props.name, 

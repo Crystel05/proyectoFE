@@ -123,11 +123,11 @@ export const Field = ({ field, color }) => {
                         labelId={field.name}
                         id={field.name}
                         label= {field.name}
-                        // onChange={handleChange}
-                    >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        onChange={field.onChange()}
+                >
+                {field.values.map((value, index)=>{
+                    return <MenuItem value={value.id} key={index}>{value.name}</MenuItem>
+                })}
                 </Select>
             </FormControl>
         )
