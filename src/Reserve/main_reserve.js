@@ -19,14 +19,13 @@ export default function MainReserve(){
     const [severity, setSeverity] = useState("success");
     const [message, setMessage] = useState("");
     const [userInfo, setUserInfo] = useState({
-        Cedula: "10001",
-        Edad: "55",
-        Nombre: "Carlos",
-        Apellidos: "Varela",
-        Correo: "cvarela@gmail.com",
-        Telefono: "12127777",
-        PrimeraVez: true,
-        PuntoInicioId: 1
+        Cedula: '',
+        Edad: '',
+        Nombre: '',
+        Apellidos: '',
+        Correo: '',
+        Telefono: '',
+        PuntoInicioId: ''
     })
 
     const steps = ['1 Datos Personales', '2 Agregar Acompañantes', '3 Punto de Inicio', '4 Enviar Formulario']
@@ -54,13 +53,24 @@ export default function MainReserve(){
     const handleFieldChange = () => (event) => {
         const value = event.target.value;
         setUserInfo({
-            ...userInfo,
-            PuntoInicioId: value
+            ...userData,
+            [event.target.id]: value
         });
     }
 
 
     useEffect(() =>{
+        
+        setUserInfo ({
+            Cedula: userData.identification,
+            Edad: userData.age,
+            Nombre: userData.name,
+            Apellidos: userData.lastName,
+            Correo: userData.email,
+            Telefono: userData.phoneNumber,
+            PuntoInicioId: '1'
+        })
+        console.log('reserve Effect', userInfo)
         getAllPlaces();
     },[])
 
@@ -71,7 +81,8 @@ export default function MainReserve(){
     }
 
 
-    async function createReservation(){
+    const createReservation =  ()=> async ()=> {
+        console.log('crea reservacion');
         const body = {
             name: userInfo.Nombre,
             lastname: userInfo.Apellidos,
