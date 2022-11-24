@@ -92,7 +92,7 @@ const CreateAccount = ({isAdmin, isNew}) => {
     async function saveNewAccount(){
         const body = {
             name: userData.Nombre,
-            lastname: userData.Apellidos,
+            lastName: userData.Apellidos,
             email: userData.Correo,
             password: userData.Contrasenna,
             identification: userData.Cedula,

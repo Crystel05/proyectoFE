@@ -7,11 +7,28 @@ import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { LOGOUT, MEMBERSHIPS, MYITINERARY, PROFILE, RESERVATIONS } from "../../Util/constants";
 import stylesContainer from '../../CSS/container.module.css'
+import { Logout } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import IconButton from '@mui/material/IconButton';
 
 export default function UserAction({action, text, setActionSelected, actionSelected}){
 
     const colorFont = actionSelected === action ? 'white' : 'black'
     const backGroundColor = actionSelected === action ? '#ce1717' : ''
+    const navigate = useNavigate();
+
+    function clickBox() {
+        setActionSelected(action);
+
+        if (action === LOGOUT) {
+            logOut ();
+        }
+    }
+
+    function logOut () {
+        navigate('/');
+        sessionStorage.removeItem('userData');
+    }
 
     return(
         <Box
@@ -22,7 +39,7 @@ export default function UserAction({action, text, setActionSelected, actionSelec
                 cursor:'pointer'
             }}
             className={stylesContainer.displayRow}
-            onClick={() => setActionSelected(action)}
+            onClick={() => clickBox()}
         >
             <Box sx={{ marginLeft:'2vh' }}>
                 {action === PROFILE && <PersonIcon fontSize="50px" />}

@@ -3,8 +3,8 @@ import axios from 'axios';
 import PlanDetails from './plan_details';
 import Stack from '@mui/material/Stack';
 import stylesB from '../CSS/button.module.css'
-
-
+import styles from '../CSS/button.module.css';
+import stylesText from '../CSS/text.module.css'
 
 export default function Memberships ({isPay, setPrice, setMembership}){
     const info = '¡Descubre más como un miembro únete hoy y experimenta el arte que amas con mayor acceso, programación exclusiva'
@@ -31,12 +31,10 @@ export default function Memberships ({isPay, setPrice, setMembership}){
     },[])
 
     function handleClick(event, index){
-        //if(event.detail >= 2 ){
         setSelectedMembershipId(index)
         setSelectedMembership(memberships[index])
         setDetails(memberships[index].details)
-        setPhoto(memberships[index].photo)
-        //}          
+        setPhoto(memberships[index].photo)        
     }
     
     const data = {
@@ -49,7 +47,15 @@ export default function Memberships ({isPay, setPrice, setMembership}){
         button: 'Unirse'
     }
     return ( 
-        <div>   
+        <div>  
+            <article>
+                <picture>
+                    <source  srcSet={principalImage} />
+                    <img src={principalImage} alt="background" className={styles.image} />
+                </picture>
+                <h3 className={stylesText.header}>Membresías</h3>
+                <a className={stylesText.bodyMemberships} > {info} </a>
+            </article>
             <div style={{display:'flex', flexDirection:'row', marginLeft:'3%', marginRight:'3%'}}>
             <Stack direction="column" spacing={2} style={{ marginTop:'5%', marginRight:'10%'}}>
                 {memberships.map((plan, index) =>{
@@ -80,15 +86,3 @@ export default function Memberships ({isPay, setPrice, setMembership}){
         </div>
     )
 }
-
-/**
- * <article>
-                <picture>
-                    <source  srcSet={principalImage} />
-                    <img src={principalImage} alt="background" className={styles.image} />
-                </picture>
-                <h3 className={stylesText.header}>Membresías</h3>
-                <a className={stylesText.bodyMemberships} > {info} </a>
-            </article>
- * 
- */
