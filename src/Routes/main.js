@@ -5,7 +5,7 @@ import Route from './path';
 import Participation from './participation'
 import axios from 'axios';
 
-function MainRoutes(){
+function MainRoutes({setValue}){
 
    const [routes, setRoutes] = useState([]);
 
@@ -29,7 +29,6 @@ function MainRoutes(){
         .then(response =>{
             setRoutes(response.data);
         })
-       
     }, [])
     return(
         <div style={{display:'flex', flexDirection:'column'}}>
@@ -39,7 +38,7 @@ function MainRoutes(){
                     <Route key={index} route={route} color={setColor()}/>
                 )
             })}
-            <Participation/>
+            <Participation setValue={setValue} />
         </div>
     )
 }

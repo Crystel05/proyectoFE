@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box } from '@mui/material';
+import { months } from '../../Util/constants';
 import HeaderUserInfo from "./header";
 import MyItinerary from "../../Itinerary/my_itinerary";
 import axios from "axios";
@@ -8,6 +9,7 @@ export default function MyItinerarySection() {
 
     const [itinerary, setItinerary] = useState();
     const [events, setEvents] = useState([]);
+    const [edition, setEdition] = useState({});
 
     async function getItineraryByUser() {
         const userId = (JSON.parse(sessionStorage.getItem('userData'))).id;
@@ -19,12 +21,21 @@ export default function MyItinerarySection() {
         })
     }
 
+    async function getCurrentEdition() {
+        axios.get('http://localhost:8080/edition/getCurrent')
+        .then(response =>{
+            setEdition(response.data);
+        })
+    }
+
     useEffect(() => {
         getItineraryByUser();
+        getCurrentEdition();
     }, []);
 
-    const myItinerary ={title: 'Chepe de Moda', date: '20 Mayo 2022', list: itinerary}
-    const subtitle = myItinerary.date + ": " + myItinerary.title;   // alambrar por ahora porque no lo tenemos en BD
+    const date = new Date(edition.date+ 'T00:00'); 
+    const myItinerary ={title: edition.name, date: date.getDate()+' '+months[date.getMonth()]+' '+date.getFullYear(), list: itinerary}
+    const subtitle = myItinerary.date + ": " + myItinerary.title;
     return (
         <Box sx={{ marginLeft: '10vh' }}>
             <HeaderUserInfo title='Mi Itinerario' subtitle={subtitle}/>

@@ -52,7 +52,8 @@ function Route({ route, color }){
                                 cursor: 'pointer',
                                 fontFamily: 'Krona One, sans-serif',
                                 borderRadius: '15px'
-                            }}>
+                            }}
+                            href = {route.places[placeToShow].link} target='_blank' >
                             Sitio Web
                         </Button>
                     </div>
