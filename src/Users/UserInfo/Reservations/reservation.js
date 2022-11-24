@@ -13,7 +13,6 @@ export default function Reservation({data}){
 
     const [row1, setRow1] = useState([]);
     const [row2, setRow2] = useState([]);
-
     function createFields(data){
         const fieldsRow1 = []
         const fieldsRow2 = []
@@ -45,7 +44,7 @@ export default function Reservation({data}){
             <Divider />
             <DataInfo title='Acompañantes'/>
             <Company people={data.compagnion}/>
-            <HistoryReservations userIdentification={data.userInfo.identification}/>
+            <HistoryReservations userId={data.userInfo.id} />
         </Box>
     )
 }

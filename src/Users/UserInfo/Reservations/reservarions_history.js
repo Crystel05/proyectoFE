@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeaderUserInfo from "../header";
 import { Box } from '@mui/material';
+import { months } from '../../../Util/constants';
 import { Timeline, TimelineContent, TimelineDot} from "@mui/lab";
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineItem, { timelineItemClasses } from '@mui/lab/TimelineItem';
 import HistoryPart from "./history_reservation";
+import axios from "axios";
 
-export default function HistoryReservations({userIdentification}){
-    //llamar a un endpoint que traiga el historial de reservaciones de un usuario
-    const history =[{date: '20 Mayo 2022', title: 'Chepe de Moda', startingPoint: 'Museo Nacional'}, {date: '20 Mayo 2022', title: 'Chepe de Moda', startingPoint: 'Museo Nacional'}]
+export default function HistoryReservations({userId}){
+
+    const [record, setRecord] = useState([]);
+    
+    async function getUserRecord() {
+        const url = 'http://localhost:8080/reservation/getRecordByUser?userId=' + userId;
+        axios.get(url).then(response =>{
+            setRecord(response.data);
+            console.log(response.data);
+        })
+    }
+
+    useEffect(() => {
+        getUserRecord();
+    }, []);
+
+
     const dots = new Array(25).fill(0);
 
     return(
@@ -22,11 +38,13 @@ export default function HistoryReservations({userIdentification}){
                 },
                 }}
             >
-                {history.map((reservation, index) =>{
+                {record.map((reservation, index) => {
+                    const date = new Date(reservation.date+ 'T00:00');
+                    const fullDate = date.getDate()+' '+months[date.getMonth()]+' '+date.getFullYear();
                     const data = {
-                        title: reservation.date + ": " + reservation.title,
+                        title: fullDate + ": " + 'editionName',
                         startingPoint: 'Punto de Inicio',
-                        info:  reservation.startingPoint,
+                        info:  reservation.place.name,
                     }
                     
                     return (
