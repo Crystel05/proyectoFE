@@ -5,6 +5,17 @@ import HeaderUserInfo from "./header";
 import Reservation from "./Reservations/reservation";
 
 export default function ReservationsSection(){
+    const [edition, setEdition] = useState({});
+
+    async function getCurrentEdition() {
+        axios.get('http://localhost:8080/edition/getCurrent')
+        .then(response =>{
+            setEdition(response.data);
+        })
+    }
+
+    const date = new Date(edition.date+ 'T00:00');
+
     //llamar endpoint para las reservaciones actuales del usuario
     const currentReservation = {date: '10 Mayo 2022', name: 'Chepe de Moda', startinPoint:'Museo Nacional'}
     const userInfo = {identification:'000000',name:'Crystel', mail:'crysvane05@gamil.com', age:'21', lastName:'Montero', phone:'86558884'}
