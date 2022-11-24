@@ -94,7 +94,6 @@ export default function MainReserve(){
         .then(response => {
             if(response.status === 200){
                 if(response.data !== ""){
-                    console.log(' sexo')
                     setMessage("La reservación fue registrada exitosamente")
                     setSeverity(SUCCESS)
                     setOpen(true)
