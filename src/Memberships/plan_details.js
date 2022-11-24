@@ -14,7 +14,6 @@ export default function PlanDetails({data, isPay, setPrice, setMembership}){
     const buttonText = data.button;
 
     const startPay = () => (event) =>{
-        console.log("entra")
         setPrice(data.price)
         setMembership(data.id)
         isPay(true)

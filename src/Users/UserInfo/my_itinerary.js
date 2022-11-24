@@ -16,7 +16,6 @@ export default function MyItinerarySection() {
         await axios.get(url).then(response => {
             setItinerary(response.data);
             setEvents(response.data.events);
-            console.log(response.data.events);
         })
     }
 
@@ -28,7 +27,6 @@ export default function MyItinerarySection() {
     const subtitle = myItinerary.date + ": " + myItinerary.title;   // alambrar por ahora porque no lo tenemos en BD
     return (
         <Box sx={{ marginLeft: '10vh' }}>
-            {console.log(events)}
             <HeaderUserInfo title='Mi Itinerario' subtitle={subtitle}/>
             <MyItinerary setEvents={setEvents} events = {events} />
         </Box>

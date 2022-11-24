@@ -36,16 +36,15 @@ export default function Memberships ({isPay, setPrice, setMembership}){
         setSelectedMembership(memberships[index])
         setDetails(memberships[index].details)
         setPhoto(memberships[index].photo)
-        //}       
-        
+        //}          
     }
     
     const data = {
         id: selectedMembership.id,
         name: selectedMembership.name,
         price: selectedMembership.price,
-        benefits: details,
-        image: photo,
+        details: details,
+        photo: photo,
         border: true,
         button: 'Unirse'
     }
