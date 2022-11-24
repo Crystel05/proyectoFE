@@ -5,18 +5,30 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import ImageHeaderAdmin from "../header_add_edit";
-import { TEXT_FIELD, NONE } from "../../../Util/constants";
+import { TEXT_FIELD, NONE, ERROR, SUCCESS } from "../../../Util/constants";
 import FieldsAdmin from "../../../ReusableComponents/Fields/fields_admin";
 import GenericRoundButton from "../../../ReusableComponents/Buttons/generic_button";
+import { Alert, Snackbar } from "@mui/material";
 
-export default function AddEditSponsor({isNew, type}){
-    const title = isNew ? "Agregar un nuevo lugar" : "Editar lugar"
+export default function AddEditSponsor({isNew, type, id}){
+
+    const [open, setOpen] = useState(false);
+    const [severity, setSeverity] = useState("success");
+    const [message, setMessage] = useState("");
     const [image, setImage] = useState()
-    const [imageForPlace, setImageForPlace] = useState()
-
+    const [imageForSponsor, setImageForSponsor] = useState()
+    const [sponsorData, setSponsorData] = useState({
+        id: '',
+        name: '',
+        imageLink:'',
+        image:{imageId:'', name:'', drivePath:''}
+    })
     useEffect(() =>{
         getImage()
+        if(!isNew)
+            getCurrentSponsor()
     },[])
+
 
     async function getImage(){
         await axios.get('http://localhost:8080/images/getAdminPH', {params:{sectionPH: type}}).then(response => {
@@ -24,12 +36,79 @@ export default function AddEditSponsor({isNew, type}){
         })
     }
 
+    async function getCurrentSponsor(){
+        await axios.get('http://localhost:8080/sponsor/getById',  {params:{id: id}}).then(
+            response => {
+                setImageForSponsor(response.data.image.drivePath)
+                setSponsorData({
+                    id: response.data.id, 
+                    name: response.data.name,
+                    image:{imageId: response.data.image.imageId, name:response.data.image.name, drivePath: response.data.image.drivePath}
+                })
+            }
+        )
+    }
+
+    
+    const handleFieldChange = () => (event) => {
+        const value = event.target.value;
+        console.log(event.target.id)
+        setSponsorData({
+            ...sponsorData,
+            [event.target.id]: value
+        });
+        if(event.target.id === 'imageLink'){
+            setSponsorData({
+                ...sponsorData,
+                image:{id:sponsorData.image.id ? sponsorData.image.id : null, name:sponsorData.name, drivePath:value},
+                imageLink: value
+            })
+        }
+    }
+
+    const handleClose = (_, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpen(false);
+    };
+
+    const save = () => () =>{
+        if(sponsorData.name === '' || sponsorData.imageLink === '' ){
+            console.log(sponsorData)
+            setMessage("Alguno de los campos requeridos está vacío")
+            setOpen(true)
+            setSeverity(ERROR)
+        }else{
+            if(isNew){
+                axios.post('http://localhost:8080/sponsor/create', sponsorData).then(response => {
+                    setMessage("Patrocinador creado exitosamente")
+                })
+            }else{ 
+                axios.post('http://localhost:8080/sponsor/update', sponsorData).then(response => {
+                    setMessage("Patrocinador actualizado exitosamente")
+                })
+            }
+            setOpen(true)
+            setSeverity(SUCCESS)
+        }
+        
+    }
+
     const info = isNew ? 'En esta sección puede agregar un nuevo patrocinador' : 'En esta sección puede editar y eliminar un patrocinador existente';
     const headerTitle = isNew ? 'Agregar Patrocinador' : 'Editar Patrocinador';
-    const nombre = [{id:'1', name:'Nombre', type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => {}}]
+    const nombre = [{id:'name', name:'Nombre', value:sponsorData.name, type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
+    {id:'imageLink', name:'Imagen', value:sponsorData.image.drivePath, type: TEXT_FIELD, isRequired:true, helperText:'Link de google drive', onChange: () => handleFieldChange()}]
 
     return(
         <Box className={stylesContainer.displayColumn}>
+             <Snackbar
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+            >
+                <Alert severity={severity}>{message}</Alert>
+            </Snackbar>
             <ImageHeaderAdmin title='Patrocinadores' info={info} image={image} headerTitle={headerTitle}/>
             <Box className={stylesContainer.displayRow} style={{borderLeft:'2vh', margin:'auto'}}>
                 <Box className={stylesContainer.displayColumn}>
@@ -40,12 +119,13 @@ export default function AddEditSponsor({isNew, type}){
                 </Box>
                 <Box className={stylesContainer.displayColumn}>
                     <Box clasName={stylesContainer.displayRow}>
-                        <GenericRoundButton Icon={<></>} backgroundColor='#2a1463' text='agregar imagen' iconPosition={NONE} onClick={()=>{}}/>
-                        <image src={imageForPlace} style={{height:'100px', width:'100px'}}> </image>
+                    {!isNew && <Box clasName={stylesContainer.displayRow} sx={{ margin:'auto', marginTop:'1vh', marginLeft:'2vh', p: 1, border:2, borderColor:'#f4f3f7', borderRadius:'10px', boxShadow:'1px 3px 18px #a19999', width:'150px', height:'150px' }}>
+                        <img src={imageForSponsor} style={{ margin:'auto', width:'150px', height:'150px' }}/>
+                    </Box>}
                     </Box>
                 </Box>
             </Box>
-            <GenericRoundButton Icon={<></>} backgroundColor='#2a1463' text='guardar' iconPosition={NONE} onClick={()=>{}}/>
+            <GenericRoundButton Icon={<></>} backgroundColor='#2a1463' text='guardar' iconPosition={NONE} onClick={()=>save()}/>
         </Box>
     )
 }

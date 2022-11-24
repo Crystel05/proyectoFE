@@ -33,7 +33,7 @@ const FieldsAdmin = ({ fields }) =>{
         >
             {fields.map((field, index) =>{
                 return (
-                    <Field field={field} key={index} />
+                    <Field field={field} key={index} color='#2a1463'/>
                 )
             })}
         </Stack>

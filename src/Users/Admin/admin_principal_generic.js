@@ -4,7 +4,7 @@ import { useState } from "react";
 import styles from '../../CSS/images.module.css'
 import axios from "axios";
 import { useEffect } from "react";
-import { NONE } from "../../Util/constants";
+import { EDITIONS, NONE } from "../../Util/constants";
 import GenericGrid from "./generic_grid";
 import GenericRoundButton from "../../ReusableComponents/Buttons/generic_button";
 import stylesContainer from '../../CSS/container.module.css'
@@ -47,9 +47,11 @@ export default function AdminCRUD({type, setValue, setRow, setIsNew}){
         <Box className={ stylesContainer.displayColumn }>
             <img src={image} alt={'Image Place Holder'} className={styles.adminImages}/>
             <Box style={{ marginLeft: '5vh', marginRight: '5vh', marginTop:'10vh' }} >
-                <GenericGrid columns={columns} rows={rows} handleSeeDetails={handleSeeDetails}/>
+                <GenericGrid columns={columns} rows={rows} handleSeeDetails={handleSeeDetails} type={type} />
             </Box>
+            {type === EDITIONS && <a style={{marginLeft: '5vh', marginTop:'3vh'}}> **Una vez agregada una edición no se puede editar, solo se puede agregar otra nueva o eliminarla** </a>}
             <GenericRoundButton Icon={<></>} backgroundColor='#2a1463' text='AGREGAR NUEVO' iconPosition={NONE} onClick={()=>handleNew}/>
+            
         </Box>
     )
 }

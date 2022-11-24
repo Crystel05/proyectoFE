@@ -8,6 +8,10 @@ export const DATE_PICKER ='datePicker';
 export const TEXT_AREA ='textArea';
 export const PASSWORD = 'password';
 export const SELECT = 'select';
+export const CHECKBOX = 'checkbox';
+export const MULTIPLE = 'multiple';
+export const SELECTMULTIPLE = 'selectMultiple';
+
 export const SUCCESS = 'success';
 export const ERROR = 'error';
 export const INFO = 'info';

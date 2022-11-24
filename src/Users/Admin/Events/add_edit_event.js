@@ -13,9 +13,11 @@ export default function AddEditEvent({isNew, type}){
     const title = isNew ? "Agregar un nuevo Evento" : "Editar Evento";
     const [image, setImage] = useState()
     const [imageForPlace, setImageForPlace] = useState()
+    const [values, setValues] = useState([])
 
     useEffect(() =>{
         getImage()
+        getPlaces()
     },[])
 
     async function getImage(){
@@ -24,9 +26,16 @@ export default function AddEditEvent({isNew, type}){
         })
     }
 
+    async function getPlaces(){
+        await axios.get('http://localhost:8080/place/getAll').then(response => {
+            setValues(response.data);
+        })
+    }
+
+
     const info = isNew ? 'En esta sección puede agregar un nuevo lugar' : 'En esta sección puede editar y eliminar un luegar existente';
     const headerTitle = title;
-    const nombre = [{id:'1', name:'Lugar', type: SELECT, isRequired:true, helperText:'', onChange: () => {}}]
+    const nombre = [{id:'1', name:'Lugar', values:values, type: SELECT, isRequired:true, helperText:'', onChange: () => {}}]
     const secondCol = [
                         {id:'3', name:'Hora Inicio', type: DATE_PICKER, isRequired:true, helperText:'', onChange: () => {}},
                         {id: '4', name:'Hora Final', type: DATE_PICKER, isRequired:true, helperText:'', onChange: () => {}}

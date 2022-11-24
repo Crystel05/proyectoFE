@@ -66,12 +66,12 @@ export default function AdminTabs(){
                 }
             </TabPanel>
             <TabPanel value="patrocinadores" style={{padding: 0}} index={1}>
-                {isEditing && value === 'patrocinadores' ? <AddEditSponsor  isNew={isNew} type={SPONSORS}  /> :
+                {isEditing && value === 'patrocinadores' ? <AddEditSponsor  isNew={isNew} type={SPONSORS} id={row} /> :
                     <AdminCRUD type={SPONSORS} setValue={setEditing} setIsNew={setIsNew} setRow={setRow}/>
                 }
             </TabPanel>
             <TabPanel value="ediciones" style={{padding: 0}} index={2} >
-                {isEditing && value === 'ediciones' ? <AddEditEdition isNew={isNew} type={EDITIONS}/> :
+                {isEditing && value === 'ediciones' ? <AddEditEdition type={EDITIONS} /> :
                     <AdminCRUD type={EDITIONS} setValue={setEditing} setIsNew={setIsNew} setRow={setRow}/>
                 }
             </TabPanel>

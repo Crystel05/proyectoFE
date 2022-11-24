@@ -8,9 +8,18 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { withStyles } from '@mui/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
+import axios from 'axios';
+import { useState } from 'react';
+import { EDITIONS, ERROR, SUCCESS } from '../../Util/constants';
+import Box from '@mui/material/Box';
+import { Alert, Snackbar } from "@mui/material";
+
+export default function GenericGrid({columns, rows, handleSeeDetails, type}) {
 
 
-export default function GenericGrid({columns, rows, handleSeeDetails}) {
+    const [open, setOpen] = useState(false);
+    const [severity, setSeverity] = useState(SUCCESS);
+    const [message, setMessage] = useState("");
 
     const TableHeadStyled = withStyles(theme => ({
         root: {
@@ -20,7 +29,7 @@ export default function GenericGrid({columns, rows, handleSeeDetails}) {
     }))(TableHead);
 
     const TableClickableTableCell = (index, value) =>{
-        if(index === 0){
+        if(index === 0 && type !== EDITIONS){
             return(
                 <TableCell 
                     key={index}
@@ -61,64 +70,92 @@ export default function GenericGrid({columns, rows, handleSeeDetails}) {
         }
     }
 
-    function handleDelete(value){
-        console.log('delete')
+    const handleDelete = (value) => {
+        console.log('delete ', value, " ", type)
+        axios.delete('http://localhost:8080/admin/deleteFromGrids', {params:{type: type, valueId:value}}).then(response =>{
+            if(response.data){
+                setMessage('Se eliminó el item exitosamente, cambie de tab para ver el cambio')
+                setSeverity(SUCCESS)
+                setOpen(true)
+            }else{
+                setMessage('Hubo un error eliminando el item')
+                setSeverity(ERROR)
+                setOpen(true)
+            }
+        })
     }
+
+    const handleClose = (_, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpen(false);
+    };
+
     return (
-        <TableContainer 
-            component={Paper} 
-        >
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHeadStyled>
-                <TableRow
-                    sx={{
-                        borderBottom: "2px solid #2a1463",
-                        borderRight: "2px solid #2a1463",
-                        borderLeft: "2px solid #2a1463",
-                        "& th": {
-                            fontSize: "1rem",
-                            color: "rgba(255, 255, 255)",
-                            fontFamily: 'Krona One'
-                          }
-                    }}
+        <Box>
+            <Snackbar
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+            >
+                <Alert severity={severity}>{message}</Alert>
+            </Snackbar>
+            <TableContainer 
+                component={Paper} 
+            >
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHeadStyled>
+                    <TableRow
+                        sx={{
+                            borderBottom: "2px solid #2a1463",
+                            borderRight: "2px solid #2a1463",
+                            borderLeft: "2px solid #2a1463",
+                            "& th": {
+                                fontSize: "1rem",
+                                color: "rgba(255, 255, 255)",
+                                fontFamily: 'Krona One'
+                            }
+                        }}
+                        >
+                        {columns.map((column, index) => {
+                            return <TableCell key={index} align="center"> {column} </TableCell>
+                        })}
+                        <TableCell> Acciones </TableCell>
+                    </TableRow>
+                </TableHeadStyled>
+                <TableBody>
+                {rows.map((row, index) => (
+                    
+                    <TableRow
+                        key={index}
                     >
-                    {columns.map((column, index) => {
-                        return <TableCell key={index} align="center"> {column} </TableCell>
+                    {row.map((value, index) =>{
+                        return( TableClickableTableCell(index, value))
                     })}
-                    <TableCell> Acciones </TableCell>
-                </TableRow>
-            </TableHeadStyled>
-            <TableBody>
-            {rows.map((row, index) => (
-                
-                <TableRow
-                    key={index}
-                >
-                {row.map((value, index) =>{
-                    return( TableClickableTableCell(index, value))
-                })}
-                <TableCell
-                    scope="row"
-                    align="center"
-                    sx={{
-                        borderRight: "2px solid #2a1463",
-                        borderLeft: "2px solid #2a1463",
-                        borderBottom: "2px solid #2a1463",
-                    }}
-                    onClick={() => handleDelete(row)}
-                > 
-                    <DeleteIcon sx={{
-                        "&:hover": {
-                            color: "#94212e !important",
-                            cursor: "pointer",
-                            fontSize:'30px'
-                        }
-                    }}/> 
-                </TableCell>
-                </TableRow>
-            ))}
-            </TableBody>
-        </Table>
-        </TableContainer>
+                    <TableCell
+                        scope="row"
+                        align="center"
+                        sx={{
+                            borderRight: "2px solid #2a1463",
+                            borderLeft: "2px solid #2a1463",
+                            borderBottom: "2px solid #2a1463",
+                        }}
+                        onClick={() => handleDelete(row[0])}
+                    > 
+                        <DeleteIcon sx={{
+                            "&:hover": {
+                                color: "#94212e !important",
+                                cursor: "pointer",
+                                fontSize:'30px'
+                            }
+                        }}/> 
+                    </TableCell>
+                    </TableRow>
+                ))}
+                </TableBody>
+            </Table>
+            </TableContainer>
+        </Box>
     );
 }
