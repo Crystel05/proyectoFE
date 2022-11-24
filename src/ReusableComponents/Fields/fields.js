@@ -17,7 +17,7 @@ const useStyles = makeStyles({
         '& fieldset': {
             borderRadius: '25px',
         },
-        width: '75vh',
+        width: '50vh',
         margin:'auto'
     }
 })
