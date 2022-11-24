@@ -23,8 +23,6 @@ export default function Tabs({value, setValue}) {
     const [priceToPay, setPriceToPay] = useState(0);
     const [membershipToBuy, setMembershipToBuy] = useState(2);
     
-
-
     const tabColor = value !== 'membresias' ? '#ce1717' :' #2a1463';
     return (
     <Box sx={{ width: '100%' }} >

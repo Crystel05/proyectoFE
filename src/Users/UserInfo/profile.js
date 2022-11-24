@@ -10,6 +10,7 @@ import GenericRoundButton from "../../ReusableComponents/Buttons/generic_button"
 
 export default function ProfileSection(){
     const [userData, setUserData] = useState({
+        id: '',
         name: '',
         email: '',
         lastName: '',
@@ -18,9 +19,11 @@ export default function ProfileSection(){
         phoneNumber:'',
         address: ''
     })
+    const [name, setName] = useState();
 
     useEffect(() => {
         setUserData ({
+            id: (JSON.parse(sessionStorage.getItem('userData'))).id,
             name: (JSON.parse(sessionStorage.getItem('userData'))).name,
             email: (JSON.parse(sessionStorage.getItem('userData'))).email,
             lastName: (JSON.parse(sessionStorage.getItem('userData'))).lastName,
@@ -29,6 +32,7 @@ export default function ProfileSection(){
             phoneNumber:(JSON.parse(sessionStorage.getItem('userData'))).phoneNumber,
             address: (JSON.parse(sessionStorage.getItem('userData'))).address
         })
+        setName((JSON.parse(sessionStorage.getItem('userData'))).name);
     },[])
 
     
@@ -42,28 +46,23 @@ export default function ProfileSection(){
 
     const handleSave = () => () => { 
         const userId = (JSON.parse(sessionStorage.getItem('userData'))).id;        
-        const url = 'http://localhost:8080/itinerary/createFullItinerary?userId='+userId;
-
-        //saveItinerary(url);
     }
-
-
     
     const col1 = [
-        {name:'Nombre', value: userData.name, type: TEXT_FIELD, isRequired:false, helperText:'', onChange: () => handleFieldChange()},
-        {name:'Correo', value: userData.email, type: TEXT_FIELD, isRequired:false, helperText:'', onChange: () => handleFieldChange()},
-        {name:'Edad', value: userData.age, type: TEXT_FIELD, isRequired:false, helperText:'', onChange: () => handleFieldChange()},
-        {name:'Dirección', value: userData.address, type: TEXT_AREA, isRequired:false, helperText:'', onChange: () => handleFieldChange()},
+        {id:'name', name:'Nombre', value: userData.name, type: TEXT_FIELD, isRequired:false, onChange: () => handleFieldChange()},
+        {id:'email', name:'Correo', value: userData.email, type: TEXT_FIELD, isRequired:false, onChange: () => handleFieldChange()},
+        {id:'age', name:'Edad', value: userData.age, type: TEXT_FIELD, isRequired:false, onChange: () => handleFieldChange()},
+        {id:'address', name:'Dirección', value: userData.address, type: TEXT_AREA, isRequired:false, onChange: () => handleFieldChange()},
     ]
     const col2 = [
-        {name:'Apellidos', value: userData.lastName, type: TEXT_FIELD, isRequired:false, helperText:'', onChange: () => handleFieldChange()},
-        {name:'Cédula', value: userData.identification, type: TEXT_FIELD, isRequired:false, helperText:'', onChange: () => handleFieldChange()},
-        {name:'Número de teléfono', value: userData.phoneNumber, type: TEXT_FIELD, isRequired:false, helperText:'', onChange: () => handleFieldChange()},
+        {id:'lastName', name:'Apellidos', value: userData.lastName, type: TEXT_FIELD, isRequired:false, onChange: () => handleFieldChange()},
+        {id:'identification', name:'Cédula', value: userData.identification, type: TEXT_FIELD, isRequired:false, onChange: () => handleFieldChange()},
+        {id:'phoneNumber', name:'Número de teléfono', value: userData.phoneNumber, type: TEXT_FIELD, isRequired:false, onChange: () => handleFieldChange()},
     ]
     return(
         <Box className={stylesContainer.displayColumn} sx={{ marginLeft: '10vh' }}>
             <Box className={stylesContainer.displayRow}>
-                <h1 className={ `${stylesText.editionTitle} ${stylesText.kronaText}` } style={{ marginLeft: '1vh', marginTop: '5vh'}} > HOLA NOMBRE </h1>
+                <h1 className={ `${stylesText.editionTitle} ${stylesText.kronaText}` } style={{ marginLeft: '1vh', marginTop: '5vh'}} > Hola {name}!  </h1>
             </Box>
             <Box className={stylesContainer.displayRow} style={{margin:'auto', marginTop: '5vh'}}>
                 <Box style={{ marginRight:'5vh' }}>
