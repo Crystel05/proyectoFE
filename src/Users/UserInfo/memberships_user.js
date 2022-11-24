@@ -29,7 +29,7 @@ export default function MemershipSection(){
             {membership && 
                 <Box>
                     <HeaderUserInfo title='Mis Membresías' subtitle={membership.name} />
-                    <PlanDetails data={membership}/>
+                    <PlanDetails data={membership} readOnly={true} />
                 </Box>
             }
             {!membership && <h1 className={`${styles.editionTitle} ${styles.kronaText}`} style={{ margin:'auto' }}> No cuenta con membresías, adquiera una en la sección de membresías</h1>}

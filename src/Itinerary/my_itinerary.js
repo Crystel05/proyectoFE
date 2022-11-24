@@ -2,7 +2,7 @@ import { Timeline, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator
 import { Box } from "@mui/system";
 import Event from "./event";
 
-export default function MyItinerary({setEvents, events}){
+export default function MyItinerary({setEvents, events, readOnly }){
 
     const dots = new Array(5).fill(0);
 
@@ -44,7 +44,7 @@ export default function MyItinerary({setEvents, events}){
                                 })}
                             </TimelineSeparator>
                             <TimelineContent>
-                                <Event event={itinerary} events={events} handleDelete={handleDelete}/>
+                                <Event event={itinerary} events={events} handleDelete={handleDelete} readOnly={readOnly}/>
                             </TimelineContent>
                         </TimelineItem>
                     )
