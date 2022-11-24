@@ -36,14 +36,13 @@ export default function HistoryReservations({userIdentification}){
                 },
                 }}
             >
-                {console.log(history)}
                 {history.map((reservation, index) =>{
                     const data = {
                         title: reservation.date + ": " + reservation.editionName,
                         startingPoint: reservation.puntoInicial,
                         info:  reservation.startingPoint,
                     }
-                    
+                
                     return (
                         
                         <TimelineItem key={index}>
