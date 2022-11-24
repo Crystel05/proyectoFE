@@ -58,7 +58,7 @@ export default function Tabs({value, setValue}) {
             </TabPanel>
 
             <TabPanel value="rutas" style={{padding: 0}} index={2} >
-                <MainRoutes />
+                <MainRoutes setValue = {setValue} />
             </TabPanel>
 
             <TabPanel value="itinerario" style={{padding: 0}} index={3} >
