@@ -14,7 +14,6 @@ import stylesButton from '../CSS/button.module.css'
 import stylesContainer from '../CSS/container.module.css'
 import stylesShapes from '../CSS/shapes.module.css'
 import { Alert, Snackbar } from '@mui/material'
-import { TextFields } from '@mui/icons-material';
 
 const Login = ({ setAuthorizationLogin, passwordChanged, setAuthorizationResetPass }) =>{
 
@@ -77,9 +76,11 @@ const Login = ({ setAuthorizationLogin, passwordChanged, setAuthorizationResetPa
             resetPasswordFunction();
         }else{
             getLogin();
-            if(event.detail === 1){
+            console.log(isCorrect);
+            if(isCorrect === null){
                 setMessage("Para ingresar use un doble click sobre el botón de iniciar sesión")
                 setSeverity(INFO)
+                setOpen(true)
             }
             if(isCorrect.name !== 'wrong'){
                 if(isCorrect.typeUser === 'Admin'){
@@ -90,8 +91,8 @@ const Login = ({ setAuthorizationLogin, passwordChanged, setAuthorizationResetPa
                 setAuthorizationLogin();
                 
             }else{
-                if(event.detail >= 2){
-                setMessage("El usuario o la contraseña ingresados son incorrectos. Si olvidó su contraseña haga click sobre \"¿Olvidó su contraseña?\". O si no tiene cuenta haga click sobre \"Crear cuenta\" ")
+                if(isCorrect !== null){
+                    setMessage("El usuario o la contraseña ingresados son incorrectos. Si olvidó su contraseña haga click sobre \"¿Olvidó su contraseña?\". O si no tiene cuenta haga click sobre \"Crear cuenta\" ")
                     setSeverity(ERROR)
                     setOpen(true)
                 }
