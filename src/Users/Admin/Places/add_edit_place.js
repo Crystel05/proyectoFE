@@ -29,7 +29,10 @@ export default function AddEditPlace({isNew, type, id}){
         longitude: '',
         imageId: '',
         category: '',
-        image:{name:'', drivePath:''}
+        image:{name:'', drivePath:''},
+        link: '',
+        priceRange: '',
+        score: ''
     })
     useEffect(() =>{
         getImage()
@@ -64,7 +67,8 @@ export default function AddEditPlace({isNew, type, id}){
                     longitude: response.data.longitude,
                     imageId: response.data.image.imageId,
                     category: response.data.category,
-                    image:{imageId: response.data.image.imageId, name:response.data.image.name, drivePath: response.data.image.drivePath}
+                    image:{imageId: response.data.image.imageId, name:response.data.image.name, drivePath: response.data.image.drivePath},
+                    link: response.data.link
                 })
             }
         )
@@ -79,7 +83,7 @@ export default function AddEditPlace({isNew, type, id}){
         if(event.target.id === 'imageLink'){
             setPlaceData({
                 ...placeData,
-                image:{name:placeData.name, drivePath:value}
+                image:{imageId: placeData.image.imageId, name:placeData.name, drivePath:value}
             })
         }
     }
@@ -91,37 +95,33 @@ export default function AddEditPlace({isNew, type, id}){
         setOpen(false);
     };
 
-    const save = () => () =>{
-        // if(placeData.name === '' || placeData.imageLink === '' || placeData.details === '' || placeData.latitude === '' || placeData.longitude === '' ){
-        //     setMessage("Alguno de los campos requeridos está vacío")
-        //     setOpen(true)
-        //     setSeverity(ERROR)
-        // }else{
-            if(isNew){
-                axios.post('http://localhost:8080/places/create', placeData).then(response => {
-                    setMessage("Lugar creado exitosamente")
-                })
-            }else{ 
-                axios.post('http://localhost:8080/places/update', placeData).then(response => {
-                    setMessage("Lugar actualizado exitosamente")
-                })
-            }
-            setOpen(true)
-            setSeverity(SUCCESS)
-       // }
-        
+    const save = () => () =>{ 
+        if(isNew){
+            axios.post('http://localhost:8080/places/create', placeData).then(response => {
+                setMessage("Lugar creado exitosamente")
+            })
+        }else{ 
+            axios.post('http://localhost:8080/places/update', placeData).then(response => {
+                setMessage("Lugar actualizado exitosamente")
+            })
+        }
+        setOpen(true)
+        setSeverity(SUCCESS)    
     }
 
     const info = isNew ? 'En esta sección puede agregar un nuevo lugar' : 'En esta sección puede editar y eliminar un luegar existente';
     const headerTitle = title;
     const nombre = [{id:'name', name:'Nombre', value:placeData.name, type: TEXT_FIELD, isRequired:true, onChange: () => handleFieldChange()}, 
-                    {id:'imageLink', name:'Imagen', value:placeData.image.drivePath, type: TEXT_FIELD, isRequired:true, helperText:'Link de google drive', onChange: () => handleFieldChange()},
-                    {id:'link', value:placeData.link, name:'Enlace', type: TEXT_FIELD, helperText: 'Enlace de la página del lugar',isRequired:false, onChange: () => handleFieldChange()},]
+                    {id:'link', value:placeData.link, name:'Enlace', type: TEXT_FIELD, helperText: 'Enlace de la página del lugar',isRequired:false, onChange: () => handleFieldChange()},
+                    {id:'priceRange', value: placeData.priceRange, name:'Rango de precios', type: TEXT_FIELD, helperText: 'Rango de precios de 1 a 3, si aplica', isRequired:false, onChange: () => handleFieldChange()},
+                    {id:'imageLink', name:'Imagen', value:placeData.image.drivePath, type: TEXT_FIELD, isRequired:true, helperText:'Link de compartir de google drive', onChange: () => handleFieldChange()},
+                ]
     const secondCol = [
                         {id:'latitude', value: placeData.latitude, name:'Latitud', type: TEXT_FIELD, isRequired:true, onChange: () => handleFieldChange()},
                         {id:'longitude', value:placeData.longitude, name:'Longitud', type: TEXT_FIELD, isRequired:true, onChange: () => handleFieldChange()},
-                        {id:'category', value:placeData.category, values: values, name:'Categoría', type: SELECT, isRequired:true, onChange: () => handleFieldChange()},
-                        {id:'details', value:placeData.details, name:'Detalles', type: TEXT_AREA, isRequired:false, onChange: () => handleFieldChange()}
+                        {id:'category', value:placeData.category, name:'Categoría', type: TEXT_FIELD, helperText:'Categorías: Bar-Entretenimiento-Restaurante', isRequired:true, onChange: () => handleFieldChange()},
+                        {id:'score', value: placeData.score, name:'Calificación', helperText:'Califique el lugar de 1 a 5', type: TEXT_FIELD, isRequired:true, onChange: () => handleFieldChange()},
+                        {id:'details', value:placeData.details, name:'Detalles', type: TEXT_AREA, isRequired:false, onChange: () => handleFieldChange()},
                     ]
 
     return(

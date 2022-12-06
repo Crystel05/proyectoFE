@@ -124,7 +124,7 @@ export const Field = ({ field, color }) => {
                         onChange={field.onChange}
                 >
                 {field.values.map((value, index)=>{
-                    return <MenuItem value={value.id} key={index}>{value.name ? value.name : value} </MenuItem>
+                    return <MenuItem value={value.id ? value.id : value} key={index}>{value.name ? value.name : value} </MenuItem>
                 })}
                 </Select>
             </FormControl>
