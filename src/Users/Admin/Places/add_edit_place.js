@@ -68,7 +68,9 @@ export default function AddEditPlace({isNew, type, id}){
                     imageId: response.data.image.imageId,
                     category: response.data.category,
                     image:{imageId: response.data.image.imageId, name:response.data.image.name, drivePath: response.data.image.drivePath},
-                    link: response.data.link
+                    link: response.data.link,
+                    score:response.data.score,
+                    priceRange: response.data.priceRange
                 })
             }
         )

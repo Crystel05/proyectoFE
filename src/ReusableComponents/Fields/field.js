@@ -10,7 +10,7 @@ import stylesContainer from '../../CSS/container.module.css'
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import AddIcon from '@mui/icons-material/Add';
-import OutlinedInput from '@mui/material/OutlinedInput';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 export const Field = ({ field, color }) => {
    
@@ -48,12 +48,13 @@ export const Field = ({ field, color }) => {
         )
     }
     else if(field.type === DATE_PICKER){
+        console.log(field.value)
         return(
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DesktopDatePicker
+                <TimePicker
                     label={field.name}
-                    inputFormat="dd/MM/YYYY"
-                    onChange={field.onChange()}
+                    onChange={field.onChange}
+                    value={field?.value}
                     renderInput={(params) => <TextField {...params} />}
                 />
             </LocalizationProvider>

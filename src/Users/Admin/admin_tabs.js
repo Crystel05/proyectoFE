@@ -56,7 +56,7 @@ export default function AdminTabs(){
                 }
             </TabPanel>
             <TabPanel value="eventos" style={{padding: 0}} index={0} >
-                {isEditing && value === 'eventos' ? <AddEditEvent isNew={isNew} type={EVENTS} /> :
+                {isEditing && value === 'eventos' ? <AddEditEvent isNew={isNew} type={EVENTS} id={row}/> :
                     <AdminCRUD type={EVENTS} setValue={setEditing} setIsNew={setIsNew} setRow={setRow}/>
                 }
             </TabPanel>
