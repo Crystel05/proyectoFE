@@ -60,8 +60,7 @@ export default function AddEditSponsor({isNew, type, id}){
         if(event.target.id === 'imageLink'){
             setSponsorData({
                 ...sponsorData,
-                image:{id:sponsorData.image.id ? sponsorData.image.id : null, name:sponsorData.name, drivePath:value},
-                imageLink: value
+                image:{imageId: sponsorData.image.imageId, name:sponsorData.name, drivePath:value}
             })
         }
     }
@@ -74,25 +73,17 @@ export default function AddEditSponsor({isNew, type, id}){
     };
 
     const save = () => () =>{
-        if(sponsorData.name === '' || sponsorData.imageLink === '' ){
-            console.log(sponsorData)
-            setMessage("Alguno de los campos requeridos está vacío")
-            setOpen(true)
-            setSeverity(ERROR)
-        }else{
-            if(isNew){
-                axios.post('http://localhost:8080/sponsor/create', sponsorData).then(response => {
-                    setMessage("Patrocinador creado exitosamente")
-                })
-            }else{ 
-                axios.post('http://localhost:8080/sponsor/update', sponsorData).then(response => {
-                    setMessage("Patrocinador actualizado exitosamente")
-                })
-            }
-            setOpen(true)
-            setSeverity(SUCCESS)
+        if(isNew){
+            axios.post('http://localhost:8080/sponsor/create', sponsorData).then(response => {
+                setMessage("Patrocinador creado exitosamente")
+            })
+        }else{ 
+            axios.post('http://localhost:8080/sponsor/update', sponsorData).then(response => {
+                setMessage("Patrocinador actualizado exitosamente")
+            })
         }
-        
+        setOpen(true)
+        setSeverity(SUCCESS)
     }
 
     const info = isNew ? 'En esta sección puede agregar un nuevo patrocinador' : 'En esta sección puede editar y eliminar un patrocinador existente';
