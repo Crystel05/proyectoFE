@@ -61,7 +61,7 @@ export default function AdminTabs(){
                 }
             </TabPanel>
             <TabPanel value="rutas" style={{padding: 0}} index={0} >
-                {isEditing && value === 'rutas' ? <AddEditRoute isNew={isNew} type={ROUTES} /> :
+                {isEditing && value === 'rutas' ? <AddEditRoute isNew={isNew} type={ROUTES} id={row}/> :
                     <AdminCRUD type={ROUTES} setValue={setEditing} setIsNew={setIsNew} setRow={setRow}/>
                 }
             </TabPanel>

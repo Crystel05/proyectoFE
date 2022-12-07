@@ -98,7 +98,7 @@ export default function AddEditEdition({type}){
         const secondCol = [ 
             {id:'sponsors', value:editionData.sponsorId, name:'Patrocinadores', type: SELECTMULTIPLE, isRequired:true, values:sponsorsList, onChange: () => handleFieldChange(), onAdd: () => onAddSponsor(), saved: sponsors},
             {id:'routes', value:editionData.routeId, name:'Rutas', type: SELECTMULTIPLE, isRequired:true, values:routesList, onChange: () => handleChangeMultipleRoutes(),  onAdd: () => onAddRoute(), saved: routes },           
-            {id:'imageLink', value:editionData.imageLink, name:'Foto', type: MULTIPLE, isRequired:true, onChange: () => handleFieldChange(), onAdd: () => onAddEdition(), saved: imagesEdition},
+            {id:'imageLink', value:editionData.imageLink, name:'Foto', type: MULTIPLE, content: 'imágenes', isRequired:true, onChange: () => handleFieldChange(), onAdd: () => onAddEdition(), saved: imagesEdition},
             {id:'isCurrent', name:'Edicion Actual', type: CHECKBOX, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
             ]
     return(

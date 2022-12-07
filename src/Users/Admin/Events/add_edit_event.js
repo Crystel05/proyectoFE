@@ -63,11 +63,11 @@ export default function AddEditEvent({isNew, type, id}){
     const save = () => () =>{ 
         if(isNew){
             axios.post('http://localhost:8080/event/create', eventData).then(response => {
-                setMessage("Lugar creado exitosamente")
+                setMessage("Evento creado exitosamente")
             })
         }else{ 
             axios.post('http://localhost:8080/event/update', eventData).then(response => {
-                setMessage("Lugar actualizado exitosamente")
+                setMessage("Evento actualizado exitosamente")
             })
         }
         setOpen(true)

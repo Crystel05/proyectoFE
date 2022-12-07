@@ -86,7 +86,7 @@ export const Field = ({ field, color }) => {
                 <IconButton onClick={field.onAdd()}>
                     <AddIcon sx={{ color: color}}/>
                 </IconButton>
-                <a>{field.saved.length} imágenes</a>
+                <a>{field.saved.length} {field.content} </a>
             </FormControl>
         )
     }
