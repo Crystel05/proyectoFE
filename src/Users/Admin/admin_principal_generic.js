@@ -4,7 +4,7 @@ import { useState } from "react";
 import styles from '../../CSS/images.module.css'
 import axios from "axios";
 import { useEffect } from "react";
-import { EDITIONS, NONE } from "../../Util/constants";
+import { EDITIONS, NONE, ROUTES } from "../../Util/constants";
 import GenericGrid from "./generic_grid";
 import GenericRoundButton from "../../ReusableComponents/Buttons/generic_button";
 import stylesContainer from '../../CSS/container.module.css'
@@ -50,8 +50,8 @@ export default function AdminCRUD({type, setValue, setRow, setIsNew}){
                 <GenericGrid columns={columns} rows={rows} handleSeeDetails={handleSeeDetails} type={type} />
             </Box>
             {type === EDITIONS && <a style={{marginLeft: '5vh', marginTop:'3vh'}}> **Una vez agregada una edición no se puede editar, solo se puede agregar otra nueva o eliminarla** </a>}
+            {type === ROUTES && <a style={{marginLeft: '5vh', marginTop:'3vh'}}> **Una vez creada una ruta no se le pueden cambiar los lugares, debe borrarla y eliminarla de nuevo para cambiar un lugar de la ruta** </a>}
             <GenericRoundButton Icon={<></>} backgroundColor='#2a1463' text='AGREGAR NUEVO' iconPosition={NONE} onClick={()=>handleNew}/>
-            
         </Box>
     )
 }

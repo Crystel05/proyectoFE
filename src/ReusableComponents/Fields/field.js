@@ -33,7 +33,6 @@ export const Field = ({ field, color }) => {
     else if(field.type === TEXT_AREA){
         return(
             <Box className={stylesContainer.displayColumn}>
-                <InputLabel id={field.name}>{field.name}</InputLabel>
                 <TextareaAutosize 
                 maxRows={4}
                 minRows={4}

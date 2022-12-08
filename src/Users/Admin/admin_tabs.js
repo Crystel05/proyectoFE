@@ -76,7 +76,7 @@ export default function AdminTabs(){
                 }
             </TabPanel>
             <TabPanel value="noticias" style={{padding: 0}} index={3} >
-                {isEditing && value === 'noticias' ? <AddEditNews isNew={isNew} type={NEWS}/> :
+                {isEditing && value === 'noticias' ? <AddEditNews isNew={isNew} type={NEWS} id={row}/> :
                     <AdminCRUD type={NEWS} setValue={setEditing} setIsNew={setIsNew} setRow={setRow}/>
                 }
             </TabPanel>
