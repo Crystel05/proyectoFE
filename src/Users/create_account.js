@@ -62,17 +62,13 @@ const CreateAccount = ({isAdmin, isNew, id}) => {
                         Distrito: response.data.address,
                         Sennas: response.data.address,
                         typeUser: response.data.typeUser
-                    })
+                })
             }
         )
     }
 
     const handleChecked =  (event) =>{
         setChecked(event.target.checked)
-        setUserData({
-            ...userData,
-            typeUser: event.target.checked ? 'Admin' : 'Normal User'
-        })
     }
 
 
@@ -146,6 +142,7 @@ const CreateAccount = ({isAdmin, isNew, id}) => {
     }
 
     async function saveNewAccount(){
+        console.log(checked)
         const body = {
             name: userData.Nombre,
             lastName: userData.Apellidos,
@@ -154,7 +151,8 @@ const CreateAccount = ({isAdmin, isNew, id}) => {
             identification: userData.Cedula,
             phoneNumber: userData.NumeroTelefono,
             address: userData.Provincia + ", " + userData.Canton + ", " + userData.Sennas,
-            age: userData.Edad
+            age: userData.Edad,
+            typeUser: checked ? 'Admin' : 'Normal User'
         }
         if(isNew){
             await axios.post('http://localhost:8080/user/create', body)
@@ -176,7 +174,16 @@ const CreateAccount = ({isAdmin, isNew, id}) => {
                 }
             })
         }else{
-            //falta el update
+            await axios.post('http://localhost:8080/user/update', body)
+            .then(response => {
+                setMessage("El usuario fue actualizado exitosamente")
+                setSeverity(SUCCESS)
+                setOpen(true)
+            }).catch(e => {
+                setMessage("Hubo un error guardando el usuario")
+                setSeverity(ERROR)
+                setOpen(true)
+            })
         }
     }
     const createAccount = () => (event) => {
