@@ -21,7 +21,7 @@ const CreateAccount = ({isAdmin, isNew, id}) => {
     const [open, setOpen] = useState(false);
     const [severity, setSeverity] = useState("success");
     const [message, setMessage] = useState("");
-    const [isAdminUser, setIsAdminUser] = useState(false)
+    const [checked, setChecked] = useState(false)
     const [userData, setUserData] = useState({
         Cedula: '',
         Nombre: '',
@@ -35,7 +35,7 @@ const CreateAccount = ({isAdmin, isNew, id}) => {
         Canton: '',
         Distrito: '',
         Sennas: '',
-        typeUser: ''
+        typeUser: '',
     })
 
     useEffect(()=>{
@@ -47,28 +47,36 @@ const CreateAccount = ({isAdmin, isNew, id}) => {
         await axios.get('http://localhost:8080/user/getById',  {params:{id: id}}).then(
             response => {
                 if(response.data.typeUser === 'Admin')
-                    setIsAdminUser(true)
-                setUserData({
-                    Cedula: response.data.identification,
-                    Nombre: response.data.name,
-                    Correo: response.data.email,
-                    Contrasenna: response.data.password,
-                    Edad: response.data.age,
-                    Apellidos: response.data.lastName,
-                    NumeroTelefono: response.data.phoneNumber,
-                    ConfirmacionContrasenna: response.data.password,
-                    Provincia: response.data.address,
-                    Canton: response.data.address,
-                    Distrito: response.data.address,
-                    Sennas: response.data.address,
-                    typeUser: response.data.typeUser
-                })
+                    setChecked(true)
+                    setUserData({
+                        Cedula: response.data.identification,
+                        Nombre: response.data.name,
+                        Correo: response.data.email,
+                        Contrasenna: response.data.password,
+                        Edad: response.data.age,
+                        Apellidos: response.data.lastName,
+                        NumeroTelefono: response.data.phoneNumber,
+                        ConfirmacionContrasenna: response.data.password,
+                        Provincia: response.data.address,
+                        Canton: response.data.address,
+                        Distrito: response.data.address,
+                        Sennas: response.data.address,
+                        typeUser: response.data.typeUser
+                    })
             }
         )
     }
 
+    const handleChecked =  (event) =>{
+        setChecked(event.target.checked)
+        setUserData({
+            ...userData,
+            typeUser: event.target.checked ? 'Admin' : 'Normal User'
+        })
+    }
+
+
     const needFields = isAdmin && !isNew;
-    console.log(isAdminUser)
 
     const fieldsColumn1 = [
         {id:'Cedula', name:'Cedula', value: userData.Cedula, type: TEXT_FIELD, isRequired:true, onChange: () => handleFieldChange()},
@@ -103,7 +111,7 @@ const CreateAccount = ({isAdmin, isNew, id}) => {
     ]
 
     const addressUpdate = [{id:'Provincia', name:'Dirección', value:userData.Distrito, type: TEXT_FIELD, isRequired:true, onChange: () => handleFieldChange()}]
-    const typeUser = [{id:'typeUser', name: 'Es usuario Administrador', type: CHECKBOX, isRequired: false, checked: isAdminUser, onChange: () => {}}]
+    const typeUser = [{id:'checked', name: 'Es usuario Administrador', type: CHECKBOX, isRequired: false, checked: checked, onChange: handleChecked}]
 
     const handleFieldChange = () => (event) => {
         const value = event.target.value;
