@@ -9,6 +9,7 @@ import { TEXT_AREA, TEXT_FIELD, NONE, CHECKBOX, MULTIPLE, SUCCESS, ERROR } from 
 import FieldsAdmin from "../../../ReusableComponents/Fields/fields_admin";
 import { Alert, Snackbar } from "@mui/material";
 import GenericRoundButton from "../../../ReusableComponents/Buttons/generic_button";
+import { EditTwoTone } from "@mui/icons-material";
 
 
 export default function AddEditEdition({type}){
@@ -32,7 +33,10 @@ export default function AddEditEdition({type}){
         sponsorId: '',
         routeId:'',
         imageLink: '',
+        date:'',
         images: [],
+        sponsorIds: [],
+        routesIds: [],
         current: false
     })
 
@@ -42,6 +46,8 @@ export default function AddEditEdition({type}){
     },[])
 
     const save = () => () =>{ 
+        editionData.sponsorIds = sponsors;
+        editionData.routesIds = routes;
         axios.post('http://localhost:8080/edition/create', editionData).then(response => {
             setMessage("Edición creada exitosamente")
             setOpen(true)
@@ -77,12 +83,20 @@ export default function AddEditEdition({type}){
     }
 
     const handleFieldChange = () => (event) => {
+       
         const value = event.target.value;
         setEditionData({
             ...editionData,
             [event.target.id]: value
         });
         console.log(editionData)
+    }
+
+    const handleChecked =  (event) =>{
+        setEditionData({
+            ...editionData,
+            current: event.target.checked
+        })
     }
 
     const onAddImage = () => () =>{
@@ -112,13 +126,14 @@ export default function AddEditEdition({type}){
     const info = 'En esta sección puede agregar una nueva edición'
     const headerTitle = 'Agregar Edición'
     const col1 = [{id:'name', name:'Nombre', type: TEXT_FIELD, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
-                    {id:'details', name:'Detalles', type: TEXT_AREA, isRequired:true, helperText:'', onChange: () => handleFieldChange()}
+                    {id:'details', name:'Detalles', type: TEXT_AREA, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
+                    {id:'date', value:editionData.date, name: 'Fecha de la Edición', type: TEXT_FIELD, isRequired:true, helperText:'Ingrese la fecha en el formato dd-MM-AAAA', onChange: () => handleFieldChange()},
                 ]
         const secondCol = [ 
             {id:'sponsorId', value:editionData.sponsorId, name:'Patrocinadores', type: MULTIPLE, content: 'patrocinadores', helperText:'Indique el ID del patrocinador que quiere agregar a esta edición, revise el ID en la tabla correspondiente', isRequired:true, values:sponsorsList, onChange: () => handleFieldChange(), onAdd: () => onAddSponsor(), saved: sponsors},
             {id:'routeId', value:editionData.routeId, name:'Rutas', type: MULTIPLE, content: 'rutas', helperText: 'Indique el ID de la ruta que quiere agregar a esta edición, revise el ID en la tabla correspondiente', isRequired:true, values:routesList, onChange: () => handleFieldChange(),  onAdd: () => onAddRoute(), saved: routes },           
             {id:'imageLink', value:editionData.imageLink, name:'Foto', type: MULTIPLE, content: 'imágenes', helperText:'Agregue un link de compartir imagen de google drive', isRequired:true, onChange: () => handleFieldChange(), onAdd: () => onAddImage(), saved: imagesEdition},
-            {id:'current', name:'Edicion Actual', type: CHECKBOX, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
+            {id:'current', name:'Edicion Actual', type: CHECKBOX, isRequired:true, helperText:'', onChange: handleChecked},
             ]
     return(
         <Box className={stylesContainer.displayColumn}>

@@ -68,6 +68,7 @@ export const Field = ({ field, color }) => {
                       color: color,
                     },
                   }}
+                onChange={field.onChange}
             />} label={field.name} />
         )
     }else if(field.type === MULTIPLE){
