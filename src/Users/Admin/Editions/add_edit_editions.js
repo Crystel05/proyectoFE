@@ -5,12 +5,18 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import ImageHeaderAdmin from "../header_add_edit";
-import { TEXT_AREA, TEXT_FIELD, NONE, CHECKBOX, MULTIPLE, SELECTMULTIPLE, SELECT } from "../../../Util/constants";
+import { TEXT_AREA, TEXT_FIELD, NONE, CHECKBOX, MULTIPLE, SUCCESS, ERROR } from "../../../Util/constants";
 import FieldsAdmin from "../../../ReusableComponents/Fields/fields_admin";
+import { Alert, Snackbar } from "@mui/material";
 import GenericRoundButton from "../../../ReusableComponents/Buttons/generic_button";
-import { RepeatOneSharp } from "@mui/icons-material";
+
 
 export default function AddEditEdition({type}){
+
+    const [open, setOpen] = useState(false);
+    const [message, setMessage] = useState("");
+    const [severity, setSeverity] = useState("success");
+
     const [image, setImage] = useState()
     const [imagesEdition, setImagesEdition] = useState([])
     const [routes, setRoutes] = useState([])
@@ -27,13 +33,33 @@ export default function AddEditEdition({type}){
         routeId:'',
         imageLink: '',
         images: [],
-        isCurrent: ''
+        current: false
     })
 
     useEffect(() =>{
         getImage()
         getSelects()
     },[])
+
+    const save = () => () =>{ 
+        axios.post('http://localhost:8080/edition/create', editionData).then(response => {
+            setMessage("Edición creada exitosamente")
+            setOpen(true)
+            setSeverity(SUCCESS)   
+        }).catch(error =>{
+            setMessage("Hubo un error creando la edición")
+            setOpen(true)
+            setSeverity(ERROR)  
+        })
+         
+    }
+
+    const handleClose = (_, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpen(false);
+    };
 
     async function getImage(){
         await axios.get('http://localhost:8080/images/getAdminPH', {params:{sectionPH: type}}).then(response => {
@@ -56,9 +82,10 @@ export default function AddEditEdition({type}){
             ...editionData,
             [event.target.id]: value
         });
+        console.log(editionData)
     }
 
-    const onAddEdition = () => () =>{
+    const onAddImage = () => () =>{
         imagesEdition.push(editionData.imageLink);
         setEditionData({
             ...editionData, 
@@ -66,15 +93,7 @@ export default function AddEditEdition({type}){
         })
     }
 
-    const handleChangeMultipleRoutes  = () => (event) =>  {
-        const value = event.target.value;
-        setEditionData({
-            ...editionData, 
-            sponsorId: value
-        })
-    };
-
-    const onAddSponsor = () => () =>{
+    const onAddSponsor = () => (event) =>{
         setEditionData({
             ...editionData, 
             sponsorId: ''
@@ -87,7 +106,7 @@ export default function AddEditEdition({type}){
             ...editionData, 
             routeId: ''
         })
-        sponsors.push(editionData.sponsorId);
+        routes.push(editionData.routeId);
     }
 
     const info = 'En esta sección puede agregar una nueva edición'
@@ -96,13 +115,20 @@ export default function AddEditEdition({type}){
                     {id:'details', name:'Detalles', type: TEXT_AREA, isRequired:true, helperText:'', onChange: () => handleFieldChange()}
                 ]
         const secondCol = [ 
-            {id:'sponsors', value:editionData.sponsorId, name:'Patrocinadores', type: SELECTMULTIPLE, isRequired:true, values:sponsorsList, onChange: () => handleFieldChange(), onAdd: () => onAddSponsor(), saved: sponsors},
-            {id:'routes', value:editionData.routeId, name:'Rutas', type: SELECTMULTIPLE, isRequired:true, values:routesList, onChange: () => handleChangeMultipleRoutes(),  onAdd: () => onAddRoute(), saved: routes },           
-            {id:'imageLink', value:editionData.imageLink, name:'Foto', type: MULTIPLE, content: 'imágenes', isRequired:true, onChange: () => handleFieldChange(), onAdd: () => onAddEdition(), saved: imagesEdition},
-            {id:'isCurrent', name:'Edicion Actual', type: CHECKBOX, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
+            {id:'sponsorId', value:editionData.sponsorId, name:'Patrocinadores', type: MULTIPLE, content: 'patrocinadores', helperText:'Indique el ID del patrocinador que quiere agregar a esta edición, revise el ID en la tabla correspondiente', isRequired:true, values:sponsorsList, onChange: () => handleFieldChange(), onAdd: () => onAddSponsor(), saved: sponsors},
+            {id:'routeId', value:editionData.routeId, name:'Rutas', type: MULTIPLE, content: 'rutas', helperText: 'Indique el ID de la ruta que quiere agregar a esta edición, revise el ID en la tabla correspondiente', isRequired:true, values:routesList, onChange: () => handleFieldChange(),  onAdd: () => onAddRoute(), saved: routes },           
+            {id:'imageLink', value:editionData.imageLink, name:'Foto', type: MULTIPLE, content: 'imágenes', helperText:'Agregue un link de compartir imagen de google drive', isRequired:true, onChange: () => handleFieldChange(), onAdd: () => onAddImage(), saved: imagesEdition},
+            {id:'current', name:'Edicion Actual', type: CHECKBOX, isRequired:true, helperText:'', onChange: () => handleFieldChange()},
             ]
     return(
         <Box className={stylesContainer.displayColumn}>
+            <Snackbar
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+            >
+                <Alert severity={severity}>{message}</Alert>
+            </Snackbar>
             <ImageHeaderAdmin title='Ediciones' info={info} image={image} headerTitle={headerTitle}/>
             <Box className={stylesContainer.displayRow} style={{borderLeft:'2vh', margin:'auto'}}>
                 <Box className={stylesContainer.displayColumn}>
@@ -114,7 +140,7 @@ export default function AddEditEdition({type}){
                     <FieldsAdmin fields={secondCol}/>
                 </Box>
             </Box>
-            <GenericRoundButton Icon={<></>} backgroundColor='#2a1463' text='guardar' iconPosition={NONE} onClick={()=>{}}/>
+            <GenericRoundButton Icon={<></>} backgroundColor='#2a1463' text='guardar' iconPosition={NONE} onClick={()=>save()}/>
         </Box>
     )
 }
