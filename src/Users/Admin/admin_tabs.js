@@ -81,7 +81,7 @@ export default function AdminTabs(){
                 }
             </TabPanel>
             <TabPanel value="usuarios" style={{padding: 0}} index={4} >
-                {isEditing && value === 'usuarios' ? <CreateAccount isAdmin={true} isNew={isNew}/> :
+                {isEditing && value === 'usuarios' ? <CreateAccount isAdmin={true} isNew={isNew} id={row}/> :
                     <AdminCRUD type={USERS} setValue={setEditing} setIsNew={setIsNew} setRow={setRow}/>
                 }
             </TabPanel>

@@ -61,6 +61,7 @@ export const Field = ({ field, color }) => {
     }else if(field.type === CHECKBOX){
         return(
             <FormControlLabel control={<Checkbox 
+                checked =  {field.checked}
                 sx={{
                     color: color,
                     '&.Mui-checked': {

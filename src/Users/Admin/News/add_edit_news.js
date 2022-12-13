@@ -66,8 +66,6 @@ export default function AddEditNews({isNew, type, id}){
                 image:{imageId: newData.image.imageId, name:newData.name, drivePath:value}
             })
         }
-
-        console.log(newData)
     }
 
     const save = () => () =>{
