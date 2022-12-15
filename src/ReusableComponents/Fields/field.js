@@ -61,12 +61,14 @@ export const Field = ({ field, color }) => {
     }else if(field.type === CHECKBOX){
         return(
             <FormControlLabel control={<Checkbox 
+                checked =  {field.checked}
                 sx={{
                     color: color,
                     '&.Mui-checked': {
                       color: color,
                     },
                   }}
+                onChange={field.onChange}
             />} label={field.name} />
         )
     }else if(field.type === MULTIPLE){
