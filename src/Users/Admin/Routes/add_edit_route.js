@@ -31,7 +31,7 @@ export default function AddEditRoute({isNew, type, id}){
     },[])
 
     async function getImage(){
-        await axios.get('http://localhost:8080/images/getAdminPH', {params:{sectionPH: type}}).then(response => {
+        await axios.get(HOST + '/images/getAdminPH', {params:{sectionPH: type}}).then(response => {
             setImage(response.data);
         })
     }
@@ -53,7 +53,7 @@ export default function AddEditRoute({isNew, type, id}){
     }
 
     async function getCurrent(){
-        await axios.get('http://localhost:8080/routes/getById',  {params:{id: id}}).then(
+        await axios.get(HOST + '/routes/getById',  {params:{id: id}}).then(
             response => {
                 setRouteData({
                     id: response.data.id, 
@@ -78,11 +78,11 @@ export default function AddEditRoute({isNew, type, id}){
     const save = () => () =>{ 
         if(isNew){
             routeData.placeIds = placesRoute
-            axios.post('http://localhost:8080/routes/create', routeData).then(response => {
+            axios.post(HOST + '/routes/create', routeData).then(response => {
                 setMessage("Ruta creada exitosamente")
             })
         }else{ 
-            axios.post('http://localhost:8080/routes/update', routeData).then(response => {
+            axios.post(HOST + '/routes/update', routeData).then(response => {
                 setMessage("Ruta actualizada exitosamente")
             })
         }

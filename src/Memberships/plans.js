@@ -7,7 +7,7 @@ export default function Plans(){ //cambiar esto por una lista de base de datos d
     const [memberships, setMemberships] = useState([]);
 
     useEffect(() =>{
-        axios.get('http://localhost:8080/membership/getAll').then(response =>{
+        axios.get(HOST + '/membership/getAll').then(response =>{
             setMemberships(response.data);
         })
     },[])

@@ -11,7 +11,7 @@ export default function MemershipSection(){
 
     async function getMembershipByUser() {
         const userId = (JSON.parse(sessionStorage.getItem('userData'))).id;
-        const url  = 'http://localhost:8080/membership/getByUserId?userId=' + userId;
+        const url  = HOST + '/membership/getByUserId?userId=' + userId;
 
         await axios.get(url).then(response => {
             let membership = response.data[0];

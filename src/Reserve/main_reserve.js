@@ -74,7 +74,7 @@ export default function MainReserve(){
     },[])
 
     async function getAllPlaces(){
-        await axios.get('http://localhost:8080/places/getAll').then(response =>{
+        await axios.get(HOST + '/places/getAll').then(response =>{
             setPlaces(response.data);
         })
     }
@@ -101,7 +101,7 @@ export default function MainReserve(){
             ]
         }      
         console.log('crea reservacion ', body.phoneNumber); 
-        await axios.post('http://localhost:8080/reservation/create', body)
+        await axios.post(HOST + '/reservation/create', body)
         .then(response => {
             if(response.status === 200){
                 if(response.data !== ""){

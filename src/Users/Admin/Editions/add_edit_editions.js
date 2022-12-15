@@ -36,16 +36,16 @@ export default function AddEditEdition({type}){
     },[])
 
     async function getImage(){
-        await axios.get('http://localhost:8080/images/getAdminPH', {params:{sectionPH: type}}).then(response => {
+        await axios.get(HOST + '/images/getAdminPH', {params:{sectionPH: type}}).then(response => {
             setImage(response.data);
         })
     }
 
     async function getSelects(){
-        await axios.get('http://localhost:8080/routes/getAll').then(response => {
+        await axios.get(HOST + '/routes/getAll').then(response => {
             setRoutesList(response.data)
         })
-        await axios.get('http://localhost:8080/sponsor/getAll').then(response => {
+        await axios.get(HOST + '/sponsor/getAll').then(response => {
             setSponsorsList(response.data)
         })
     }

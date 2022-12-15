@@ -31,13 +31,13 @@ export default function AddEditSponsor({isNew, type, id}){
 
 
     async function getImage(){
-        await axios.get('http://localhost:8080/images/getAdminPH', {params:{sectionPH: type}}).then(response => {
+        await axios.get(HOST + '/images/getAdminPH', {params:{sectionPH: type}}).then(response => {
             setImage(response.data);
         })
     }
 
     async function getCurrentSponsor(){
-        await axios.get('http://localhost:8080/sponsor/getById',  {params:{id: id}}).then(
+        await axios.get(HOST + '/sponsor/getById',  {params:{id: id}}).then(
             response => {
                 setImageForSponsor(response.data.image.drivePath)
                 setSponsorData({
@@ -74,11 +74,11 @@ export default function AddEditSponsor({isNew, type, id}){
 
     const save = () => () =>{
         if(isNew){
-            axios.post('http://localhost:8080/sponsor/create', sponsorData).then(response => {
+            axios.post(HOST + '/sponsor/create', sponsorData).then(response => {
                 setMessage("Patrocinador creado exitosamente")
             })
         }else{ 
-            axios.post('http://localhost:8080/sponsor/update', sponsorData).then(response => {
+            axios.post(HOST + '/sponsor/update', sponsorData).then(response => {
                 setMessage("Patrocinador actualizado exitosamente")
             })
         }

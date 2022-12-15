@@ -1,6 +1,6 @@
 import React, { useState} from 'react'
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
-import { ERROR, SUCCESS } from '../Util/constants';
+import { ERROR, PAYPAL_CLIENTID, SUCCESS } from '../Util/constants';
 import { Alert, Snackbar } from '@mui/material'
 import axios from 'axios';
 
@@ -22,7 +22,7 @@ export default function Paypal({price, membership}) {
         const userId = (JSON.parse(sessionStorage.getItem('userData'))).id;
 
         
-        const url = 'http://localhost:8080/membership/createMembershipByUser?userId='+userId+'&membershipId='+membershipId;
+        const url = HOST + '/membership/createMembershipByUser?userId='+userId+'&membershipId='+membershipId;
         await axios.get(url)
         .then(response => {
             if (response.data === 1) {
@@ -47,7 +47,7 @@ export default function Paypal({price, membership}) {
             >
                 <Alert severity={severity}>{message}</Alert>
             </Snackbar>
-            <PayPalScriptProvider options={{"client-id": "AcKi1mnMxsQazlZ2Tv626YV6aY0hMd7mKzx-TAT3Wsx2oaFcB_aENJ6bQNB0iECXU1K3DUqYB3L0yL0H&currency=USD"}}>
+            <PayPalScriptProvider options={{"client-id": PAYPAL_CLIENTID}}>
                 <PayPalButtons 
                 style={{
                     color: 'gold',

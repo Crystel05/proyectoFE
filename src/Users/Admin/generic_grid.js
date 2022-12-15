@@ -72,7 +72,7 @@ export default function GenericGrid({columns, rows, handleSeeDetails, type}) {
 
     const handleDelete = (value) => {
         console.log('delete ', value, " ", type)
-        axios.delete('http://localhost:8080/admin/deleteFromGrids', {params:{type: type, valueId:value}}).then(response =>{
+        axios.delete(HOST + '/admin/deleteFromGrids', {params:{type: type, valueId:value}}).then(response =>{
             if(response.data){
                 setMessage('Se eliminó el item exitosamente, cambie de tab para ver el cambio')
                 setSeverity(SUCCESS)

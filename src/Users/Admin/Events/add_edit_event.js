@@ -27,13 +27,13 @@ export default function AddEditEvent({isNew, type, id}){
     },[])
 
     async function getImage(){
-        await axios.get('http://localhost:8080/images/getAdminPH', {params:{sectionPH: type}}).then(response => {
+        await axios.get(HOST + '/images/getAdminPH', {params:{sectionPH: type}}).then(response => {
             setImage(response.data);
         })
     }
 
     async function getCurrentEvent(){
-        await axios.get('http://localhost:8080/event/getEventById',  {params:{eventId: id}}).then(
+        await axios.get(HOST + '/event/getEventById',  {params:{eventId: id}}).then(
             response => {
                 setEventData({
                     id: response.data.id, 
@@ -62,11 +62,11 @@ export default function AddEditEvent({isNew, type, id}){
 
     const save = () => () =>{ 
         if(isNew){
-            axios.post('http://localhost:8080/event/create', eventData).then(response => {
+            axios.post(HOST + '/event/create', eventData).then(response => {
                 setMessage("Evento creado exitosamente")
             })
         }else{ 
-            axios.post('http://localhost:8080/event/update', eventData).then(response => {
+            axios.post(HOST + '/event/update', eventData).then(response => {
                 setMessage("Evento actualizado exitosamente")
             })
         }

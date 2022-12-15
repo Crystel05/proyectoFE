@@ -16,7 +16,7 @@ function EditionPage(){
     const [sponsors, setSponsors] = useState([]);
 
     useEffect(()=>{
-        axios.get('http://localhost:8080/edition/getCurrent')
+        axios.get(HOST + '/edition/getCurrent')
         .then(response =>{
             setEdition(response.data);
             setBody(response.data.details);

@@ -60,7 +60,7 @@ export default function ProfileSection(){
             phoneNumber: userData.phoneNumber,
             address: userData.address
         } 
-        await axios.post('http://localhost:8080/user/update', body)
+        await axios.post(HOST + '/user/update', body)
         .then(response => {
             if(response.status === 200){
                 if(response.data !== ""){

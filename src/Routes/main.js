@@ -25,7 +25,7 @@ function MainRoutes({setValue}){
     }
 
     useEffect(() =>{
-        axios.get('http://localhost:8080/routes/getAll')
+        axios.get(HOST + '/routes/getAll')
         .then(response =>{
             setRoutes(response.data);
         })

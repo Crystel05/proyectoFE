@@ -100,7 +100,7 @@ const CreateAccount = ({isAdmin, isNew}) => {
             address: userData.Provincia + ", " + userData.Canton + ", " + userData.Sennas,
             age: userData.Edad
         }
-        await axios.post('http://localhost:8080/user/create', body)
+        await axios.post(HOST + '/user/create', body)
         .then(response => {
             if(response.status === 200){
                 if(response.data !== ""){

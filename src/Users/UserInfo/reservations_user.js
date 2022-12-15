@@ -10,7 +10,7 @@ export default function ReservationsSection(){
     const [edition, setEdition] = useState({});
 
     async function getCurrentEdition() {
-        axios.get('http://localhost:8080/edition/getCurrent')
+        axios.get(HOST + '/edition/getCurrent')
         .then(response =>{
             setEdition(response.data);
         })

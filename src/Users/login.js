@@ -33,14 +33,14 @@ const Login = ({ setAuthorizationLogin, passwordChanged, setAuthorizationResetPa
     ]
 
     async function getImage(){
-        await axios.get('http://localhost:8080/images/getLogin').then(response => {
+        await axios.get(HOST + '/images/getLogin').then(response => {
             setImage(response.data);
         })
     }
 
     async function getLogin(){
 
-        const link = 'http://localhost:8080/user/login?email='+email+'&password='+password;
+        const link = HOST + '/user/login?email='+email+'&password='+password;
         await axios.get(link)
         .then(response => {
             setIsCorrect(response.data);

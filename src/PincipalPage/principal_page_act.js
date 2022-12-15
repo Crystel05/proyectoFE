@@ -18,17 +18,17 @@ export default function ACTPrincipalPage({setValue}){
     const info = 'Es una experiencia nocturna de recorridos por museos, galerias y centros culturales de la ciudad de San José'
     
     async function getImage(){
-        await axios.get('http://localhost:8080/images/getPrincipalPageImage').then(response => { 
+        await axios.get(HOST + '/images/getPrincipalPageImage').then(response => { 
             setImage(response.data);
         })
     }
     async function getNews() {
-        await axios.get('http://localhost:8080/news/getAll').then(response => { 
+        await axios.get(HOST + '/news/getAll').then(response => { 
             setNews(response.data);
         })
     }
     async function getRoutes() {
-        await axios.get('http://localhost:8080/routes/getByCurrent').then(response => { 
+        await axios.get(HOST + '/routes/getByCurrent').then(response => { 
             setRoutes(response.data);
         })
     }

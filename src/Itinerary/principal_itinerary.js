@@ -32,26 +32,26 @@ export default function PrincipalItineraryPage(){
 
     
     useLayoutEffect(() => {
-        axios.get('http://localhost:8080/places/getAll').then(response =>{
+        axios.get(HOST + '/places/getAll').then(response =>{
             setgeneralPlaces(response.data);
         })
-        axios.get('http://localhost:8080/event/getAll').then(response =>{
+        axios.get(HOST + '/event/getAll').then(response =>{
             setEvents(response.data);
         })
-        axios.get('http://localhost:8080/places/getAllCategory?category=Bar').then(response => {
+        axios.get(HOST + '/places/getAllCategory?category=Bar').then(response => {
             setBar(response.data);
         })
-        axios.get('http://localhost:8080/places/getAllCategory?category=Restaurante').then(response => {
+        axios.get(HOST + '/places/getAllCategory?category=Restaurante').then(response => {
             setRestaurant(response.data);
         })
-        axios.get('http://localhost:8080/places/getAllCategory?category=Entretenimiento').then(response => {
+        axios.get(HOST + '/places/getAllCategory?category=Entretenimiento').then(response => {
             setEntertainment(response.data);
         })
     }, [])
 
     const handleSave = () => () => { 
         const userId = (JSON.parse(sessionStorage.getItem('userData'))).id;        
-        const url = 'http://localhost:8080/itinerary/createFullItinerary?userId='+userId;
+        const url = HOST + '/itinerary/createFullItinerary?userId='+userId;
 
         saveItinerary(url);
     }

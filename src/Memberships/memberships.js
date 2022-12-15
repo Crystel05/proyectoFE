@@ -18,13 +18,13 @@ export default function Memberships ({isPay, setPrice, setMembership}){
     const [memberships, setMemberships] = useState([]);
 
     useEffect(() =>{
-        axios.get('http://localhost:8080/membership/getAll').then(response =>{
+        axios.get(HOST + '/membership/getAll').then(response =>{
             setMemberships(response.data);
             setSelectedMembership(response.data[0]);
             setDetails(response.data[0].details);
             setPhoto(response.data[0].photo)
         })
-        axios.get('http://localhost:8080/membership/getPrincipal')
+        axios.get(HOST + '/membership/getPrincipal')
         .then(response =>{
             setPrincipalImage(response.data);
         })

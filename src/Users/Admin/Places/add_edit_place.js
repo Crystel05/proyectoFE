@@ -43,19 +43,19 @@ export default function AddEditPlace({isNew, type, id}){
     },[])
 
     async function getImage(){
-        await axios.get('http://localhost:8080/images/getAdminPH', {params:{sectionPH: type}}).then(response => {
+        await axios.get(HOST + '/images/getAdminPH', {params:{sectionPH: type}}).then(response => {
             setImage(response.data);
         })
     }
 
     async function getCategories(){
-        await axios.get('http://localhost:8080/places/getCategories', {params:{sectionPH: type}}).then(response => {
+        await axios.get(HOST + '/places/getCategories', {params:{sectionPH: type}}).then(response => {
             setValues(response.data);
         })
     }
 
     async function getCurrentPlace(){
-        await axios.get('http://localhost:8080/places/getById',  {params:{id: id}}).then(
+        await axios.get(HOST + '/places/getById',  {params:{id: id}}).then(
             response => {
                 setPlace(response.data)
                 setImageForPlace(response.data.image.drivePath)
@@ -99,11 +99,11 @@ export default function AddEditPlace({isNew, type, id}){
 
     const save = () => () =>{ 
         if(isNew){
-            axios.post('http://localhost:8080/places/create', placeData).then(response => {
+            axios.post(HOST + '/places/create', placeData).then(response => {
                 setMessage("Lugar creado exitosamente")
             })
         }else{ 
-            axios.post('http://localhost:8080/places/update', placeData).then(response => {
+            axios.post(HOST + '/places/update', placeData).then(response => {
                 setMessage("Lugar actualizado exitosamente")
             })
         }

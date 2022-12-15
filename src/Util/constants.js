@@ -11,6 +11,7 @@ export const SELECT = 'select';
 export const CHECKBOX = 'checkbox';
 export const MULTIPLE = 'multiple';
 export const SELECTMULTIPLE = 'selectMultiple';
+export const HOST = HOST + ''
 
 export const SUCCESS = 'success';
 export const ERROR = 'error';
@@ -34,3 +35,6 @@ export const RESERVATIONSICON = 'reservationIcon'
 export const MYITINERARYICON = 'myItineraryIcon'
 export const MEMBERSHIPSICON = 'myMembershipsIcon'
 export const LOGOUT = 'logOutIcon'
+
+// ATENCION! Las proximas son constantes que deben ser actualizadas y convertidas en variables de entorno para un despliegue seguro y funcional
+export const PAYPAL_CLIENTID = 'AcKi1mnMxsQazlZ2Tv626YV6aY0hMd7mKzx-TAT3Wsx2oaFcB_aENJ6bQNB0iECXU1K3DUqYB3L0yL0H&currency=USD'

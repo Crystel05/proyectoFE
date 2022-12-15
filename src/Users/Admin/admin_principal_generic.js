@@ -20,13 +20,13 @@ export default function AdminCRUD({type, setValue, setRow, setIsNew}){
     },[])
 
     async function getImage(){
-        await axios.get('http://localhost:8080/images/getAdminPH', {params:{sectionPH: type}}).then(response => {
+        await axios.get(HOST + '/images/getAdminPH', {params:{sectionPH: type}}).then(response => {
             setImage(response.data);
         })
     }
 
     async function getGrid(){
-        await axios.get('http://localhost:8080/admin/getAdminGrid', {params:{adminSection: type}}).then(response =>{
+        await axios.get(HOST + '/admin/getAdminGrid', {params:{adminSection: type}}).then(response =>{
             setColumns(response.data.columns)
             setRows(response.data.rows)
         })

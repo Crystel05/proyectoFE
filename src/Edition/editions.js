@@ -15,7 +15,7 @@ function EditionsThroughYears(){
     const dots = new Array(25).fill(0);
 
     useEffect(() =>{
-        axios.get('http://localhost:8080/edition/getAll').then(response =>{
+        axios.get(HOST + '/edition/getAll').then(response =>{
             setEditions(response.data)
         })
     },[])

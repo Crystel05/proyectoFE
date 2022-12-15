@@ -13,7 +13,7 @@ export default function MyItinerarySection() {
 
     async function getItineraryByUser() {
         const userId = (JSON.parse(sessionStorage.getItem('userData'))).id;
-        const url = 'http://localhost:8080/itinerary/getByUserId?userId=' + userId;
+        const url = HOST + '/itinerary/getByUserId?userId=' + userId;
 
         await axios.get(url).then(response => {
             setItinerary(response.data);
@@ -22,7 +22,7 @@ export default function MyItinerarySection() {
     }
 
     async function getCurrentEdition() {
-        axios.get('http://localhost:8080/edition/getCurrent')
+        axios.get(HOST + '/edition/getCurrent')
         .then(response =>{
             setEdition(response.data);
         })

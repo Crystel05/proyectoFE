@@ -32,7 +32,7 @@ export default function AddEditNews({isNew, type, id}){
     },[])
 
     async function getCurrent(){
-        await axios.get('http://localhost:8080/news/getById',  {params:{id: id}}).then(
+        await axios.get(HOST + '/news/getById',  {params:{id: id}}).then(
             response => {
                 setCurrentNewImage(response.data.image.drivePath)
                 setNewData({
@@ -49,7 +49,7 @@ export default function AddEditNews({isNew, type, id}){
     }
 
     async function getImage(){
-        await axios.get('http://localhost:8080/images/getAdminPH', {params:{sectionPH: type}}).then(response => {
+        await axios.get(HOST + '/images/getAdminPH', {params:{sectionPH: type}}).then(response => {
             setImage(response.data);
         })
     }
@@ -72,11 +72,11 @@ export default function AddEditNews({isNew, type, id}){
 
     const save = () => () =>{
         if(isNew){
-            axios.post('http://localhost:8080/news/create', newData).then(response => {
+            axios.post(HOST + '/news/create', newData).then(response => {
                 setMessage("Noticia creada exitosamente")
             })
         }else{ 
-            axios.post('http://localhost:8080/news/update', newData).then(response => {
+            axios.post(HOST + '/news/update', newData).then(response => {
                 setMessage("Noticia actualizada exitosamente")
             })
         }
